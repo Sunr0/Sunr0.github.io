@@ -582,6 +582,84 @@
       </tags>
   </entry>
   <entry>
+    <title>在VMware Player 15中安装MacOS</title>
+    <url>/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</url>
+    <content><![CDATA[<h1 id="0x0-安装前准备"><a href="#0x0-安装前准备" class="headerlink" title="0x0 安装前准备"></a>0x0 安装前准备</h1><blockquote>
+<p>材料准备：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li><p>镜像文件：这里我使用的是 OS X 10.13</p>
+</li>
+<li><p>VMware 的 MacOS的破解补丁</p>
+</li>
+<li><p>VMware Workstation 15 软件，注册码或注册机自己百度，嫌麻烦就使用VirtualBox</p>
+</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+
+<p>文件链接 :  <a href="https://pan.baidu.com/s/1YqU5nhO764ANK_x4bgvJaA">密码:2333</a>    <a href="https://download3.vmware.com/software/wkst/file/VMware-workstation-full-15.5.1-15018445.exe">VMware Download</a> </p>
+<h1 id="0x1-安装"><a href="#0x1-安装" class="headerlink" title="0x1 安装"></a>0x1 安装</h1><p>下载破解补丁后解压出来以管理员模式运行 <em>win-install.cmd</em>  </p>
+<p><img src="https://i.loli.net/2020/03/02/MOaZzCDIqcUn2xw.png" alt="unlocker.png"></p>
+<p>运行结束后就开始使用VMware Workstation 15 Player部署呗</p>
+<p><img src="https://i.loli.net/2020/03/02/JBA96jwbYCuaQP1.png" alt="1.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/U3NWGHA7lzxT4Kw.png" alt="2.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/jdQMYgVZt1q357f.png" alt="3.png"></p>
+<p>之后便是一路Next，最后Fish</p>
+<hr>
+<p>启动虚拟机后可能会出现以下问题</p>
+<p><img src="https://i.loli.net/2020/03/02/fXqvI9SE5YRT3WA.png" alt="4.png"></p>
+<p>这是因为要检查很多东西，百度一下发现如下解决方法：</p>
+<blockquote>
+<ol>
+<li>在虚拟机的路径中找到 <code>.vmx</code> 的文件</li>
+<li>打开文件找到一行类似 <code>guestOS = &quot;darwin17-64&quot;</code></li>
+<li>下一行追加 <code>cpuid.1.eax = &quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</code></li>
+</ol>
+</blockquote>
+<p>保存再启动就可以解决，大概原理是虚拟机会对对核心进行检验，用mask来欺骗，从而过CPU不必要的检查</p>
+<p>(#其实我也不知道，手动滑稽)</p>
+<h1 id="0x2-系统安装"><a href="#0x2-系统安装" class="headerlink" title="0x2 系统安装"></a>0x2 系统安装</h1><p>进入界面后第一件事，调出终端建议进行以下步骤方便后续安装VMware Tools ：<a href="#0x4-VMware-Tools%E5%AE%89%E8%A3%85">VMware Tools安装</a></p>
+<p>再进行进行磁盘管理</p>
+<p><img src="https://i.loli.net/2020/03/02/tz6FoAHBXE2hwQc.png" alt="5.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/wgE1uv3GJy6AFcD.png" alt="6.png"></p>
+<p>作为系统盘呗，需要自己再自行添加硬盘</p>
+<p><img src="https://i.loli.net/2020/03/02/DrBsNQeHL1ipIlj.png" alt="7.png"></p>
+<p>之后就是等它静默安装，然后再进行常规的系统配置</p>
+<p><img src="https://i.loli.net/2020/03/02/r8wZbAIHmqoQEeu.png" alt="9.png"></p>
+<p>安装好VMware Tools后就开始享用OS X吧</p>
+<h1 id="0x3-添加硬盘及网络配置"><a href="#0x3-添加硬盘及网络配置" class="headerlink" title="0x3 添加硬盘及网络配置"></a>0x3 添加硬盘及网络配置</h1><p><img src="https://i.loli.net/2020/03/02/uzWvTp3qRwmAUOD.png" alt="10.png"></p>
+<p>设置网络 设置 - &gt; 网络 - &gt; WLAN - &gt; 更改适配器设置</p>
+<p><img src="https://i.loli.net/2020/03/02/QeGR8d5CFU3whp1.png" alt="11.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/Voeaxsi57QCBF8N.png" alt="12.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/wWmnTudCaGfqscD.png" alt="12.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/U4fxJuE8lvwtVO1.png" alt="12.png"></p>
+<p>然后进Mac看设置</p>
+<p><img src="https://i.loli.net/2020/03/02/cFeDdaQlm8326WZ.png" alt="13.png"></p>
+<p>显示绿点则说明连接成功</p>
+<h1 id="0x4-VMware-Tools安装"><a href="#0x4-VMware-Tools安装" class="headerlink" title="0x4 VMware Tools安装"></a>0x4 VMware Tools安装</h1><p>反复装不上VMware Tools 通过百度发现Mac有SIP系统完整性保护机制</p>
+<p>我们就进入Recovery里手动关闭</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># csrutil status &#x2F;&#x2F;检查状态 enable 为开启</span><br><span class="line"># csrutil disable &#x2F;&#x2F;关闭保护机制</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="https://i.loli.net/2020/03/03/P6o8CTOLGdAfkIQ.png" alt="16.png"></p>
+<p><img src="https://i.loli.net/2020/03/03/or9MFBzdan1KvGC.png" alt="17.png"></p>
+<p>之后便可以开心的安装VMware Tools 了</p>
+<p><img src="https://i.loli.net/2020/03/03/cKBhbYw6ROHlTvI.png" alt="18.png"></p>
+<h1 id="0x5-安装Xcode"><a href="#0x5-安装Xcode" class="headerlink" title="0x5 安装Xcode"></a>0x5 安装Xcode</h1><p>就在商店自己安装呗，现在Xcode的最低支持版本是 OS X 10.14.4</p>
+<p><img src="https://i.loli.net/2020/03/03/S6VIMvT7AEYxaLo.png" alt="19.png"></p>
+<p>然后就可以 愉cao 快dan的 敲xiu 码bug 了</p>
+<hr>
+<p>[^]: 注：本文资料大多来源于网络，如果有侵权，请联系作者删除。2020/03/03 二次修改。</p>
+]]></content>
+      <tags>
+        <tag>黑苹果</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sqli-lab Less 54-Less 65</title>
     <url>/2020/09/10/sqli-lab-Less-54-Less-65/</url>
     <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-54-Less-65"><a href="#Sqli-lab-过关笔记-Less-54-Less-65" class="headerlink" title="Sqli-lab 过关笔记 Less 54-Less 65"></a>Sqli-lab 过关笔记 Less 54-Less 65</h1><blockquote>
@@ -677,81 +755,24 @@
       </tags>
   </entry>
   <entry>
-    <title>在VMware Player 15中安装MacOS</title>
-    <url>/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</url>
-    <content><![CDATA[<h1 id="0x0-安装前准备"><a href="#0x0-安装前准备" class="headerlink" title="0x0 安装前准备"></a>0x0 安装前准备</h1><blockquote>
-<p>材料准备：</p>
-</blockquote>
-<blockquote>
-<ol>
-<li><p>镜像文件：这里我使用的是 OS X 10.13</p>
-</li>
-<li><p>VMware 的 MacOS的破解补丁</p>
-</li>
-<li><p>VMware Workstation 15 软件，注册码或注册机自己百度，嫌麻烦就使用VirtualBox</p>
-</li>
-</ol>
-</blockquote>
+    <title>简单使用链接库</title>
+    <url>/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="使用静态链接库"><a href="#使用静态链接库" class="headerlink" title="使用静态链接库"></a>使用静态链接库</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;TestLib.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestLib.lib&quot;</span>)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
-<p>文件链接 :  <a href="https://pan.baidu.com/s/1YqU5nhO764ANK_x4bgvJaA">密码:2333</a>    <a href="https://download3.vmware.com/software/wkst/file/VMware-workstation-full-15.5.1-15018445.exe">VMware Download</a> </p>
-<h1 id="0x1-安装"><a href="#0x1-安装" class="headerlink" title="0x1 安装"></a>0x1 安装</h1><p>下载破解补丁后解压出来以管理员模式运行 <em>win-install.cmd</em>  </p>
-<p><img src="https://i.loli.net/2020/03/02/MOaZzCDIqcUn2xw.png" alt="unlocker.png"></p>
-<p>运行结束后就开始使用VMware Workstation 15 Player部署呗</p>
-<p><img src="https://i.loli.net/2020/03/02/JBA96jwbYCuaQP1.png" alt="1.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/U3NWGHA7lzxT4Kw.png" alt="2.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/jdQMYgVZt1q357f.png" alt="3.png"></p>
-<p>之后便是一路Next，最后Fish</p>
-<hr>
-<p>启动虚拟机后可能会出现以下问题</p>
-<p><img src="https://i.loli.net/2020/03/02/fXqvI9SE5YRT3WA.png" alt="4.png"></p>
-<p>这是因为要检查很多东西，百度一下发现如下解决方法：</p>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">在项目 <span class="built_in">set</span> &gt; link 里添加相应lib文件，需申明头文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <blockquote>
-<ol>
-<li>在虚拟机的路径中找到 <code>.vmx</code> 的文件</li>
-<li>打开文件找到一行类似 <code>guestOS = &quot;darwin17-64&quot;</code></li>
-<li>下一行追加 <code>cpuid.1.eax = &quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</code></li>
-</ol>
+<p>静态链接库:把代码静态编译到exe中，更改lib内容就得重新编译使用</p>
 </blockquote>
-<p>保存再启动就可以解决，大概原理是虚拟机会对对核心进行检验，用mask来欺骗，从而过CPU不必要的检查</p>
-<p>(#其实我也不知道，手动滑稽)</p>
-<h1 id="0x2-系统安装"><a href="#0x2-系统安装" class="headerlink" title="0x2 系统安装"></a>0x2 系统安装</h1><p>进入界面后第一件事，调出终端建议进行以下步骤方便后续安装VMware Tools ：<a href="#0x4-VMware-Tools%E5%AE%89%E8%A3%85">VMware Tools安装</a></p>
-<p>再进行进行磁盘管理</p>
-<p><img src="https://i.loli.net/2020/03/02/tz6FoAHBXE2hwQc.png" alt="5.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/wgE1uv3GJy6AFcD.png" alt="6.png"></p>
-<p>作为系统盘呗，需要自己再自行添加硬盘</p>
-<p><img src="https://i.loli.net/2020/03/02/DrBsNQeHL1ipIlj.png" alt="7.png"></p>
-<p>之后就是等它静默安装，然后再进行常规的系统配置</p>
-<p><img src="https://i.loli.net/2020/03/02/r8wZbAIHmqoQEeu.png" alt="9.png"></p>
-<p>安装好VMware Tools后就开始享用OS X吧</p>
-<h1 id="0x3-添加硬盘及网络配置"><a href="#0x3-添加硬盘及网络配置" class="headerlink" title="0x3 添加硬盘及网络配置"></a>0x3 添加硬盘及网络配置</h1><p><img src="https://i.loli.net/2020/03/02/uzWvTp3qRwmAUOD.png" alt="10.png"></p>
-<p>设置网络 设置 - &gt; 网络 - &gt; WLAN - &gt; 更改适配器设置</p>
-<p><img src="https://i.loli.net/2020/03/02/QeGR8d5CFU3whp1.png" alt="11.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/Voeaxsi57QCBF8N.png" alt="12.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/wWmnTudCaGfqscD.png" alt="12.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/U4fxJuE8lvwtVO1.png" alt="12.png"></p>
-<p>然后进Mac看设置</p>
-<p><img src="https://i.loli.net/2020/03/02/cFeDdaQlm8326WZ.png" alt="13.png"></p>
-<p>显示绿点则说明连接成功</p>
-<h1 id="0x4-VMware-Tools安装"><a href="#0x4-VMware-Tools安装" class="headerlink" title="0x4 VMware Tools安装"></a>0x4 VMware Tools安装</h1><p>反复装不上VMware Tools 通过百度发现Mac有SIP系统完整性保护机制</p>
-<p>我们就进入Recovery里手动关闭</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># csrutil status &#x2F;&#x2F;检查状态 enable 为开启</span><br><span class="line"># csrutil disable &#x2F;&#x2F;关闭保护机制</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p><img src="https://i.loli.net/2020/03/03/P6o8CTOLGdAfkIQ.png" alt="16.png"></p>
-<p><img src="https://i.loli.net/2020/03/03/or9MFBzdan1KvGC.png" alt="17.png"></p>
-<p>之后便可以开心的安装VMware Tools 了</p>
-<p><img src="https://i.loli.net/2020/03/03/cKBhbYw6ROHlTvI.png" alt="18.png"></p>
-<h1 id="0x5-安装Xcode"><a href="#0x5-安装Xcode" class="headerlink" title="0x5 安装Xcode"></a>0x5 安装Xcode</h1><p>就在商店自己安装呗，现在Xcode的最低支持版本是 OS X 10.14.4</p>
-<p><img src="https://i.loli.net/2020/03/03/S6VIMvT7AEYxaLo.png" alt="19.png"></p>
-<p>然后就可以 愉cao 快dan的 敲xiu 码bug 了</p>
 <hr>
-<p>[^]: 注：本文资料大多来源于网络，如果有侵权，请联系作者删除。2020/03/03 二次修改。</p>
-]]></content>
+<h1 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h1><h2 id="链接库头文件写法"><a href="#链接库头文件写法" class="headerlink" title="链接库头文件写法"></a>链接库头文件写法</h2><h3 id="使用-declspec-dllexport"><a href="#使用-declspec-dllexport" class="headerlink" title="使用_declspec(dllexport)"></a>使用<code>_declspec(dllexport)</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> _declspec(dllexport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//extern 申明为全局</span></span><br><span class="line"><span class="comment">//&quot;C&quot; 申明以C的语法处理，避免编译器无法判断处理方式把函数魔性改名</span></span><br><span class="line"><span class="comment">//_declspec(dllexport) 申明函数将导出</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-def"><a href="#使用-def" class="headerlink" title="使用.def"></a>使用<code>.def</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FuncList.def</span></span><br><span class="line">EXPORT</span><br><span class="line"></span><br><span class="line">Func @<span class="number">12</span> (NONAME)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="引用写法"><a href="#引用写法" class="headerlink" title="引用写法"></a>引用写法</h2><h3 id="隐式链接"><a href="#隐式链接" class="headerlink" title="隐式链接"></a>隐式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestDLL.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> __declspec(dllimport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="显式链接"><a href="#显式链接" class="headerlink" title="显式链接"></a>显式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lpFunc)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>; <span class="comment">//申明函数指针</span></span><br><span class="line"></span><br><span class="line">	lpFunc myFun; <span class="comment">//创建指针</span></span><br><span class="line"></span><br><span class="line">	HINSTANCE hModule = LoadLibrary(<span class="string">&quot;TestDLL.dll&quot;</span>); <span class="comment">//载入dll</span></span><br><span class="line"></span><br><span class="line">	myFun = (lpFunc)GetProcAddress(hModule, <span class="string">&quot;Func&quot;</span>); <span class="comment">//把指针指向dll内函数的地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag>黑苹果</tag>
+        <tag>笔记</tag>
+        <tag>C</tag>
       </tags>
   </entry>
   <entry>
@@ -834,27 +855,6 @@
       <tags>
         <tag>笔记</tag>
         <tag>渗透测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简单使用链接库</title>
-    <url>/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="使用静态链接库"><a href="#使用静态链接库" class="headerlink" title="使用静态链接库"></a>使用静态链接库</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;TestLib.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestLib.lib&quot;</span>)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">在项目 <span class="built_in">set</span> &gt; link 里添加相应lib文件，需申明头文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>静态链接库:把代码静态编译到exe中，更改lib内容就得重新编译使用</p>
-</blockquote>
-<hr>
-<h1 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h1><h2 id="链接库头文件写法"><a href="#链接库头文件写法" class="headerlink" title="链接库头文件写法"></a>链接库头文件写法</h2><h3 id="使用-declspec-dllexport"><a href="#使用-declspec-dllexport" class="headerlink" title="使用_declspec(dllexport)"></a>使用<code>_declspec(dllexport)</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> _declspec(dllexport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//extern 申明为全局</span></span><br><span class="line"><span class="comment">//&quot;C&quot; 申明以C的语法处理，避免编译器无法判断处理方式把函数魔性改名</span></span><br><span class="line"><span class="comment">//_declspec(dllexport) 申明函数将导出</span></span><br></pre></td></tr></table></figure>
-<h3 id="使用-def"><a href="#使用-def" class="headerlink" title="使用.def"></a>使用<code>.def</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FuncList.def</span></span><br><span class="line">EXPORT</span><br><span class="line"></span><br><span class="line">Func @<span class="number">12</span> (NONAME)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="引用写法"><a href="#引用写法" class="headerlink" title="引用写法"></a>引用写法</h2><h3 id="隐式链接"><a href="#隐式链接" class="headerlink" title="隐式链接"></a>隐式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestDLL.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> __declspec(dllimport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="显式链接"><a href="#显式链接" class="headerlink" title="显式链接"></a>显式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lpFunc)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>; <span class="comment">//申明函数指针</span></span><br><span class="line"></span><br><span class="line">	lpFunc myFun; <span class="comment">//创建指针</span></span><br><span class="line"></span><br><span class="line">	HINSTANCE hModule = LoadLibrary(<span class="string">&quot;TestDLL.dll&quot;</span>); <span class="comment">//载入dll</span></span><br><span class="line"></span><br><span class="line">	myFun = (lpFunc)GetProcAddress(hModule, <span class="string">&quot;Func&quot;</span>); <span class="comment">//把指针指向dll内函数的地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>笔记</tag>
-        <tag>C</tag>
       </tags>
   </entry>
 </search>
