@@ -6,7 +6,7 @@
   <link href="http://0w0.host/atom.xml" rel="self"/>
   
   <link href="http://0w0.host/"/>
-  <updated>2020-09-19T17:56:15.204Z</updated>
+  <updated>2021-01-26T16:58:52.964Z</updated>
   <id>http://0w0.host/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>导入表学习笔记</title>
+    <link href="http://0w0.host/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://0w0.host/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-01-26T16:57:31.000Z</published>
+    <updated>2021-01-26T16:58:52.964Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="导入表学习笔记"><a href="#导入表学习笔记" class="headerlink" title="导入表学习笔记"></a>导入表学习笔记</h1><hr><h2 id="0x00-导入表概述"><a href="#0x00-导入表概述" class="headerlink" title="0x00 导入表概述"></a>0x00 导入表概述</h2><p>当程序使用非自身文件所写的函数，比如MessageBox的时候，这时候是从外界引了user32.dll里的函数。当程序使用了动态链接库里的函数时，编译和链接后的这些信息都会写入PE结构的导入表里。而我们的程序也是通过导入表来告诉操作系统这些函数该在哪去找。</p><a id="more"></a><p>而导入表则是位于IMAGE_DIRECTORY_ENTRY_IMPORT的第2项，而第2项指向的仍是一个数组。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        DWORD   Characteristics; <span class="comment">//通常为0</span></span><br><span class="line">        DWORD   OriginalFirstThunk;</span><br><span class="line">    &#125;;</span><br><span class="line">    DWORD   TimeDateStamp;</span><br><span class="line">    DWORD   ForwarderChain;</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;</span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure><p>然后我们来看几个重要点的值</p><ol><li><p><code>DWORD   OriginalFirstThunk;</code>为INT表，是一个RVA指向了一个<code>PIMAGE_THUNK_DATA</code>结构</p><p>当<code>PIMAGE_THUNK_DATA</code>的最高位为1时为一个序号，是一个以序号导出的函数的导出序号        </p></li></ol><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_THUNK_DATA32</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        PBYTE  ForwarderString;</span><br><span class="line">        PDWORD Function;</span><br><span class="line">        DWORD Ordinal;</span><br><span class="line">        PIMAGE_IMPORT_BY_NAME  AddressOfData;</span><br><span class="line">    &#125; u1;</span><br><span class="line">&#125; IMAGE_THUNK_DATA32;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;</span><br></pre></td></tr></table></figure><pre><code>当`PIMAGE_THUNK_DATA`的最高位为0时为一个RVA指针，而里面存的是RVA且指向`_IMAGE_IMPORT_BY_NAME`结构</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_BY_NAME</span> &#123;</span></span><br><span class="line">    WORD    Hint;</span><br><span class="line">    BYTE    Name[<span class="number">1</span>];</span><br><span class="line">&#125; IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;</span><br></pre></td></tr></table></figure><pre><code>且其中Hint为序号，不一定是导出序号，大部分的编译器置0；而Name则是指向函数名称首字符。</code></pre><ol start="2"><li><p><code>DWORD   TimeDateStamp; </code>为时间戳</p><p>当时间戳为0时表示为该dll未绑定</p><p>当时间戳不为0时则该dll已被绑定，且时间戳于dll的时间戳相同（New Bound），如果不同则绑定已过期（Old Bound）</p></li><li><p><code>DWORD   Name;</code>为dll的文件名的地址(RVA)</p></li><li><p><code>DWORD   FirstThunk; </code>IAT表，在文件中值与INT表相同，在内存中载入后则为函数的真实地址(RVA)；如果该dll已绑定，则该值为该dll函数的真实地址</p></li></ol><h2 id="0x01-导入表基本图解"><a href="#0x01-导入表基本图解" class="headerlink" title="0x01 导入表基本图解"></a>0x01 导入表基本图解</h2><p><img src="https://i.loli.net/2021/01/26/Uc8ZDgwiV5ldFWq.png" alt="image-20210126011214938"></p><p><img src="https://i.loli.net/2021/01/26/Jiuf29PLQv8Hyw1.png" alt="image-20210126011353615"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;导入表学习笔记&quot;&gt;&lt;a href=&quot;#导入表学习笔记&quot; class=&quot;headerlink&quot; title=&quot;导入表学习笔记&quot;&gt;&lt;/a&gt;导入表学习笔记&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;0x00-导入表概述&quot;&gt;&lt;a href=&quot;#0x00-导入表概述&quot; class=&quot;headerlink&quot; title=&quot;0x00 导入表概述&quot;&gt;&lt;/a&gt;0x00 导入表概述&lt;/h2&gt;&lt;p&gt;当程序使用非自身文件所写的函数，比如MessageBox的时候，这时候是从外界引了user32.dll里的函数。当程序使用了动态链接库里的函数时，编译和链接后的这些信息都会写入PE结构的导入表里。而我们的程序也是通过导入表来告诉操作系统这些函数该在哪去找。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>BUUCTF[BJDCTF2020]Mark loves cat</title>

