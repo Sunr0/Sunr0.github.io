@@ -6,7 +6,7 @@
   <link href="http://0w0.host/atom.xml" rel="self"/>
   
   <link href="http://0w0.host/"/>
-  <updated>2021-01-26T16:58:52.964Z</updated>
+  <updated>2021-02-04T14:02:13.255Z</updated>
   <id>http://0w0.host/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>调用门笔记</title>
+    <link href="http://0w0.host/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>http://0w0.host/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-02-04T14:00:20.000Z</published>
+    <updated>2021-02-04T14:02:13.255Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="0x00-练习1"><a href="#0x00-练习1" class="headerlink" title="0x00 练习1"></a>0x00 练习1</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line">DWORD g_esp;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">        pushfd</span><br><span class="line">        pushad</span><br><span class="line">mov eax,esp</span><br><span class="line">mov [eax+<span class="number">0x24</span>],<span class="number">0x00401060</span></span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x4</span>],<span class="number">0x08</span></span><br><span class="line">mov ebx,dword ptr[eax+<span class="number">0x24</span>+<span class="number">0x8</span>]</span><br><span class="line">mov g_esp,ebx</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x8</span>],esp</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x1c</span>],ss</span><br><span class="line">popad</span><br><span class="line">        popfd</span><br><span class="line">        retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">mov eax,<span class="number">0x8003f048</span></span><br><span class="line">mov [eax],<span class="number">0x80</span></span><br><span class="line">call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   __asm</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">mov eax,esp</span><br><span class="line">mov dword ptr[eax],<span class="number">0x004010ce</span></span><br><span class="line">mov dword ptr[eax+<span class="number">0x4</span>],<span class="number">0x1b</span></span><br><span class="line">mov ebx,g_esp</span><br><span class="line">mov [eax+<span class="number">8</span>],ebx</span><br><span class="line">mov [eax+<span class="number">0x1c</span>],<span class="number">0x23</span></span><br><span class="line">retf</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;0x00-练习1&quot;&gt;&lt;a href=&quot;#0x00-练习1&quot; class=&quot;headerlink&quot; title=&quot;0x00 练习1&quot;&gt;&lt;/a&gt;0x00 练习1&lt;/h1&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=</summary>
+      
+    
+    
+    
+    
+    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="保护模式" scheme="http://0w0.host/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>导入表学习笔记</title>
