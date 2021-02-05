@@ -21,16 +21,21 @@
     var CONFIG = {"hostname":"0w0.host","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Sunr&#39;s Blog">
-<meta property="og:url" content="http://0w0.host/archives/index.html">
+  <meta name="description" content="0x01练习11234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include &lt;stdio.h&gt;#include &lt;windows.h&gt;char cs_eip[6] &#x3D; &amp;#123;0, 0, 0,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中断门练习">
+<meta property="og:url" content="http://0w0.host/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Sunr&#39;s Blog">
+<meta property="og:description" content="0x01练习11234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include &lt;stdio.h&gt;#include &lt;windows.h&gt;char cs_eip[6] &#x3D; &amp;#123;0, 0, 0,">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-05T14:55:48.000Z">
+<meta property="article:modified_time" content="2021-02-05T15:09:01.087Z">
 <meta property="article:author" content="Sunr">
-<meta property="article:tag" content="Network Security, Binary Security, Reverse Engineering, CTFer">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="保护模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://0w0.host/archives/">
+<link rel="canonical" href="http://0w0.host/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/">
 
 
 <script id="page-configurations">
@@ -38,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Sunr's Blog</title>
+  <title>中断门练习 | Sunr's Blog</title>
   
 
 
@@ -185,242 +190,150 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://0w0.host/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ar.jpg">
+      <meta itemprop="name" content="Sunr">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sunr's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          中断门练习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-05 22:55:48 / 修改时间：23:09:01" itemprop="dateCreated datePublished" datetime="2021-02-05T22:55:48+08:00">2021-02-05</time>
+            </span>
+
+          
+            <span id="/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="中断门练习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 16 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>815</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <a id="more"></a>
+
+<h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line"></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">		push ebx</span><br><span class="line">		popfd</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		pop eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">		mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>__declspec(naked) void InGate1() 在中断门通过retf返回</p>
+<p>__declspec(naked) void CallGate2() 在调用门通过iretd返回</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-02-05T22:55:48+08:00"
-              content="2021-02-05">
-          02-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/" itemprop="url">
-            <span itemprop="name">中断门练习</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-02-04T22:00:20+08:00"
-              content="2021-02-04">
-          02-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">调用门笔记</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-27T00:57:31+08:00"
-              content="2021-01-27">
-          01-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">导入表学习笔记</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-20T00:02:26+08:00"
-              content="2020-09-20">
-          09-20
-        </time>
-      </div>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/" itemprop="url">
-            <span itemprop="name">BUUCTF[BJDCTF2020]Mark loves cat</span>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-18T23:00:56+08:00"
-              content="2020-09-18">
-          09-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/18/GKCTF2020-%E8%80%81%E5%85%AB%E5%B0%8F%E8%B6%85%E5%B8%82%E5%84%BF/" itemprop="url">
-            <span itemprop="name">BUUCTF[GKCTF2020]老八小超市儿</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-17T21:42:40+08:00"
-              content="2020-09-17">
-          09-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/" itemprop="url">
-            <span itemprop="name">BUUCTF[SUCTF 2019]EasySQL</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-10T15:12:25+08:00"
-              content="2020-09-10">
-          09-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/10/sqli-lab-Less-54-Less-65/" itemprop="url">
-            <span itemprop="name">sqli-lab Less 54-Less 65</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-09T18:00:23+08:00"
-              content="2020-09-09">
-          09-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/09/sqli-lab-Less-39-Less-53/" itemprop="url">
-            <span itemprop="name">sqli-lab Less 39-Less 53</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-06T17:17:51+08:00"
-              content="2020-09-06">
-          09-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/06/Sqli-lab-Less-23-Less-38/" itemprop="url">
-            <span itemprop="name">sqli-lab Less 23-Less 38</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-30T21:22:43+08:00"
-              content="2020-08-30">
-          08-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/30/sqli-lab-Less-11-Less-22/" itemprop="url">
-            <span itemprop="name">sqli-lab Less 11-Less 22</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 保护模式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/" rel="prev" title="调用门笔记">
+      <i class="fa fa-chevron-left"></i> 调用门笔记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -467,6 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01%E7%BB%83%E4%B9%A01"><span class="nav-number">1.</span> <span class="nav-text">0x01练习1</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -699,6 +613,16 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://0w0.host/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/',]
+      });
+      });
+  </script>
 
 
 <script>
