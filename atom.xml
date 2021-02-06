@@ -3,11 +3,11 @@
   <title>Sunr&#39;s Blog</title>
   
   
-  <link href="http://0w0.host/atom.xml" rel="self"/>
+  <link href="http://a7k6b1c.gitee.io/atom.xml" rel="self"/>
   
-  <link href="http://0w0.host/"/>
-  <updated>2021-02-05T15:09:01.087Z</updated>
-  <id>http://0w0.host/</id>
+  <link href="http://a7k6b1c.gitee.io/"/>
+  <updated>2021-02-06T06:12:56.129Z</updated>
+  <id>http://a7k6b1c.gitee.io/</id>
   
   <author>
     <name>Sunr</name>
@@ -18,60 +18,50 @@
   
   <entry>
     <title>中断门练习</title>
-    <link href="http://0w0.host/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/"/>
-    <id>http://0w0.host/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/</id>
+    <link href="http://a7k6b1c.gitee.io/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/"/>
+    <id>http://a7k6b1c.gitee.io/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/</id>
     <published>2021-02-05T14:55:48.000Z</published>
-    <updated>2021-02-05T15:09:01.087Z</updated>
+    <updated>2021-02-06T06:12:56.129Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">&#123;</span><br><span class="line">pushad</span><br><span class="line">pushfd</span><br><span class="line"></span><br><span class="line">mov eax,esp</span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">push ebx</span><br><span class="line">popfd</span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">popfd</span><br><span class="line">popad</span><br><span class="line">pop eax</span><br><span class="line">retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">&#123;</span><br><span class="line">pushad</span><br><span class="line">pushfd</span><br><span class="line"></span><br><span class="line">mov eax,esp</span><br><span class="line">mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">popad</span><br><span class="line">iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>__declspec(naked) void InGate1() 在中断门通过retf返回</p><p>__declspec(naked) void CallGate2() 在调用门通过iretd返回</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><p>在中断门通过retf返回,在调用门通过iretd返回</p><a id="more"></a><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">&#123;</span><br><span class="line">pushad</span><br><span class="line">pushfd</span><br><span class="line"></span><br><span class="line">mov eax,esp</span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">push ebx</span><br><span class="line">popfd</span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">popfd</span><br><span class="line">popad</span><br><span class="line">pop eax</span><br><span class="line">retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">&#123;</span><br><span class="line">pushad</span><br><span class="line">pushfd</span><br><span class="line"></span><br><span class="line">mov eax,esp</span><br><span class="line">mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">popad</span><br><span class="line">iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;0x01练习1&quot;&gt;&lt;a href=&quot;#0x01练习1&quot; class=&quot;headerlink&quot; title=&quot;0x01练习1&quot;&gt;&lt;/a&gt;0x01练习1&lt;/h1&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;0x01练习1&quot;&gt;&lt;a href=&quot;#0x01练习1&quot; class=&quot;headerlink&quot; title=&quot;0x01练习1&quot;&gt;&lt;/a&gt;0x01练习1&lt;/h1&gt;&lt;p&gt;在中断门通过retf返回,在调用门通过iretd返回&lt;/p&gt;</summary>
     
     
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="保护模式" scheme="http://0w0.host/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/"/>
+    <category term="保护模式" scheme="http://a7k6b1c.gitee.io/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>调用门笔记</title>
-    <link href="http://0w0.host/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
-    <id>http://0w0.host/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/</id>
+    <link href="http://a7k6b1c.gitee.io/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>http://a7k6b1c.gitee.io/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/</id>
     <published>2021-02-04T14:00:20.000Z</published>
-    <updated>2021-02-05T15:09:05.601Z</updated>
+    <updated>2021-02-06T06:12:27.801Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><h1 id="0x00-练习1"><a href="#0x00-练习1" class="headerlink" title="0x00 练习1"></a>0x00 练习1</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line">DWORD g_esp;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">        pushfd</span><br><span class="line">        pushad</span><br><span class="line">mov eax,esp</span><br><span class="line">mov [eax+<span class="number">0x24</span>],<span class="number">0x00401060</span></span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x4</span>],<span class="number">0x08</span></span><br><span class="line">mov ebx,dword ptr[eax+<span class="number">0x24</span>+<span class="number">0x8</span>]</span><br><span class="line">mov g_esp,ebx</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x8</span>],esp</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x1c</span>],ss</span><br><span class="line">popad</span><br><span class="line">        popfd</span><br><span class="line">        retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">mov eax,<span class="number">0x8003f048</span></span><br><span class="line">mov [eax],<span class="number">0x80</span></span><br><span class="line">call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   __asm</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">mov eax,esp</span><br><span class="line">mov dword ptr[eax],<span class="number">0x004010ce</span></span><br><span class="line">mov dword ptr[eax+<span class="number">0x4</span>],<span class="number">0x1b</span></span><br><span class="line">mov ebx,g_esp</span><br><span class="line">mov [eax+<span class="number">8</span>],ebx</span><br><span class="line">mov [eax+<span class="number">0x1c</span>],<span class="number">0x23</span></span><br><span class="line">retf</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="0x00-练习1"><a href="#0x00-练习1" class="headerlink" title="0x00 练习1"></a>0x00 练习1</h1><p>3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环</p><a id="more"></a><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line">DWORD g_esp;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">        pushfd</span><br><span class="line">        pushad</span><br><span class="line">mov eax,esp</span><br><span class="line">mov [eax+<span class="number">0x24</span>],<span class="number">0x00401060</span></span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x4</span>],<span class="number">0x08</span></span><br><span class="line">mov ebx,dword ptr[eax+<span class="number">0x24</span>+<span class="number">0x8</span>]</span><br><span class="line">mov g_esp,ebx</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x8</span>],esp</span><br><span class="line">mov [eax+<span class="number">0x24</span>+<span class="number">0x1c</span>],ss</span><br><span class="line">popad</span><br><span class="line">        popfd</span><br><span class="line">        retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">mov eax,<span class="number">0x8003f048</span></span><br><span class="line">mov [eax],<span class="number">0x80</span></span><br><span class="line">call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   __asm</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//int 3</span></span><br><span class="line">mov eax,esp</span><br><span class="line">mov dword ptr[eax],<span class="number">0x004010ce</span></span><br><span class="line">mov dword ptr[eax+<span class="number">0x4</span>],<span class="number">0x1b</span></span><br><span class="line">mov ebx,g_esp</span><br><span class="line">mov [eax+<span class="number">8</span>],ebx</span><br><span class="line">mov [eax+<span class="number">0x1c</span>],<span class="number">0x23</span></span><br><span class="line">retf</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;0x00-练习1&quot;&gt;&lt;a href=&quot;#0x00-练习1&quot; class=&quot;headerlink&quot; title=&quot;0x00 练习1&quot;&gt;&lt;/a&gt;0x00 练习1&lt;/h1&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;t</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;0x00-练习1&quot;&gt;&lt;a href=&quot;#0x00-练习1&quot; class=&quot;headerlink&quot; title=&quot;0x00 练习1&quot;&gt;&lt;/a&gt;0x00 练习1&lt;/h1&gt;&lt;p&gt;3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环&lt;/p&gt;</summary>
     
     
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="保护模式" scheme="http://0w0.host/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/"/>
+    <category term="保护模式" scheme="http://a7k6b1c.gitee.io/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>导入表学习笔记</title>
-    <link href="http://0w0.host/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://0w0.host/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <link href="http://a7k6b1c.gitee.io/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://a7k6b1c.gitee.io/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
     <published>2021-01-26T16:57:31.000Z</published>
     <updated>2021-02-04T14:01:08.151Z</updated>
     
@@ -84,14 +74,14 @@
     
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>BUUCTF[BJDCTF2020]Mark loves cat</title>
-    <link href="http://0w0.host/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/"/>
-    <id>http://0w0.host/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/"/>
+    <id>http://a7k6b1c.gitee.io/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/</id>
     <published>2020-09-19T16:02:26.000Z</published>
     <updated>2020-09-19T17:56:15.204Z</updated>
     
@@ -102,21 +92,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="CTF" scheme="http://0w0.host/tags/CTF/"/>
+    <category term="CTF" scheme="http://a7k6b1c.gitee.io/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>BUUCTF[GKCTF2020]老八小超市儿</title>
-    <link href="http://0w0.host/2020/09/18/GKCTF2020-%E8%80%81%E5%85%AB%E5%B0%8F%E8%B6%85%E5%B8%82%E5%84%BF/"/>
-    <id>http://0w0.host/2020/09/18/GKCTF2020-%E8%80%81%E5%85%AB%E5%B0%8F%E8%B6%85%E5%B8%82%E5%84%BF/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/09/18/GKCTF2020-%E8%80%81%E5%85%AB%E5%B0%8F%E8%B6%85%E5%B8%82%E5%84%BF/"/>
+    <id>http://a7k6b1c.gitee.io/2020/09/18/GKCTF2020-%E8%80%81%E5%85%AB%E5%B0%8F%E8%B6%85%E5%B8%82%E5%84%BF/</id>
     <published>2020-09-18T15:00:56.000Z</published>
     <updated>2020-09-18T16:29:03.702Z</updated>
     
@@ -127,21 +117,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="CTF" scheme="http://0w0.host/tags/CTF/"/>
+    <category term="CTF" scheme="http://a7k6b1c.gitee.io/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>BUUCTF[SUCTF 2019]EasySQL</title>
-    <link href="http://0w0.host/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/"/>
-    <id>http://0w0.host/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/"/>
+    <id>http://a7k6b1c.gitee.io/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/</id>
     <published>2020-09-17T13:42:40.000Z</published>
     <updated>2020-09-18T03:57:00.669Z</updated>
     
@@ -152,21 +142,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="CTF" scheme="http://0w0.host/tags/CTF/"/>
+    <category term="CTF" scheme="http://a7k6b1c.gitee.io/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>sqli-lab Less 54-Less 65</title>
-    <link href="http://0w0.host/2020/09/10/sqli-lab-Less-54-Less-65/"/>
-    <id>http://0w0.host/2020/09/10/sqli-lab-Less-54-Less-65/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/09/10/sqli-lab-Less-54-Less-65/"/>
+    <id>http://a7k6b1c.gitee.io/2020/09/10/sqli-lab-Less-54-Less-65/</id>
     <published>2020-09-10T07:12:25.000Z</published>
     <updated>2020-09-10T14:09:05.972Z</updated>
     
@@ -179,21 +169,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="sqli-lab" scheme="http://0w0.host/tags/sqli-lab/"/>
+    <category term="sqli-lab" scheme="http://a7k6b1c.gitee.io/tags/sqli-lab/"/>
     
   </entry>
   
   <entry>
     <title>sqli-lab Less 39-Less 53</title>
-    <link href="http://0w0.host/2020/09/09/sqli-lab-Less-39-Less-53/"/>
-    <id>http://0w0.host/2020/09/09/sqli-lab-Less-39-Less-53/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/09/09/sqli-lab-Less-39-Less-53/"/>
+    <id>http://a7k6b1c.gitee.io/2020/09/09/sqli-lab-Less-39-Less-53/</id>
     <published>2020-09-09T10:00:23.000Z</published>
     <updated>2020-09-10T14:09:05.974Z</updated>
     
@@ -204,21 +194,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="sqli-lab" scheme="http://0w0.host/tags/sqli-lab/"/>
+    <category term="sqli-lab" scheme="http://a7k6b1c.gitee.io/tags/sqli-lab/"/>
     
   </entry>
   
   <entry>
     <title>sqli-lab Less 23-Less 38</title>
-    <link href="http://0w0.host/2020/09/06/Sqli-lab-Less-23-Less-38/"/>
-    <id>http://0w0.host/2020/09/06/Sqli-lab-Less-23-Less-38/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/09/06/Sqli-lab-Less-23-Less-38/"/>
+    <id>http://a7k6b1c.gitee.io/2020/09/06/Sqli-lab-Less-23-Less-38/</id>
     <published>2020-09-06T09:17:51.000Z</published>
     <updated>2020-09-10T14:09:05.973Z</updated>
     
@@ -229,21 +219,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="sqli-lab" scheme="http://0w0.host/tags/sqli-lab/"/>
+    <category term="sqli-lab" scheme="http://a7k6b1c.gitee.io/tags/sqli-lab/"/>
     
   </entry>
   
   <entry>
     <title>sqli-lab Less 11-Less 22</title>
-    <link href="http://0w0.host/2020/08/30/sqli-lab-Less-11-Less-22/"/>
-    <id>http://0w0.host/2020/08/30/sqli-lab-Less-11-Less-22/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/08/30/sqli-lab-Less-11-Less-22/"/>
+    <id>http://a7k6b1c.gitee.io/2020/08/30/sqli-lab-Less-11-Less-22/</id>
     <published>2020-08-30T13:22:43.000Z</published>
     <updated>2020-09-10T14:09:05.974Z</updated>
     
@@ -254,21 +244,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="sqli-lab" scheme="http://0w0.host/tags/sqli-lab/"/>
+    <category term="sqli-lab" scheme="http://a7k6b1c.gitee.io/tags/sqli-lab/"/>
     
   </entry>
   
   <entry>
     <title>过安全狗笔记</title>
-    <link href="http://0w0.host/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/"/>
-    <id>http://0w0.host/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/"/>
+    <id>http://a7k6b1c.gitee.io/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/</id>
     <published>2020-08-10T17:56:54.000Z</published>
     <updated>2020-08-12T04:54:47.458Z</updated>
     
@@ -283,16 +273,16 @@
     
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透测试" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    <category term="渗透测试" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>sqli-lab Less 1-Less 10</title>
-    <link href="http://0w0.host/2020/08/09/sqli-lab-Less-1-Less-10/"/>
-    <id>http://0w0.host/2020/08/09/sqli-lab-Less-1-Less-10/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/08/09/sqli-lab-Less-1-Less-10/"/>
+    <id>http://a7k6b1c.gitee.io/2020/08/09/sqli-lab-Less-1-Less-10/</id>
     <published>2020-08-09T15:56:10.000Z</published>
     <updated>2020-09-10T14:09:05.974Z</updated>
     
@@ -303,21 +293,21 @@
     
     
     
-    <category term="学习笔记" scheme="http://0w0.host/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <category term="学习笔记" scheme="http://a7k6b1c.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="渗透" scheme="http://0w0.host/tags/%E6%B8%97%E9%80%8F/"/>
+    <category term="渗透" scheme="http://a7k6b1c.gitee.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-    <category term="sqli-lab" scheme="http://0w0.host/tags/sqli-lab/"/>
+    <category term="sqli-lab" scheme="http://a7k6b1c.gitee.io/tags/sqli-lab/"/>
     
   </entry>
   
   <entry>
     <title>Cockpit For RHEL8</title>
-    <link href="http://0w0.host/2020/03/05/Cockpit-For-RHEL8/"/>
-    <id>http://0w0.host/2020/03/05/Cockpit-For-RHEL8/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/03/05/Cockpit-For-RHEL8/"/>
+    <id>http://a7k6b1c.gitee.io/2020/03/05/Cockpit-For-RHEL8/</id>
     <published>2020-03-05T02:10:19.000Z</published>
     <updated>2020-03-05T06:06:25.096Z</updated>
     
@@ -331,16 +321,16 @@
     
     
     
-    <category term="Linux" scheme="http://0w0.host/tags/Linux/"/>
+    <category term="Linux" scheme="http://a7k6b1c.gitee.io/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>在VMware Player 15中安装MacOS</title>
-    <link href="http://0w0.host/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/"/>
-    <id>http://0w0.host/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/"/>
+    <id>http://a7k6b1c.gitee.io/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</id>
     <published>2020-03-02T07:39:46.000Z</published>
-    <updated>2021-01-22T09:15:10.024Z</updated>
+    <updated>2021-02-06T06:12:57.638Z</updated>
     
     <content type="html"><![CDATA[<h1 id="0x0-安装前准备"><a href="#0x0-安装前准备" class="headerlink" title="0x0 安装前准备"></a>0x0 安装前准备</h1><blockquote><p>材料准备：</p></blockquote><blockquote><ol><li><p>镜像文件：这里我使用的是 OS X 10.13</p></li><li><p>VMware 的 MacOS的破解补丁</p></li><li><p>VMware Workstation 15 软件，注册码或注册机自己百度，嫌麻烦就使用VirtualBox</p></li></ol></blockquote><a id="more"></a><p>文件链接 :  <a href="https://pan.baidu.com/s/1YqU5nhO764ANK_x4bgvJaA">密码:2333</a>    <a href="https://download3.vmware.com/software/wkst/file/VMware-workstation-full-15.5.1-15018445.exe">VMware Download</a> </p><h1 id="0x1-安装"><a href="#0x1-安装" class="headerlink" title="0x1 安装"></a>0x1 安装</h1><p>下载破解补丁后解压出来以管理员模式运行 <em>win-install.cmd</em>  </p><p><img src="https://i.loli.net/2020/03/02/MOaZzCDIqcUn2xw.png" alt="unlocker.png"></p><p>运行结束后就开始使用VMware Workstation 15 Player部署呗</p><p><img src="https://i.loli.net/2020/03/02/JBA96jwbYCuaQP1.png" alt="1.png"></p><p><img src="https://i.loli.net/2020/03/02/U3NWGHA7lzxT4Kw.png" alt="2.png"></p><p><img src="https://i.loli.net/2020/03/02/jdQMYgVZt1q357f.png" alt="3.png"></p><p>之后便是一路Next，最后Fish</p><hr><p>启动虚拟机后可能会出现以下问题</p><p><img src="https://i.loli.net/2020/03/02/fXqvI9SE5YRT3WA.png" alt="4.png"></p><p>这是因为要检查很多东西，百度一下发现如下解决方法：</p><blockquote><ol><li>在虚拟机的路径中找到 <code>.vmx</code> 的文件</li><li>打开文件找到一行类似 <code>guestOS = &quot;darwin17-64&quot;</code></li><li>下一行追加 <code>cpuid.1.eax = &quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</code></li></ol></blockquote><p>保存再启动就可以解决，大概原理是虚拟机会对对核心进行检验，用mask来欺骗，从而过CPU不必要的检查</p><p>(#其实我也不知道，手动滑稽)</p><h1 id="0x2-系统安装"><a href="#0x2-系统安装" class="headerlink" title="0x2 系统安装"></a>0x2 系统安装</h1><p>进入界面后第一件事，调出终端建议进行以下步骤方便后续安装VMware Tools ：<a href="#0x4-VMware-Tools%E5%AE%89%E8%A3%85">VMware Tools安装</a></p><p>再进行进行磁盘管理</p><p><img src="https://i.loli.net/2020/03/02/tz6FoAHBXE2hwQc.png" alt="5.png"></p><p><img src="https://i.loli.net/2020/03/02/wgE1uv3GJy6AFcD.png" alt="6.png"></p><p>作为系统盘呗，需要自己再自行添加硬盘</p><p><img src="https://i.loli.net/2020/03/02/DrBsNQeHL1ipIlj.png" alt="7.png"></p><p>之后就是等它静默安装，然后再进行常规的系统配置</p><p><img src="https://i.loli.net/2020/03/02/r8wZbAIHmqoQEeu.png" alt="9.png"></p><p>安装好VMware Tools后就开始享用OS X吧</p><h1 id="0x3-添加硬盘及网络配置"><a href="#0x3-添加硬盘及网络配置" class="headerlink" title="0x3 添加硬盘及网络配置"></a>0x3 添加硬盘及网络配置</h1><p><img src="https://i.loli.net/2020/03/02/uzWvTp3qRwmAUOD.png" alt="10.png"></p><p>设置网络 设置 - &gt; 网络 - &gt; WLAN - &gt; 更改适配器设置</p><p><img src="https://i.loli.net/2020/03/02/QeGR8d5CFU3whp1.png" alt="11.png"></p><p><img src="https://i.loli.net/2020/03/02/Voeaxsi57QCBF8N.png" alt="12.png"></p><p><img src="https://i.loli.net/2020/03/02/wWmnTudCaGfqscD.png" alt="12.png"></p><p><img src="https://i.loli.net/2020/03/02/U4fxJuE8lvwtVO1.png" alt="12.png"></p><p>然后进Mac看设置</p><p><img src="https://i.loli.net/2020/03/02/cFeDdaQlm8326WZ.png" alt="13.png"></p><p>显示绿点则说明连接成功</p><h1 id="0x4-VMware-Tools安装"><a href="#0x4-VMware-Tools安装" class="headerlink" title="0x4 VMware Tools安装"></a>0x4 VMware Tools安装</h1><p>反复装不上VMware Tools 通过百度发现Mac有SIP系统完整性保护机制</p><p>我们就进入Recovery里手动关闭</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># csrutil status &#x2F;&#x2F;检查状态 enable 为开启</span><br><span class="line"># csrutil disable &#x2F;&#x2F;关闭保护机制</span><br></pre></td></tr></table></figure><p><img src="https://i.loli.net/2020/03/03/P6o8CTOLGdAfkIQ.png" alt="16.png"></p><p><img src="https://i.loli.net/2020/03/03/or9MFBzdan1KvGC.png" alt="17.png"></p><p>之后便可以开心的安装VMware Tools 了</p><p><img src="https://i.loli.net/2020/03/03/cKBhbYw6ROHlTvI.png" alt="18.png"></p><h1 id="0x5-安装Xcode"><a href="#0x5-安装Xcode" class="headerlink" title="0x5 安装Xcode"></a>0x5 安装Xcode</h1><p>就在商店自己安装呗，现在Xcode的最低支持版本是 OS X 10.14.4</p><p><img src="https://i.loli.net/2020/03/03/S6VIMvT7AEYxaLo.png" alt="19.png"></p><p>然后就可以 愉cao 快dan的 敲xiu 码bug 了</p><hr><p>[^]: 注：本文资料大多来源于网络，如果有侵权，请联系作者删除。2020/03/03 二次修改。</p>]]></content>
     
@@ -362,14 +352,14 @@
     
     
     
-    <category term="黑苹果" scheme="http://0w0.host/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
+    <category term="黑苹果" scheme="http://a7k6b1c.gitee.io/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
     
   </entry>
   
   <entry>
     <title>简单使用链接库</title>
-    <link href="http://0w0.host/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/"/>
-    <id>http://0w0.host/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/</id>
+    <link href="http://a7k6b1c.gitee.io/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/"/>
+    <id>http://a7k6b1c.gitee.io/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/</id>
     <published>2020-01-20T15:19:11.000Z</published>
     <updated>2020-01-22T04:56:48.633Z</updated>
     
@@ -381,16 +371,16 @@
     
     
     
-    <category term="笔记" scheme="http://0w0.host/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="http://a7k6b1c.gitee.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="C" scheme="http://0w0.host/tags/C/"/>
+    <category term="C" scheme="http://a7k6b1c.gitee.io/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>浅谈if/switch的&quot;效率革命&quot;</title>
-    <link href="http://0w0.host/2019/12/06/%E6%B5%85%E8%B0%88switch-if/"/>
-    <id>http://0w0.host/2019/12/06/%E6%B5%85%E8%B0%88switch-if/</id>
+    <link href="http://a7k6b1c.gitee.io/2019/12/06/%E6%B5%85%E8%B0%88switch-if/"/>
+    <id>http://a7k6b1c.gitee.io/2019/12/06/%E6%B5%85%E8%B0%88switch-if/</id>
     <published>2019-12-05T16:21:21.000Z</published>
     <updated>2020-03-03T07:19:55.127Z</updated>
     
@@ -403,7 +393,7 @@
     
     
     
-    <category term="c" scheme="http://0w0.host/tags/c/"/>
+    <category term="c" scheme="http://a7k6b1c.gitee.io/tags/c/"/>
     
   </entry>
   
