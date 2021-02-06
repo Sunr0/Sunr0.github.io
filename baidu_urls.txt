@@ -1,3 +1,4 @@
+http://a7k6b1c.gitee.io/2021/02/06/%E9%99%B7%E9%98%B1%E9%97%A8%E7%BB%83%E4%B9%A0/
 http://a7k6b1c.gitee.io/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/
 http://a7k6b1c.gitee.io/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/
 http://a7k6b1c.gitee.io/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
@@ -7,10 +8,3 @@ http://a7k6b1c.gitee.io/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/
 http://a7k6b1c.gitee.io/2020/09/10/sqli-lab-Less-54-Less-65/
 http://a7k6b1c.gitee.io/2020/09/09/sqli-lab-Less-39-Less-53/
 http://a7k6b1c.gitee.io/2020/09/06/Sqli-lab-Less-23-Less-38/
-http://a7k6b1c.gitee.io/2020/08/30/sqli-lab-Less-11-Less-22/
-http://a7k6b1c.gitee.io/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/
-http://a7k6b1c.gitee.io/2020/08/09/sqli-lab-Less-1-Less-10/
-http://a7k6b1c.gitee.io/2020/03/05/Cockpit-For-RHEL8/
-http://a7k6b1c.gitee.io/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/
-http://a7k6b1c.gitee.io/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/
-http://a7k6b1c.gitee.io/2019/12/06/%E6%B5%85%E8%B0%88switch-if/

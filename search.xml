@@ -922,4 +922,28 @@
         <tag>渗透测试</tag>
       </tags>
   </entry>
+  <entry>
+    <title>陷阱门练习</title>
+    <url>/2021/02/06/%E9%99%B7%E9%98%B1%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="0x00-陷阱门练习"><a href="#0x00-陷阱门练习" class="headerlink" title="0x00 陷阱门练习"></a>0x00 陷阱门练习</h1><p>首先是看陷阱门在IDT表中的描述符</p>
+<p>可见陷阱门和中断门的区别在描述符上仅仅在于第8位是否为1</p>
+<a id="more"></a>
+
+<p><img src="https://i.loli.net/2021/02/06/V3QIiyk1Nc5RGhZ.png" alt="image-20210206225147250"></p>
+<p>而在使用上与中断门的区别仅仅只是中断门会将eflags的IF位清0，而陷阱门不会</p>
+<p>下面进行实验</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">DWORD a_eflags, i_eflags, t_eflags;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InterruptGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov i_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">TrapGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov t_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov a_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">        <span class="keyword">int</span> <span class="number">0x20</span> <span class="comment">//Call InterruptGate</span></span><br><span class="line">		<span class="keyword">int</span> <span class="number">0x21</span> <span class="comment">//Call TrapGate</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;after: %x \ninterrupt: %x \ntrap: %x\n&quot;</span>,a_eflags,i_eflags,t_eflags);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里结果是</p>
+<blockquote>
+<p>after: 216  –&gt; 0010 0001 0110</p>
+<p>interrupt: 16 –&gt; 0000 0001 0110</p>
+<p>trap: 216 –&gt; 0010 0001 0110</p>
+</blockquote>
+<p> 很明显，第9位被清0</p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>保护模式</tag>
+      </tags>
+  </entry>
 </search>
