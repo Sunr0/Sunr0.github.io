@@ -21,19 +21,25 @@
     var CONFIG = {"hostname":"a7k6b1c.gitee.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="0x00 练习13环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环">
+  <meta name="description" content="0x00 调用门概述  调用门是用来在不同权限级别之间进行跳转，可是平级跳转，也可以是提权跳转">
 <meta property="og:type" content="article">
 <meta property="og:title" content="调用门笔记">
 <meta property="og:url" content="http://a7k6b1c.gitee.io/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Sunr&#39;s Blog">
-<meta property="og:description" content="0x00 练习13环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环">
+<meta property="og:description" content="0x00 调用门概述  调用门是用来在不同权限级别之间进行跳转，可是平级跳转，也可以是提权跳转">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/EkiOZDcWdCJQbeF.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/mhYM4dovE9fBI7O.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/U2PvOpbcw7lnYVh.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/o6xHaDpcn4h9g2G.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/4FCcQsH1A7r6mdP.png">
 <meta property="article:published_time" content="2021-02-04T14:00:20.000Z">
-<meta property="article:modified_time" content="2021-02-06T06:12:27.801Z">
+<meta property="article:modified_time" content="2021-02-24T11:32:46.554Z">
 <meta property="article:author" content="Sunr">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="保护模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/EkiOZDcWdCJQbeF.png">
 
 <link rel="canonical" href="http://a7k6b1c.gitee.io/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/">
 
@@ -227,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-06 14:12:27" itemprop="dateModified" datetime="2021-02-06T14:12:27+08:00">2021-02-06</time>
+                <time title="修改时间：2021-02-24 19:32:46" itemprop="dateModified" datetime="2021-02-24T19:32:46+08:00">2021-02-24</time>
               </span>
 
           
@@ -257,7 +263,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>901</span>
+              <span>1.8k</span>
             </span>
 
         </div>
@@ -269,12 +275,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="0x00-练习1"><a href="#0x00-练习1" class="headerlink" title="0x00 练习1"></a>0x00 练习1</h1><p>3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环</p>
+        <h1 id="0x00-调用门概述"><a href="#0x00-调用门概述" class="headerlink" title="0x00 调用门概述"></a>0x00 调用门概述</h1><blockquote>
+<p> 调用门是用来在不同权限级别之间进行跳转，可是平级跳转，也可以是提权跳转</p>
+</blockquote>
 <a id="more"></a>
 
+<h2 id="0x10-描述符"><a href="#0x10-描述符" class="headerlink" title="0x10 描述符"></a>0x10 描述符</h2><p><img src="https://i.loli.net/2021/02/24/EkiOZDcWdCJQbeF.png" alt="image-20210224162142538"></p>
+<p>这是在GDT表中的描述符格式</p>
+<p>例如在3环提权到0环的调用门应该这样构造 <code>XXXXEC00 0008XXXX</code></p>
+<h2 id="0x11-权限检查"><a href="#0x11-权限检查" class="headerlink" title="0x11 权限检查"></a>0x11 权限检查</h2><p>在跳转时也会有权限检查：CPL ≤ call gate DPL; RPL ≤ call gate DPL</p>
+<blockquote>
+<p>这里要注意，在3环提权的时候DPL的值应该是3环的权限，要不然连敲门的权限都没有</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/02/24/mhYM4dovE9fBI7O.png" alt="image-20210224163820289"></p>
+<h2 id="0x12-堆栈变化"><a href="#0x12-堆栈变化" class="headerlink" title="0x12 堆栈变化"></a>0x12 堆栈变化</h2><p>而在用call调用的时候其堆栈变化是</p>
+<p><img src="https://i.loli.net/2021/02/24/U2PvOpbcw7lnYVh.png" alt="image-20210224163419182"></p>
+<p><img src="https://i.loli.net/2021/02/24/o6xHaDpcn4h9g2G.png" alt="image-20210224192554951"></p>
+<p><img src="https://i.loli.net/2021/02/24/4FCcQsH1A7r6mdP.png" alt="image-20210224192644904"></p>
+<p>而含参的平级跳转和也只是和提权含参差不多，只是不把ebp和ss压入堆栈</p>
+<p>而这时候的0环的ebp和ss都是TSS里的值来填充的</p>
+<p>而这种变化的堆栈则要用retf，而retf的pop回去的值没有进行权限检查</p>
+<blockquote>
+<p>retf [参数个数，无则省略]</p>
+</blockquote>
+<h1 id="0x01-练习1"><a href="#0x01-练习1" class="headerlink" title="0x01 练习1"></a>0x01 练习1</h1><p>调用门中调用调用门</p>
+<blockquote>
+<p>3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环</p>
+</blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line">DWORD g_esp;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		<span class="comment">//int 3</span></span><br><span class="line">        pushfd</span><br><span class="line">        pushad</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov [eax+<span class="number">0x24</span>],<span class="number">0x00401060</span></span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x4</span>],<span class="number">0x08</span></span><br><span class="line">		mov ebx,dword ptr[eax+<span class="number">0x24</span>+<span class="number">0x8</span>]</span><br><span class="line">		mov g_esp,ebx</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x8</span>],esp</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x1c</span>],ss</span><br><span class="line">		popad</span><br><span class="line">        popfd</span><br><span class="line">        retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		<span class="comment">//int 3</span></span><br><span class="line">		mov eax,<span class="number">0x8003f048</span></span><br><span class="line">		mov [eax],<span class="number">0x80</span></span><br><span class="line">		call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   __asm</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//	int 3</span></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov dword ptr[eax],<span class="number">0x004010ce</span></span><br><span class="line">		mov dword ptr[eax+<span class="number">0x4</span>],<span class="number">0x1b</span></span><br><span class="line">		mov ebx,g_esp</span><br><span class="line">		mov [eax+<span class="number">8</span>],ebx</span><br><span class="line">		mov [eax+<span class="number">0x1c</span>],<span class="number">0x23</span></span><br><span class="line">		retf</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+<h1 id="0x02-练习2"><a href="#0x02-练习2" class="headerlink" title="0x02 练习2"></a>0x02 练习2</h1><p>通过retf进1环</p>
+<blockquote>
+<p>构造1环权限的cs ss 通过retf不进行权限检查来跳转到1环</p>
+</blockquote>
+<p>cs: 00cfbb00`0000ffff  –&gt;  8003f0b0</p>
+<p>ss: 00cfb300`0000ffff  –&gt; 8003f0b8</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		mov eax,<span class="number">0xb1</span></span><br><span class="line">		mov [esp+<span class="number">0x4</span>],eax</span><br><span class="line"></span><br><span class="line">		mov eax,<span class="number">0xB9</span></span><br><span class="line">		mov [esp+<span class="number">0xc</span>],eax</span><br><span class="line"></span><br><span class="line">		retf</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//printf(&quot;%x&quot;,Func);</span></span><br><span class="line">	<span class="keyword">short</span> g_cs1;</span><br><span class="line">	<span class="keyword">char</span> buf[] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0x48</span>,<span class="number">0</span>&#125;;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		call fword ptr [buf]</span><br><span class="line">		mov g_cs1,cs</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>,g_cs1);  <span class="comment">//结果为B1 --&gt; 10110 0 01 --&gt; RPL == 1</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -392,7 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-%E7%BB%83%E4%B9%A01"><span class="nav-number">1.</span> <span class="nav-text">0x00 练习1</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-%E8%B0%83%E7%94%A8%E9%97%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">0x00 调用门概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x10-%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">1.1.</span> <span class="nav-text">0x10 描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x11-%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">0x11 权限检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x12-%E5%A0%86%E6%A0%88%E5%8F%98%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">0x12 堆栈变化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-%E7%BB%83%E4%B9%A01"><span class="nav-number">2.</span> <span class="nav-text">0x01 练习1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-%E7%BB%83%E4%B9%A02"><span class="nav-number">3.</span> <span class="nav-text">0x02 练习2</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -469,7 +504,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">44k</span>
+    <span title="站点总字数">45k</span>
 </div>
 
         

