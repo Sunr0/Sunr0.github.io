@@ -21,19 +21,22 @@
     var CONFIG = {"hostname":"a7k6b1c.gitee.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="0x01练习1在中断门通过retf返回,在调用门通过iretd返回">
+  <meta name="description" content="0x00 中断门中断门位于IDT表中，处理器利用IDT表中的描述符来处理异常和中断">
 <meta property="og:type" content="article">
 <meta property="og:title" content="中断门练习">
 <meta property="og:url" content="http://a7k6b1c.gitee.io/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Sunr&#39;s Blog">
-<meta property="og:description" content="0x01练习1在中断门通过retf返回,在调用门通过iretd返回">
+<meta property="og:description" content="0x00 中断门中断门位于IDT表中，处理器利用IDT表中的描述符来处理异常和中断">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/25/XGmoA5rbFJINTzD.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/25/uGCzatPYoO6KrTd.png">
 <meta property="article:published_time" content="2021-02-05T14:55:48.000Z">
-<meta property="article:modified_time" content="2021-02-24T08:14:33.649Z">
+<meta property="article:modified_time" content="2021-02-24T16:40:55.631Z">
 <meta property="article:author" content="Sunr">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="保护模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/25/XGmoA5rbFJINTzD.png">
 
 <link rel="canonical" href="http://a7k6b1c.gitee.io/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/">
 
@@ -227,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-24 16:14:33" itemprop="dateModified" datetime="2021-02-24T16:14:33+08:00">2021-02-24</time>
+                <time title="修改时间：2021-02-25 00:40:55" itemprop="dateModified" datetime="2021-02-25T00:40:55+08:00">2021-02-25</time>
               </span>
 
           
@@ -257,7 +260,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>754</span>
+              <span>756</span>
             </span>
 
         </div>
@@ -269,10 +272,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><p>在中断门通过retf返回,在调用门通过iretd返回</p>
+        <h1 id="0x00-中断门"><a href="#0x00-中断门" class="headerlink" title="0x00 中断门"></a>0x00 中断门</h1><p>中断门位于IDT表中，处理器利用IDT表中的描述符来处理异常和中断</p>
 <a id="more"></a>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line"></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">		push ebx</span><br><span class="line">		popfd</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		pop eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">		mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>浅析</strong></p>
+<h2 id="0x10-描述符"><a href="#0x10-描述符" class="headerlink" title="0x10 描述符"></a>0x10 描述符</h2><p><img src="https://i.loli.net/2021/02/25/XGmoA5rbFJINTzD.png" alt="image-20210225002129735"></p>
+<p>这是中断门的描述符第11位D位为0是16位下的中断门，而为1则是32位下的中断门（Type位描述的）</p>
+<p>这里我们可以构造一个中断描述符</p>
+<blockquote>
+<p>xxxxee00`xxxxxxxx</p>
+<p>xxxxe600`xxxxxxxx</p>
+</blockquote>
+<h2 id="0x11-权限检查"><a href="#0x11-权限检查" class="headerlink" title="0x11  权限检查"></a>0x11  权限检查</h2><p>依旧是RPL&lt;= Interrupt Gate DPL </p>
+<h2 id="0x12-堆栈切换"><a href="#0x12-堆栈切换" class="headerlink" title="0x12 堆栈切换"></a>0x12 堆栈切换</h2><p>在低权限请求下会使用TSS自动切换到中断处理的堆栈空间，而原先的会被保存</p>
+<p><img src="https://i.loli.net/2021/02/25/uGCzatPYoO6KrTd.png" alt="image-20210225003548742"></p>
+<p>所以，从门返回该用iret/iretd</p>
+<h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><p>在中断门通过retf返回,在调用门通过iretd返回</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pop eax</span><br><span class="line">        pop ebx</span><br><span class="line">        pop ecx</span><br><span class="line">        push ebx</span><br><span class="line">        push eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pop eax</span><br><span class="line">        pop ebx</span><br><span class="line">        pushfd</span><br><span class="line">        push ebx</span><br><span class="line">        push eax</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip] <span class="comment">//还可以使用有参提权来把eflag当一个参数传进去</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     <div>
@@ -387,7 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01%E7%BB%83%E4%B9%A01"><span class="nav-number">1.</span> <span class="nav-text">0x01练习1</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-%E4%B8%AD%E6%96%AD%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">0x00 中断门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x10-%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">1.1.</span> <span class="nav-text">0x10 描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x11-%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">0x11  权限检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x12-%E5%A0%86%E6%A0%88%E5%88%87%E6%8D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">0x12 堆栈切换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01%E7%BB%83%E4%B9%A01"><span class="nav-number">2.</span> <span class="nav-text">0x01练习1</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

